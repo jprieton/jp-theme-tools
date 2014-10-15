@@ -34,11 +34,15 @@ if (is_admin()) {
 
 	function jptt_admin_settings()
 	{
+		// General
+		register_setting('jptt-settings-group', 'google-analytics');
+		// Contacto
 		register_setting('jptt-settings-group', 'contact-form-email', 'sanitize_email');
+		register_setting('jptt-settings-group', 'contact-form-phone', 'sanitize_text_field');
+		// Social
 		register_setting('jptt-settings-group', 'social-facebook', 'jptt_valid_url');
 		register_setting('jptt-settings-group', 'social-googleplus', 'jptt_valid_url');
 		register_setting('jptt-settings-group', 'social-instagram', 'jptt_valid_url');
-		register_setting('jptt-settings-group', 'google-analytics');
 	}
 
 }

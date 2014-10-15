@@ -18,6 +18,12 @@
 										<p class="description">Email de destino del formulario de contacto.</p>
 								</td>
 						</tr>
+						<tr valign="top">
+								<th scope="row">Tel&eacute;fono</th>
+								<td>
+										<input type="text" class="regular-text" name="contact-form-phone" value="<?php echo esc_attr(get_option('contact-form-phone')); ?>" />
+								</td>
+						</tr>
 				</table>
 				<?php submit_button(); ?>
 		</form>
