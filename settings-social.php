@@ -7,8 +7,8 @@
 		<?php } ?>
 		<form method="post" action="options.php">
 				<?php
-				settings_fields('jptt-settings-group');
-				do_settings_sections('jptt-settings-group');
+				settings_fields('jptt-social-group');
+				do_settings_sections('jptt-social-group');
 				?>
 				<table class="form-table">
 						<tr valign="top">
@@ -27,6 +27,12 @@
 								<th scope="row">Instagram</th>
 								<td>
 										<input type="text" class="regular-text" name="social-instagram" value="<?php echo esc_attr(get_option('social-instagram')); ?>" />
+								</td>
+						</tr>
+						<tr valign="top">
+								<th scope="row">Pinterest</th>
+								<td>
+										<input type="text" class="regular-text" name="social-pinterest" value="<?php echo esc_attr(get_option('social-pinterest')); ?>" />
 								</td>
 						</tr>
 						<tr valign="top">

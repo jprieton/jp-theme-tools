@@ -19,9 +19,15 @@
 								</td>
 						</tr>
 						<tr valign="top">
+								<th scope="row">Email</th>
+								<td>
+										<input type="text" class="regular-text" name="contact-email" value="<?php echo esc_attr(get_option('contact-email')); ?>" />
+								</td>
+						</tr>
+						<tr valign="top">
 								<th scope="row">Tel&eacute;fono</th>
 								<td>
-										<input type="text" class="regular-text" name="contact-form-phone" value="<?php echo esc_attr(get_option('contact-form-phone')); ?>" />
+										<input type="text" class="regular-text" name="contact-phone" value="<?php echo esc_attr(get_option('contact-phone')); ?>" />
 								</td>
 						</tr>
 				</table>
