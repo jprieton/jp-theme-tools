@@ -4,7 +4,7 @@
  * Plugin Name: JP Theme Tools
  * Plugin URI: https://github.com/jprieton/jp-theme-tools/
  * Description: A brief description of the Plugin.
- * Version:  0.0.1
+ * Version:  0.2
  * Author: Javier Prieto
  * Author URI: https://github.com/jprieton/
  * License: GPL2
@@ -33,7 +33,7 @@ if (is_admin()) { // note the use of is_admin() to double check that this is hap
         'sslverify' => true, // wether WP should check the validity of the SSL cert when getting an update, see https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/2 and https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/4 for details
         'requires' => '4.0', // which version of WordPress does your plugin require?
         'tested' => '4.0', // which version of WordPress is your plugin tested up to?
-        'readme' => 'version.txt', // which file to use as the readme for the version number
+        'readme' => 'README.md', // which file to use as the readme for the version number
         'access_token' => '', // Access private repositories by authorizing under Appearance > Github Updates when this example plugin is installed
     );
     new WP_GitHub_Updater($config);
