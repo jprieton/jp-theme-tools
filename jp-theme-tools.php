@@ -3,7 +3,7 @@
 /**
  * Plugin Name: JP Theme Tools
  * Plugin URI: https://github.com/jprieton/jp-theme-tools/
- * Description: A brief description of the Plugin.
+ * Description: 
  * Version:  0.2
  * Author: Javier Prieto
  * Author URI: https://github.com/jprieton/
@@ -18,11 +18,11 @@ define('JPTT_PLUGIN_URI', plugin_dir_url(__FILE__));
 require_once __DIR__ . '/functions/common-functions.php';
 require_once __DIR__ . '/ajax/contact.php';
 
-include_once __DIR__ . './includes/updater.php';
 
 //https://github.com/jprieton/jp-theme-tools
 
 if (is_admin()) { // note the use of is_admin() to double check that this is happening in the admin
+		include_once JPTT_PLUGIN_PATH . 'includes/updater.php';
     $config = array(
         'slug' => plugin_basename(__FILE__), // this is the slug of your plugin
         'proper_folder_name' => 'jp-theme-tools', // this is the name of the folder your plugin lives in
@@ -30,13 +30,13 @@ if (is_admin()) { // note the use of is_admin() to double check that this is hap
         'raw_url' => 'https://raw.github.com/jprieton/jp-theme-tools/master', // the github raw url of your github repo
         'github_url' => 'https://github.com/jprieton/jp-theme-tools', // the github url of your github repo
         'zip_url' => 'https://github.com/jprieton/jp-theme-tools/zipball/master', // the zip url of the github repo
-        'sslverify' => true, // wether WP should check the validity of the SSL cert when getting an update, see https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/2 and https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/4 for details
+//        'sslverify' => true, // wether WP should check the validity of the SSL cert when getting an update, see https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/2 and https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/4 for details
         'requires' => '4.0', // which version of WordPress does your plugin require?
         'tested' => '4.0', // which version of WordPress is your plugin tested up to?
-        'readme' => 'README.md', // which file to use as the readme for the version number
-        'access_token' => '', // Access private repositories by authorizing under Appearance > Github Updates when this example plugin is installed
+        'readme' => 'version.txt', // which file to use as the readme for the version number
+//        'access_token' => '', // Access private repositories by authorizing under Appearance > Github Updates when this example plugin is installed
     );
-    new WP_GitHub_Updater($config);
+    $github_updater = new WP_GitHub_Updater($config);
 }
 
 if (is_admin()) {
