@@ -3,7 +3,7 @@
 /**
  * Plugin Name: JP Theme Tools
  * Plugin URI: https://github.com/jprieton/jp-theme-tools/
- * Description: 
+ * Description:
  * Version:  0.2
  * Author: Javier Prieto
  * Author URI: https://github.com/jprieton/
@@ -11,35 +11,29 @@
  */
 defined('ABSPATH') or die("No script kiddies please!");
 
-
 define('JPTT_PLUGIN_PATH', plugin_dir_path(__FILE__));
 define('JPTT_PLUGIN_URI', plugin_dir_url(__FILE__));
 
 require_once __DIR__ . '/functions/common-functions.php';
 require_once __DIR__ . '/ajax/contact.php';
 
-
 //https://github.com/jprieton/jp-theme-tools
 
-if (is_admin()) { // note the use of is_admin() to double check that this is happening in the admin
-		include_once JPTT_PLUGIN_PATH . 'includes/updater.php';
-    $config = array(
-        'slug' => plugin_basename(__FILE__), // this is the slug of your plugin
-        'proper_folder_name' => 'jp-theme-tools', // this is the name of the folder your plugin lives in
-        'api_url' => 'https://api.github.com/repos/jprieton/jp-theme-tools', // the github API url of your github repo
-        'raw_url' => 'https://raw.github.com/jprieton/jp-theme-tools/master', // the github raw url of your github repo
-        'github_url' => 'https://github.com/jprieton/jp-theme-tools', // the github url of your github repo
-        'zip_url' => 'https://github.com/jprieton/jp-theme-tools/zipball/master', // the zip url of the github repo
-//        'sslverify' => true, // wether WP should check the validity of the SSL cert when getting an update, see https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/2 and https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/4 for details
-        'requires' => '4.0', // which version of WordPress does your plugin require?
-        'tested' => '4.0', // which version of WordPress is your plugin tested up to?
-        'readme' => 'version.txt', // which file to use as the readme for the version number
-//        'access_token' => '', // Access private repositories by authorizing under Appearance > Github Updates when this example plugin is installed
-    );
-    $github_updater = new WP_GitHub_Updater($config);
-}
-
 if (is_admin()) {
+
+	include_once JPTT_PLUGIN_PATH . 'includes/updater.php';
+	$config = array(
+			'slug' => plugin_basename(__FILE__),
+			'proper_folder_name' => 'jp-theme-tools',
+			'api_url' => 'https://api.github.com/repos/jprieton/jp-theme-tools',
+			'raw_url' => 'https://raw.github.com/jprieton/jp-theme-tools/master',
+			'github_url' => 'https://github.com/jprieton/jp-theme-tools',
+			'zip_url' => 'https://github.com/jprieton/jp-theme-tools/zipball/master',
+			'requires' => '4.0',
+			'tested' => '4.0',
+			'readme' => 'version.txt',
+	);
+	$github_updater = new WP_GitHub_Updater($config);
 
 	add_action('admin_menu', 'theme_tools_admin_menu');
 
@@ -60,9 +54,10 @@ if (is_admin()) {
 		// General
 		register_setting('jptt-settings-group', 'google-analytics');
 		// Contacto
-		register_setting('jptt-settings-group', 'contact-form-email', 'sanitize_email');
-		register_setting('jptt-settings-group', 'contact-email', 'sanitize_email');
-		register_setting('jptt-settings-group', 'contact-phone', 'sanitize_text_field');
+		register_setting('jptt-contact-group', 'contact-form-email', 'sanitize_email');
+		register_setting('jptt-contact-group', 'contact-email', 'sanitize_email');
+		register_setting('jptt-contact-group', 'contact-phone', 'sanitize_text_field');
+		register_setting('jptt-contact-group', 'google-maps');
 		// Social
 		register_setting('jptt-social-group', 'social-facebook', 'jptt_valid_url');
 		register_setting('jptt-social-group', 'social-googleplus', 'jptt_valid_url');
