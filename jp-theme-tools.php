@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Plugin Name: JP Theme Tools
+ * Plugin Name: JP WordPress Theme Tools
  * Plugin URI: https://github.com/jprieton/jp-theme-tools/
- * Description:
- * Version:  0.2
+ * Description: Extends WordPress functionality for themes
+ * Version: 0.3
  * Author: Javier Prieto
  * Author URI: https://github.com/jprieton/
  * License: GPL2
@@ -16,8 +16,6 @@ define('JPTT_PLUGIN_URI', plugin_dir_url(__FILE__));
 
 require_once __DIR__ . '/functions/common-functions.php';
 require_once __DIR__ . '/ajax/contact.php';
-
-//https://github.com/jprieton/jp-theme-tools
 
 if (is_admin()) {
 
