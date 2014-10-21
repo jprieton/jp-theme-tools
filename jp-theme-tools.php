@@ -4,7 +4,7 @@
  * Plugin Name: JP WordPress Theme Tools
  * Plugin URI: https://github.com/jprieton/jp-theme-tools/
  * Description: Extends WordPress functionality for themes
- * Version: 0.3
+ * Version: 0.5
  * Author: Javier Prieto
  * Author URI: https://github.com/jprieton/
  * License: GPL2
@@ -20,41 +20,16 @@ require_once __DIR__ . '/ajax/contact.php';
 class JP_Theme_Tools
 {
 
-	public function __construct()
+	public static function plugin_setup()
 	{
+		add_filter('upgrader_source_selection', array('JP_Theme_Tools', 'rename_github_zip'), 1);
 
+		require JPTT_PLUGIN_PATH . '/plugin-updates/plugin-update-checker.php';
+		$update_checker = PucFactory::buildUpdateChecker('https://raw.github.com/jprieton/jp-theme-tools/master/includes/update.json', __FILE__, 'jp-theme-tools-master');
 	}
 
-	/**
-	 * points the class
-	 *
-	 * @access public
-	 * @since  0.0.1
-	 * @return object
-	 */
-	public static function get_instance()
+	public static function rename_github_zip($source)
 	{
-
-		static $instance;
-
-		if (NULL === $instance) $instance = new self();
-
-		return $instance;
-	}
-
-	/**
-	 * Removes the prefix "-master" when updating from GitHub zip files
-	 *
-	 * See: https://github.com/YahnisElsts/plugin-update-checker/issues/1
-	 *
-	 * @param string $source
-	 * @param string $remote_source
-	 * @param object $thiz
-	 * @return string
-	 */
-	public function rename_github_zip($source, $remote_source, $thiz)
-	{
-
 		if (FALSE === strpos($source, 'jp-theme-tools')) return $source;
 
 		$path_parts = pathinfo($source);
@@ -68,46 +43,8 @@ class JP_Theme_Tools
 }
 
 if (is_admin()) {
-	/*
-	  include_once JPTT_PLUGIN_PATH . 'includes/updater.php';
-	  $config = array(
-	  'slug' => plugin_basename(__FILE__),
-	  'proper_folder_name' => 'jp-theme-tools',
-	  'api_url' => 'https://api.github.com/repos/jprieton/jp-theme-tools',
-	  'raw_url' => 'https://raw.github.com/jprieton/jp-theme-tools/master',
-	  'github_url' => 'https://github.com/jprieton/jp-theme-tools',
-	  'zip_url' => 'https://github.com/jprieton/jp-theme-tools/zipball/master',
-	  'requires' => '4.0',
-	  'tested' => '4.0',
-	  'readme' => 'version.txt',
-	  );
-	  $github_updater = new WP_GitHub_Updater($config);
-	 *
-	 */
 
-	add_action('plugins_loaded', 'plugin_setup');
-
-	function plugin_setup()
-	{
-		// Workaround to remove the suffix "-master" from the unzipped directory
-		add_filter('upgrader_source_selection', 'rename_github_zip', 1, 3);
-
-		function rename_github_zip($source)
-		{
-
-			if (FALSE === strpos($source, 'jp-theme-tools')) return $source;
-
-			$path_parts = pathinfo($source);
-			$newsource = trailingslashit($path_parts['dirname']) .
-							trailingslashit('jp-theme-tools');
-			rename($source, $newsource);
-
-			return $newsource;
-		}
-
-		require __DIR__ . '/plugin-updates/plugin-update-checker.php';
-		$update_checker = PucFactory::buildUpdateChecker('https://raw.github.com/jprieton/jp-theme-tools/master/includes/update.json', __FILE__, 'jp-theme-tools-master');
-	}
+	add_action('plugins_loaded', array('JP_Theme_Tools', 'plugin_setup'));
 
 	add_action('admin_menu', 'theme_tools_admin_menu');
 
