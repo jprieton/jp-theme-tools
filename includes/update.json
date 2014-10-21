@@ -1,0 +1,21 @@
+{
+    "name": "External Update Example",
+    "slug": "external-update-example",
+    "homepage": "http://example.com/",
+    "download_url": "https://github.com/jprieton/jp-theme-tools/archive/master.zip",
+    "version": "0.4",
+    "requires": "4.0",
+    "tested": "4.0",
+    "last_updated": "2014-10-21 17:57:32",
+    "upgrade_notice": "Extends WordPress functionality for themes",
+    "author": "Javier Prieto",
+    "author_homepage": "https://github.com/jprieton",
+    "sections": {
+        "description": "(Required) Plugin description. Basic HTML can be used in all sections.",
+        "installation": "",
+        "changelog": ""
+    },
+    "rating": 0,
+    "num_ratings": 0,
+    "downloaded": 0
+}
