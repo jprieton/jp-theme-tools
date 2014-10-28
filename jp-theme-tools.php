@@ -16,7 +16,6 @@ define('JPTT_PLUGIN_URI', plugin_dir_url(__FILE__));
 
 require_once __DIR__ . '/functions/common-functions.php';
 require_once __DIR__ . '/ajax/contact.php';
-require_once __DIR__ . '/ajax/login.php';
 
 if (is_admin()) {
 

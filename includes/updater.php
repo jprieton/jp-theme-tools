@@ -2,7 +2,7 @@
 
 if (!defined('JPTT_PLUGIN_PATH')) return;
 
-class JP_Blank
+class JP_Theme_Tools
 {
 
 	public static function plugin_setup()
