@@ -32,7 +32,7 @@
 			<tr valign="top">
 				<th scope="row">DEBUG_LEVEL</th>
 				<td>
-						<?php $checked = ((bool) get_option('timthumb_debug_level')) ? 'checked' : '' ?>
+			<?php $checked = ((bool) get_option('timthumb_debug_level')) ? 'checked' : '' ?>
 					<input type="checkbox" value="1" id="timthumb_debug_level" name="timthumb_debug_level" <?php echo $checked ?>>
 					<p class="description">Debug level 1 is less noisy and 3 is the most noisy</p>
 					<p class="description"><small>Default value: false</small></p>
@@ -41,7 +41,7 @@
 			<tr valign="top">
 				<th scope="row">MEMORY_LIMIT</th>
 				<td>
-						<?php $checked = ((bool) get_option('timthumb_memory_limit')) ? 'checked' : '' ?>
+			<?php $checked = ((bool) get_option('timthumb_memory_limit')) ? 'checked' : '' ?>
 					<input type="checkbox" value="1" id="timthumb_memory_limit" name="timthumb_memory_limit" <?php echo $checked ?>>
 					<p class="description">Set PHP memory limit</p>
 					<p class="description"><small>Default value: false</small></p>
@@ -59,7 +59,7 @@
 			<tr valign="top">
 				<th scope="row">DISPLAY_ERROR_MESSAGES</th>
 				<td>
-					<input type="checkbox" value="1" id="timthumb_display_error_messages" name="timthumb_display_error_messages" <?php checked(get_option('timthumb_display_error_messages',true)) ?>>
+					<input type="checkbox" value="1" id="timthumb_display_error_messages" name="timthumb_display_error_messages" <?php checked(get_option('timthumb_display_error_messages', true)) ?>>
 					<p class="description">Display error messages. Set to false to turn off errors (good for production websites)</p>
 					<p class="description"><small>Default value: true</small></p>
 				</td>
@@ -67,7 +67,7 @@
 			<tr valign="top">
 				<th scope="row">ALLOW_EXTERNAL</th>
 				<td>
-					<input type="checkbox" value="1" id="timthumb_allow_external" name="timthumb_allow_external" <?php checked(get_option('timthumb_allow_external',true)) ?>>
+					<input type="checkbox" value="1" id="timthumb_allow_external" name="timthumb_allow_external" <?php checked(get_option('timthumb_allow_external', true)) ?>>
 					<p class="description">Allow image fetching from external websites. Will check against ALLOWED_SITES if ALLOW_ALL_EXTERNAL_SITES is false</p>
 					<p class="description"><small>Default value: true</small></p>
 				</td>
@@ -101,7 +101,7 @@
 			<tr valign="top">
 				<th scope="row">FILE_CACHE_MAX_FILE_AGE</th>
 				<td>
-						<?php $checked = ((bool) get_option('timthumb_file_cache_max_file_age')) ? 'checked' : '' ?>
+			<?php $checked = ((bool) get_option('timthumb_file_cache_max_file_age')) ? 'checked' : '' ?>
 					<input type="checkbox" value="1" id="timthumb_file_cache_max_file_age" name="timthumb_file_cache_max_file_age" <?php echo $checked ?>>
 					<p class="description">How old does a file have to be to be deleted from the cache</p>
 					<p class="description"><small>Default value: false</small></p>
@@ -110,7 +110,7 @@
 			<tr valign="top">
 				<th scope="row">FILE_CACHE_SUFFIX</th>
 				<td>
-						<?php $checked = ((bool) get_option('timthumb_file_cache_suffix')) ? 'checked' : '' ?>
+			<?php $checked = ((bool) get_option('timthumb_file_cache_suffix')) ? 'checked' : '' ?>
 					<input type="checkbox" value="1" id="timthumb_file_cache_suffix" name="timthumb_file_cache_suffix" <?php echo $checked ?>>
 					<p class="description">What to put at the end of all files in the cache directory so we can identify them</p>
 					<p class="description"><small>Default value: .timthumb.txt</small></p>
@@ -119,7 +119,7 @@
 			<tr valign="top">
 				<th scope="row">FILE_CACHE_PREFIX</th>
 				<td>
-						<?php $checked = ((bool) get_option('timthumb_file_cache_prefix')) ? 'checked' : '' ?>
+			<?php $checked = ((bool) get_option('timthumb_file_cache_prefix')) ? 'checked' : '' ?>
 					<input type="checkbox" value="1" id="timthumb_file_cache_prefix" name="timthumb_file_cache_prefix" <?php echo $checked ?>>
 					<p class="description">What to put at the beg of all files in the cache directory so we can identify them</p>
 					<p class="description"><small>Default value: timthumb</small></p>
@@ -137,7 +137,7 @@
 			<tr valign="top">
 				<th scope="row">MAX_FILE_SIZE</th>
 				<td>
-						<?php $checked = ((bool) get_option('timthumb_max_file_size')) ? 'checked' : '' ?>
+			<?php $checked = ((bool) get_option('timthumb_max_file_size')) ? 'checked' : '' ?>
 					<input type="checkbox" value="1" id="timthumb_max_file_size" name="timthumb_max_file_size" <?php echo $checked ?>>
 					<p class="description">10 Megs is 10485760. This is the max internal or external file size that we'll process.  </p>
 					<p class="description"><small>Default value: false</small></p>
@@ -146,7 +146,7 @@
 			<tr valign="top">
 				<th scope="row">CURL_TIMEOUT</th>
 				<td>
-						<?php $checked = ((bool) get_option('timthumb_curl_timeout')) ? 'checked' : '' ?>
+			<?php $checked = ((bool) get_option('timthumb_curl_timeout')) ? 'checked' : '' ?>
 					<input type="checkbox" value="1" id="timthumb_curl_timeout" name="timthumb_curl_timeout" <?php echo $checked ?>>
 					<p class="description">Timeout duration for Curl. This only applies if you have Curl installed and aren't using PHP's default URL fetching mechanism.</p>
 					<p class="description"><small>Default value: false</small></p>
@@ -155,7 +155,7 @@
 			<tr valign="top">
 				<th scope="row">WAIT_BETWEEN_FETCH_ERRORS</th>
 				<td>
-						<?php $checked = ((bool) get_option('timthumb_wait_between_fetch_errors')) ? 'checked' : '' ?>
+			<?php $checked = ((bool) get_option('timthumb_wait_between_fetch_errors')) ? 'checked' : '' ?>
 					<input type="checkbox" value="1" id="timthumb_wait_between_fetch_errors" name="timthumb_wait_between_fetch_errors" <?php echo $checked ?>>
 					<p class="description">Time to wait between errors fetching remote file</p>
 					<p class="description"><small>Default value: false</small></p>
@@ -164,7 +164,7 @@
 			<tr valign="top">
 				<th scope="row">BROWSER_CACHE_MAX_AGE</th>
 				<td>
-						<?php $checked = ((bool) get_option('timthumb_browser_cache_max_age')) ? 'checked' : '' ?>
+			<?php $checked = ((bool) get_option('timthumb_browser_cache_max_age')) ? 'checked' : '' ?>
 					<input type="checkbox" value="1" id="timthumb_browser_cache_max_age" name="timthumb_browser_cache_max_age" <?php echo $checked ?>>
 					<p class="description">Time to cache in the browser</p>
 					<p class="description"><small>Default value: false</small></p>
@@ -195,26 +195,21 @@
 					<p class="description"><small>Default value: false</small></p>
 				</td>
 			</tr>
-			<!--
 			<tr valign="top">
 				<th scope="row">NOT_FOUND_IMAGE</th>
 				<td>
-						<?php $checked = ((bool) get_option('timthumb_not_found_image')) ? 'checked' : '' ?>
-					<input type="checkbox" value="1" id="timthumb_not_found_image" name="timthumb_not_found_image" <?php echo $checked ?>>
+					<input type="text" class="large-text" value="<?php echo get_option('timthumb_not_found_image', JPTT_PLUGIN_URI . 'assets/images/no-image.png') ?>" id="timthumb_not_found_image" name="timthumb_not_found_image" placeholder="">
 					<p class="description">to serve if any 404 occurs </p>
-					<p class="description"><small>Default value: false</small></p>
 				</td>
 			</tr>
 			<tr valign="top">
 				<th scope="row">ERROR_IMAGE</th>
 				<td>
 						<?php $checked = ((bool) get_option('timthumb_error_image')) ? 'checked' : '' ?>
-					<input type="checkbox" value="1" id="timthumb_error_image" name="timthumb_error_image" <?php echo $checked ?>>
+					<input type="text" class="large-text" value="<?php echo get_option('timthumb_error_image', JPTT_PLUGIN_URI . 'assets/images/no-image.png') ?>" id="timthumb_error_image" name="timthumb_error_image" <?php echo $checked ?>>
 					<p class="description">to serve if an error occurs instead of showing error message </p>
-					<p class="description"><small>Default value: false</small></p>
 				</td>
 			</tr>
-			-->
 			<tr valign="top">
 				<th scope="row">PNG_IS_TRANSPARENT</th>
 				<td>
@@ -251,7 +246,7 @@
 			<tr valign="top">
 				<th scope="row">DEFAULT_F</th>
 				<td>
-						<?php $checked = ((bool) get_option('timthumb_default_f')) ? 'checked' : '' ?>
+			<?php $checked = ((bool) get_option('timthumb_default_f')) ? 'checked' : '' ?>
 					<input type="checkbox" value="1" id="timthumb_default_f" name="timthumb_default_f" <?php echo $checked ?>>
 					<p class="description">Default image filters.</p>
 					<p class="description"><small>Default value: false</small></p>
@@ -260,7 +255,7 @@
 			<tr valign="top">
 				<th scope="row">DEFAULT_S</th>
 				<td>
-						<?php $checked = ((bool) get_option('timthumb_default_s')) ? 'checked' : '' ?>
+			<?php $checked = ((bool) get_option('timthumb_default_s')) ? 'checked' : '' ?>
 					<input type="checkbox" value="1" id="timthumb_default_s" name="timthumb_default_s" <?php echo $checked ?>>
 					<p class="description">Default sharpen value.</p>
 					<p class="description"><small>Default value: false</small></p>
@@ -269,7 +264,7 @@
 			<tr valign="top">
 				<th scope="row">DEFAULT_CC</th>
 				<td>
-						<?php $checked = ((bool) get_option('timthumb_default_cc')) ? 'checked' : '' ?>
+			<?php $checked = ((bool) get_option('timthumb_default_cc')) ? 'checked' : '' ?>
 					<input type="checkbox" value="1" id="timthumb_default_cc" name="timthumb_default_cc" <?php echo $checked ?>>
 					<p class="description">Default canvas colour.</p>
 					<p class="description"><small>Default value: false</small></p>
@@ -294,6 +289,6 @@
 			</tr>
 
 		</table>
-		<?php submit_button(); ?>
+		<?php submit_button() ?>
 	</form>
 </div>
