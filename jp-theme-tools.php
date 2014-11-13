@@ -19,8 +19,6 @@ require_once __DIR__ . '/ajax/contact.php';
 require_once __DIR__ . '/filters/common-filters.php';
 require_once __DIR__ . '/includes/actions.php';
 
-//debug(WP_CONTENT_DIR);
-
 if (is_admin()) {
 
 	// Updater
