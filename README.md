@@ -1,4 +1,4 @@
-theme-tools
+JP Theme Tools
 ===========
 
 

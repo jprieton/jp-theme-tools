@@ -39,3 +39,12 @@ function jptt_valid_url($url)
 {
 	return esc_url_raw($url, array('http', 'https'));
 }
+
+if (!function_exists('boolval')) {
+
+	function boolval($var)
+	{
+		return (bool) $var;
+	}
+
+}
