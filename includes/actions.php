@@ -1,5 +1,4 @@
 <?php
-
 if (is_admin()) {
 
 	add_action('admin_action_update', function() {
