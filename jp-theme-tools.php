@@ -45,6 +45,8 @@ if (is_admin()) {
 	{
 		// General
 		register_setting('jptt-settings-group', 'google-analytics');
+		register_setting('jptt-settings-group', 'google-site-verification');
+		register_setting('jptt-settings-group', 'bing-site-verification');
 		// Contacto
 		register_setting('jptt-contact-group', 'contact-form-email', 'sanitize_email');
 		register_setting('jptt-contact-group', 'contact-email', 'sanitize_email');

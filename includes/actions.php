@@ -75,4 +75,25 @@ if (!is_admin()) {
 			return str_replace(' src', " async='async' src", $tag);
 		}
 	}, 10, 2);
+	add_action('wp_head', function() {
+		$google_site_verification = get_option('google-site-verification', '');
+		if (!empty($google_site_verification)) {
+			echo '<meta name="google-site-verification" content="' . esc_attr($google_site_verification) . '" />' . "\n";
+		}
+
+		$bing_site_verification = get_option('bing-site-verification', '');
+		if (!empty($bing_site_verification)) {
+			echo '<meta name="msvalidate.01" content="' . esc_attr($bing_site_verification) . '" />' . "\n";
+		}
+	}, 1);
+	add_action('wp_head', function() {
+		$admin_ajax = admin_url('admin-ajax.php');
+		echo "<script>var admin_url = '{$admin_ajax}';</script>\n";
+
+		$google_analitics = get_option('google-analytics', '');
+
+		if (!empty($google_analitics)) {
+			echo "<script>\n{$google_analitics}\n</script>\n";
+		}
+	}, 99);
 }
