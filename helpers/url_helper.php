@@ -1,5 +1,7 @@
 <?php
 
+defined('ABSPATH') or die("No script kiddies please!");
+
 if (!function_exists('get_short_permalink') && !function_exists('get_the_short_permalink')) {
 
 	/**
