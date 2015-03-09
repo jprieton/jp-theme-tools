@@ -34,6 +34,7 @@ add_action('wp_head', function() {
 
 	$meta = (array) apply_filters('og_meta_tags', $meta);
 
+	echo "<!-- Open Graph -->\n";
 	foreach ($meta as $key => $value) {
 		if (!empty($value)) {
 			printf('<meta property="%s" content="%s" />'."\n", $key, $value);
