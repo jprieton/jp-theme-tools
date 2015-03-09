@@ -1,4 +1,7 @@
 <?php
+
+defined('ABSPATH') or die("No script kiddies please!");
+
 /**
  * Include Open Graph metadata in <head> of the web page
  */

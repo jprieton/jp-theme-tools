@@ -1,5 +1,7 @@
 <?php
 
+defined('ABSPATH') or die("No script kiddies please!");
+
 if (!function_exists('debug')) {
 
 	/**
@@ -9,8 +11,7 @@ if (!function_exists('debug')) {
 	 * @param bool $stop If true terminate the current script.
 	 * @return void
 	 */
-	function debug($var, $stop = false)
-	{
+	function debug($var, $stop = false) {
 		echo '<pre>';
 		var_dump($var);
 		echo '</pre>';

@@ -1,10 +1,13 @@
 <?php
 
+defined('ABSPATH') or die("No script kiddies please!");
+
+/**
+ * 
+ */
 add_action('wp_ajax_nopriv_user_signon', function() {
 
-	$nonce = filter_input(INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING)? :
-					filter_input(INPUT_GET, '_wpnonce', FILTER_SANITIZE_STRING);
-
+	$nonce = get_nonce_value();
 	$verify_nonce = (bool) wp_verify_nonce($nonce, 'user_signon');
 
 	$submit = array(

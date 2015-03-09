@@ -15,11 +15,17 @@ define('JPTT_PLUGIN_PATH', plugin_dir_path(__FILE__));
 define('JPTT_PLUGIN_URI', plugin_dir_url(__FILE__));
 
 //Helpers
-include_once JPTT_PLUGIN_PATH . '/helpers/debug.php';
-include_once JPTT_PLUGIN_PATH . '/helpers/url.php';
+include_once JPTT_PLUGIN_PATH . 'helpers/debug.php';
+include_once JPTT_PLUGIN_PATH . 'helpers/url.php';
+include_once JPTT_PLUGIN_PATH . 'helpers/form.php';
+include_once JPTT_PLUGIN_PATH . 'helpers/user.php';
+
 // Action hooks
-include_once JPTT_PLUGIN_PATH . '/actions/open-graph.php';
-include_once JPTT_PLUGIN_PATH . '/actions/user-signon.php';
+include_once JPTT_PLUGIN_PATH . 'actions/open-graph.php';
+include_once JPTT_PLUGIN_PATH . 'actions/google-webmaster-tools.php';
+include_once JPTT_PLUGIN_PATH . 'actions/ajax-user-register.php';
+include_once JPTT_PLUGIN_PATH . 'actions/user-signon.php';
+include_once JPTT_PLUGIN_PATH . 'actions/profile-image.php';
 
 global $defer_scripts, $async_scripts;
 require_once __DIR__ . '/functions/common-functions.php';
@@ -35,8 +41,7 @@ if (is_admin()) {
 
 	add_action('admin_menu', 'theme_tools_admin_menu');
 
-	function theme_tools_admin_menu()
-	{
+	function theme_tools_admin_menu() {
 		add_menu_page('JP Theme Tools Plugin Settings', 'JP Theme Tools', 'administrator', __DIR__ . '/admin-options.php', '', 'dashicons-admin-generic');
 		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - Generales', 'Generales', 'administrator', __DIR__ . '/admin-options.php');
 		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - Contacto', 'Contacto', 'administrator', __DIR__ . '/settings-contact.php');
@@ -48,8 +53,7 @@ if (is_admin()) {
 
 	add_action('admin_init', 'jptt_admin_settings');
 
-	function jptt_admin_settings()
-	{
+	function jptt_admin_settings() {
 		// General
 		register_setting('jptt-settings-group', 'google-analytics');
 		register_setting('jptt-settings-group', 'google-site-verification');
@@ -93,8 +97,7 @@ if (is_admin()) {
 
 	add_action('admin_enqueue_scripts', 'jptt_admin_style');
 
-	function jptt_admin_style()
-	{
+	function jptt_admin_style() {
 		wp_register_style('jptt_admin_style', JPTT_PLUGIN_URI . 'assets/css/jp-theme-tools-admin.css', false, '1.0.0');
 		wp_enqueue_style('jptt_admin_style');
 	}

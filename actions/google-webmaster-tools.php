@@ -1,4 +1,7 @@
 <?php
+
+defined('ABSPATH') or die("No script kiddies please!");
+
 /**
  * Adds <meta name="google-site-verification" content="{verification-code}" /> in <head> of the web page
  */
