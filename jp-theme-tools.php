@@ -11,21 +11,29 @@
  */
 defined('ABSPATH') or die("No script kiddies please!");
 
+// Updates
+if (is_admin()) {
+	if (!class_exists('BFIGitHubPluginUpdater')) {
+		require_once __DIR__ . '/updater/BFIGitHubPluginUpdater.php';
+	}
+	$updater = new BFIGitHubPluginUpdater(__FILE__, 'jprieton', 'plugin-update-test', '');
+}
+
 define('JPTT_PLUGIN_PATH', plugin_dir_path(__FILE__));
 define('JPTT_PLUGIN_URI', plugin_dir_url(__FILE__));
 
 //Helpers
-include_once JPTT_PLUGIN_PATH . 'helpers/debug.php';
-include_once JPTT_PLUGIN_PATH . 'helpers/url.php';
-include_once JPTT_PLUGIN_PATH . 'helpers/form.php';
-include_once JPTT_PLUGIN_PATH . 'helpers/user.php';
+include_once __DIR__ . 'helpers/debug.php';
+include_once __DIR__ . 'helpers/url.php';
+include_once __DIR__ . 'helpers/form.php';
+include_once __DIR__ . 'helpers/user.php';
 
 // Action hooks
-include_once JPTT_PLUGIN_PATH . 'actions/open-graph.php';
-include_once JPTT_PLUGIN_PATH . 'actions/google-webmaster-tools.php';
-include_once JPTT_PLUGIN_PATH . 'actions/ajax-user-register.php';
-include_once JPTT_PLUGIN_PATH . 'actions/user-signon.php';
-include_once JPTT_PLUGIN_PATH . 'actions/profile-image.php';
+include_once __DIR__ . 'actions/open-graph.php';
+include_once __DIR__ . 'actions/google-webmaster-tools.php';
+include_once __DIR__ . 'actions/ajax-user-register.php';
+include_once __DIR__ . 'actions/user-signon.php';
+include_once __DIR__ . 'actions/profile-image.php';
 
 global $defer_scripts, $async_scripts;
 require_once __DIR__ . '/functions/common-functions.php';
@@ -35,9 +43,6 @@ require_once __DIR__ . '/includes/actions.php';
 //require_once __DIR__ . '/social/filters.php';
 
 if (is_admin()) {
-
-	// Updater
-	require_once __DIR__ . '/includes/updater.php';
 
 	add_action('admin_menu', 'theme_tools_admin_menu');
 
