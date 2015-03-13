@@ -43,8 +43,26 @@ class BFIGitHubPluginUpdater
 			$url = add_query_arg(array("access_token" => $this->accessToken), $url);
 		}
 
-		// Get the results
-		$this->githubAPIResult = wp_remote_retrieve_body(wp_remote_get($url));
+		$cache_file = __DIR__ . '/cache.json';
+
+		if (file_exists($cache_file)) {
+			$too_old = ((time() - filemtime($cache_file)) > 3600); // 1 Hour
+		} else {
+			$too_old = true;
+		}
+
+		if ($too_old) {
+			// Get the results
+			$this->githubAPIResult = wp_remote_retrieve_body(wp_remote_get($url));
+			// Create cache
+			$fp = fopen($cache_file, 'w');
+			fwrite($fp, $this->githubAPIResult);
+			fclose($fp);
+		} else {
+			// Use cache
+			$this->githubAPIResult = file_get_contents($cache_file);
+		}
+
 		if (!empty($this->githubAPIResult)) {
 			$this->githubAPIResult = @json_decode($this->githubAPIResult);
 		}
