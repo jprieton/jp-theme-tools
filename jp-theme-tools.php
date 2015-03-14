@@ -4,7 +4,7 @@
  * Plugin Name: JP WordPress Theme Tools
  * Plugin URI: https://github.com/jprieton/jp-theme-tools/
  * Description: Extends WordPress functionality for themes
- * Version: 0.7.2
+ * Version: 0.7.3
  * Author: Javier Prieto
  * Author URI: https://github.com/jprieton/
  * License: GPL2
@@ -28,17 +28,17 @@ define('JPTT_PLUGIN_PATH', plugin_dir_path(__FILE__));
 define('JPTT_PLUGIN_URI', plugin_dir_url(__FILE__));
 
 //Helpers
-include_once __DIR__ . 'helpers/debug.php';
-include_once __DIR__ . 'helpers/url.php';
-include_once __DIR__ . 'helpers/form.php';
-include_once __DIR__ . 'helpers/user.php';
+include_once __DIR__ . '/helpers/debug.php';
+include_once __DIR__ . '/helpers/url.php';
+include_once __DIR__ . '/helpers/form.php';
+include_once __DIR__ . '/helpers/user.php';
 
 // Action hooks
-include_once __DIR__ . 'actions/open-graph.php';
-include_once __DIR__ . 'actions/google-webmaster-tools.php';
-include_once __DIR__ . 'actions/ajax-user-register.php';
-include_once __DIR__ . 'actions/user-signon.php';
-include_once __DIR__ . 'actions/profile-image.php';
+include_once __DIR__ . '/actions/open-graph.php';
+include_once __DIR__ . '/actions/google-webmaster-tools.php';
+include_once __DIR__ . '/actions/ajax-user-register.php';
+include_once __DIR__ . '/actions/user-signon.php';
+include_once __DIR__ . '/actions/profile-image.php';
 
 global $defer_scripts, $async_scripts;
 require_once __DIR__ . '/functions/common-functions.php';
