@@ -27,10 +27,6 @@ if (is_admin()) {
 define('JPTT_PLUGIN_PATH', plugin_dir_path(__FILE__));
 define('JPTT_PLUGIN_URI', plugin_dir_url(__FILE__));
 
-
-die(JPTT_PLUGIN_PATH);
-
-
 //Helpers
 include_once JPTT_PLUGIN_PATH . 'helpers/debug.php';
 include_once JPTT_PLUGIN_PATH . 'helpers/url.php';
