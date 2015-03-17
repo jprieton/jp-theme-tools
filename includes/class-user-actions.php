@@ -11,7 +11,7 @@ class User_Actions {
 	private $max_login_attempts;
 
 	public function __construct() {
-		$this->max_login_attempts = (int) get_option('user_max_attemps', -1);
+		$this->max_login_attempts = (int) get_option('max-login-attemps', -1);
 	}
 
 	public function user_signon() {
