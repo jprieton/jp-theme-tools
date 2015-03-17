@@ -36,7 +36,6 @@ include_once JPTT_PLUGIN_PATH . 'helpers/user.php';
 // Action hooks
 include_once JPTT_PLUGIN_PATH . 'actions/open-graph.php';
 include_once JPTT_PLUGIN_PATH . 'actions/google-webmaster-tools.php';
-include_once JPTT_PLUGIN_PATH . 'actions/user-register.php';
 include_once JPTT_PLUGIN_PATH . 'includes/class-user-actions.php';
 include_once JPTT_PLUGIN_PATH . 'actions/profile-image.php';
 

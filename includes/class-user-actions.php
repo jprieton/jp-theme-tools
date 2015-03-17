@@ -43,19 +43,20 @@ class User_Actions {
 		(is_wp_error($user) || $user_blocked) ? die('false') : die('true');
 	}
 
-	public function _user_register() {
-		$nonce = get_nonce_value();
+	public function user_register() {
+		$nonce        = filter_input(INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING);
 		$verify_nonce = (bool) wp_verify_nonce($nonce, 'user_register');
 
 		do_action('pre_user_register');
 
-		(($verify_nonce || !is_user_logged_in()) || die(0));
+		(($verify_nonce || !is_user_logged_in()) || die('false'));
 
 		$userdata = array(
-				'user_pass'  => filter_input(INPUT_POST, 'user_password'),
-				'user_login' => filter_input(INPUT_POST, 'user_login'),
-				'user_email' => filter_input(INPUT_POST, 'user_login')
+				'user_pass'  => filter_input(INPUT_POST, 'user_pass'),
+				'user_login' => filter_input(INPUT_POST, 'user_email'),
+				'user_email' => filter_input(INPUT_POST, 'user_email')
 		);
+
 		$user_id = wp_insert_user($userdata);
 
 		do_action('post_user_register', $user_id);
@@ -113,4 +114,5 @@ class User_Actions {
 }
 
 $User_Actions = new User_Actions();
-add_action('wp_ajax_nopriv_user_signon', array($UserActions, 'user_signon'));
+add_action('wp_ajax_nopriv_user_signon', array($User_Actions, 'user_signon'));
+add_action('wp_ajax_nopriv_user_register', array($User_Actions, 'user_register'));
