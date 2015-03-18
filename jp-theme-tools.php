@@ -34,9 +34,10 @@ include_once JPTT_PLUGIN_PATH . 'helpers/form.php';
 include_once JPTT_PLUGIN_PATH . 'helpers/user.php';
 
 // Action hooks
-include_once JPTT_PLUGIN_PATH . 'actions/open-graph.php';
-include_once JPTT_PLUGIN_PATH . 'actions/google-webmaster-tools.php';
-include_once JPTT_PLUGIN_PATH . 'includes/class-user-actions.php';
+if (!is_admin()) {
+	include_once JPTT_PLUGIN_PATH . 'includes/class-head-actions.php';
+	include_once JPTT_PLUGIN_PATH . 'includes/class-user-actions.php';
+}
 include_once JPTT_PLUGIN_PATH . 'actions/profile-image.php';
 
 global $defer_scripts, $async_scripts;
@@ -44,7 +45,6 @@ require_once JPTT_PLUGIN_PATH . '/functions/common-functions.php';
 require_once JPTT_PLUGIN_PATH . '/ajax/contact.php';
 require_once JPTT_PLUGIN_PATH . '/filters/common-filters.php';
 require_once JPTT_PLUGIN_PATH . '/includes/actions.php';
-//require_once __DIR__ . '/social/filters.php';
 
 if (is_admin()) {
 
