@@ -18,7 +18,7 @@ class Head_Actions {
 	}
 
 	function open_graph_meta() {
-		$has_open_graph_meta = (bool) get_option('has_open_graph_meta', TRUE);
+		$has_open_graph_meta = (bool) get_option('open-graph-meta', TRUE);
 
 		if (!$has_open_graph_meta) return;
 
@@ -58,7 +58,7 @@ class Head_Actions {
 	}
 
 	function twitter_card_meta() {
-		$has_twitter_card_meta = (bool) get_option('has_twitter_card_meta', TRUE);
+		$has_twitter_card_meta = (bool) get_option('twitter-card-meta', TRUE);
 
 		if (!$has_twitter_card_meta) return;
 

@@ -52,20 +52,23 @@ if (is_admin()) {
 	function theme_tools_admin_menu() {
 		add_menu_page('JP Theme Tools Plugin Settings', 'JP Theme Tools', 'administrator', __DIR__ . '/admin-options.php', '', 'dashicons-admin-generic');
 		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - Generales', 'Generales', 'administrator', __DIR__ . '/admin-options.php');
+		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - Anal&iacute;tica y SEO', ' Anal&iacute;tica y SEO', 'administrator', __DIR__ . '/settings/seo.php');
 		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - Contacto', 'Contacto', 'administrator', __DIR__ . '/settings-contact.php');
 		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - Social', 'Social', 'administrator', __DIR__ . '/settings-social.php');
-		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - CDN', 'CDN', 'administrator', __DIR__ . '/settings-cdn.php');
-		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - Misceláneas', 'Misceláneas', 'administrator', __DIR__ . '/settings-misc.php');
+		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - CDN', 'CDN', 'administrator', __DIR__ . '/settings/cdn.php');
 		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - TimThumb', 'TimThumb', 'administrator', __DIR__ . '/settings-timthumb.php');
 	}
 
 	add_action('admin_init', 'jptt_admin_settings');
 
 	function jptt_admin_settings() {
-		// General
-		register_setting('jptt-settings-group', 'google-analytics');
-		register_setting('jptt-settings-group', 'google-site-verification');
-		register_setting('jptt-settings-group', 'bing-site-verification');
+		// Analitica y SEO
+		register_setting('jptt-seo-group', 'google-analytics');
+		register_setting('jptt-seo-group', 'google-site-verification');
+		register_setting('jptt-seo-group', 'bing-site-verification');
+		register_setting('jptt-seo-group', 'open-graph-meta', 'boolval');
+		register_setting('jptt-seo-group', 'twitter-card-meta', 'boolval');
+		register_setting('jptt-seo-group', 'remove-generator', 'boolval');
 		// Contacto
 		register_setting('jptt-contact-group', 'contact-form-email', 'sanitize_email');
 		register_setting('jptt-contact-group', 'contact-email', 'sanitize_email');
@@ -80,8 +83,6 @@ if (is_admin()) {
 		// CDN
 		register_setting('jptt-cdn-group', 'cdn-jquery', 'jptt_valid_url');
 		register_setting('jptt-cdn-group', 'cdn-jquery-migrate', 'jptt_valid_url');
-		// Misc
-		register_setting('jptt-misc-group', 'remove-generator', 'boolval');
 		// TimThumb
 		register_setting('jptt-timthumb-group', 'timthumb_htaccess', 'boolval');
 		register_setting('jptt-timthumb-group', 'timthumb_debug_on', 'boolval');
