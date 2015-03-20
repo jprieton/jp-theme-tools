@@ -39,8 +39,7 @@ class User_Actions {
 			}
 		}
 
-		header('Content-Type: application/json');
-		(is_wp_error($user) || $user_blocked) ? die('false') : die('true');
+		wp_send_json(!(is_wp_error($user) || $user_blocked));
 	}
 
 	public function user_register() {
@@ -61,8 +60,7 @@ class User_Actions {
 
 		do_action('post_user_register', $user_id);
 
-		header('Content-Type: application/json');
-		is_wp_error($user_id) ? die('false') : die('true');
+		wp_send_json(!is_wp_error($user_id));
 	}
 
 	/**
