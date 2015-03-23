@@ -43,15 +43,4 @@ if (!function_exists('send_contact_form')) {
 
 	add_action('wp_ajax_send_contact_form', 'send_contact_form');
 	add_action('wp_ajax_nopriv_send_contact_form', 'send_contact_form');
-
-	if (!is_admin()) {
-		add_action('wp_enqueue_scripts', 'contact_form_script');
-
-		function contact_form_script()
-		{
-			wp_register_script('jptt_contact', JPTT_PLUGIN_URI . 'assets/js/contact.js', array('jquery'), NULL, true);
-			wp_enqueue_script('jptt_contact');
-		}
-
-	}
 }
