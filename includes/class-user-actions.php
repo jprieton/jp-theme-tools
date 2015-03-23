@@ -12,38 +12,47 @@ class User_Actions {
 
 	public function __construct() {
 		$this->max_login_attempts = (int) get_option('max-login-attemps', -1);
+		$this->max_login_attempts = (int) get_option('max-login-attemps', 3);
 	}
 
+	/**
+	 * Inicio de sesion de usuarios
+	 */
 	public function user_signon() {
 		$nonce = filter_input(INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING);
 		$verify_nonce = (bool) wp_verify_nonce($nonce, 'user_signon');
 		$user_blocked = false;
 
 		if ($verify_nonce) {
-			$submit = array(
-					'user_login' => filter_input(INPUT_POST, 'user_login', FILTER_SANITIZE_STRING),
-					'user_password' => filter_input(INPUT_POST, 'user_password', FILTER_SANITIZE_STRING),
-					'remember' => filter_input(INPUT_POST, 'remember', FILTER_SANITIZE_STRING)
-			);
-
 			$user_id = username_exists($submit['user_login']);
-			$user_blocked = ($user_id > 0) ? $this->is_user_blocked(user_id) : FALSE;
+			$user_blocked = (bool) ($user_id > 0) ? $this->is_user_blocked($user_id) : FALSE;
 
-			if (!$user_blocked) {
+			if ($user_blocked) {
+				$error = new WP_Error('user_blocked', 'Disculpa, usuario bloqueado');
+				wp_send_json_error($error);
+			} else {
+				$submit = array(
+						'user_login' => filter_input(INPUT_POST, 'user_login', FILTER_SANITIZE_STRING),
+						'user_password' => filter_input(INPUT_POST, 'user_password', FILTER_SANITIZE_STRING),
+						'remember' => filter_input(INPUT_POST, 'remember', FILTER_SANITIZE_STRING)
+				);
 				$user = wp_signon($submit, false);
 			}
-			if (is_wp_error($user) or $user_blocked) {
+			if (is_wp_error($user)) {
 				$this->add_user_attempt($user_id);
+				wp_send_json_error($user);
 			} else {
 				$this->clear_user_attempt($user_id);
+				wp_send_json_success();
 			}
+		} else {
+			$error = new WP_Error('method_error', 'Método no adimitido');
+			wp_send_json_error($error);
 		}
-
-		wp_send_json(!(is_wp_error($user) || $user_blocked));
 	}
 
 	/**
-	 * 
+	 * Registro de usuarios
 	 */
 	public function user_register() {
 		$nonce = filter_input(INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING);
@@ -77,16 +86,17 @@ class User_Actions {
 	 * @return boolean
 	 */
 	private function is_user_blocked($user_id) {
-		$user_blocked = (bool) get_user_meta($user_id, 'user_blocked', TRUE);
+		$user_blocked = (bool) get_user_meta($user_id, 'user_blocked', FALSE);
 
-		if (!$user_blocked && $this->max_login_attempts > 0) {
+		if ($this->max_login_attempts < 0) return FALSE;
 
-			$user_attemps = (int) get_user_meta($user_id, 'login_attemps', TRUE);
+		if ($user_blocked) return TRUE;
 
-			if ($user_attemps > $this->max_login_attempts) {
-				$this->block_user($user_id);
-				$user_blocked = TRUE;
-			}
+		$user_attemps = get_user_meta($user_id, 'login_attempts', TRUE);
+
+		if ($user_attemps > $this->max_login_attempts) {
+			$this->block_user($user_id);
+			$user_blocked = TRUE;
 		}
 		return $user_blocked;
 	}
