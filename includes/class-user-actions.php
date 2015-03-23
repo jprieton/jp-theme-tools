@@ -15,18 +15,18 @@ class User_Actions {
 	}
 
 	public function user_signon() {
-		$nonce        = filter_input(INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING);
+		$nonce = filter_input(INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING);
 		$verify_nonce = (bool) wp_verify_nonce($nonce, 'user_signon');
 		$user_blocked = false;
 
 		if ($verify_nonce) {
 			$submit = array(
-					'user_login'    => filter_input(INPUT_POST, 'user_login', FILTER_SANITIZE_STRING),
+					'user_login' => filter_input(INPUT_POST, 'user_login', FILTER_SANITIZE_STRING),
 					'user_password' => filter_input(INPUT_POST, 'user_password', FILTER_SANITIZE_STRING),
-					'remember'      => filter_input(INPUT_POST, 'remember', FILTER_SANITIZE_STRING)
+					'remember' => filter_input(INPUT_POST, 'remember', FILTER_SANITIZE_STRING)
 			);
 
-			$user_id      = username_exists($submit['user_login']);
+			$user_id = username_exists($submit['user_login']);
 			$user_blocked = ($user_id > 0) ? $this->is_user_blocked(user_id) : FALSE;
 
 			if (!$user_blocked) {
@@ -42,8 +42,11 @@ class User_Actions {
 		wp_send_json(!(is_wp_error($user) || $user_blocked));
 	}
 
+	/**
+	 * 
+	 */
 	public function user_register() {
-		$nonce        = filter_input(INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING);
+		$nonce = filter_input(INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING);
 		$verify_nonce = (bool) wp_verify_nonce($nonce, 'user_register');
 
 		do_action('pre_user_register');
@@ -51,16 +54,21 @@ class User_Actions {
 		(($verify_nonce || !is_user_logged_in()) || die('false'));
 
 		$userdata = array(
-				'user_pass'  => filter_input(INPUT_POST, 'user_pass'),
+				'user_pass' => filter_input(INPUT_POST, 'user_pass'),
 				'user_login' => filter_input(INPUT_POST, 'user_email'),
 				'user_email' => filter_input(INPUT_POST, 'user_email')
 		);
+
+		if (!is_email($userdata['user_email'])) {
+			$error = new WP_Error('bad_user_email', 'Disculpa, el email suministrado no es válido');
+			wp_send_json_error($error);
+		}
 
 		$user_id = wp_insert_user($userdata);
 
 		do_action('post_user_register', $user_id);
 
-		wp_send_json(!is_wp_error($user_id));
+		is_wp_error($user_id) ? wp_send_json_error($user_id) : wp_send_json_success();
 	}
 
 	/**
