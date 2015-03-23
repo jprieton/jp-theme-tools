@@ -81,7 +81,7 @@ class User_Actions {
 	}
 
 	/**
-	 *
+	 * Verifica si el usuario esta bloqueado
 	 * @param int $user_id
 	 * @return boolean
 	 */
@@ -102,7 +102,7 @@ class User_Actions {
 	}
 
 	/**
-	 *
+	 * Bloquear usuarios
 	 * @param int $user_id
 	 */
 	private function block_user($user_id) {
@@ -110,7 +110,7 @@ class User_Actions {
 	}
 
 	/**
-	 *
+	 * Agregar intentos fallidos al contador de usuarios
 	 * @param int $user_id
 	 */
 	private function add_user_attempt($user_id) {
@@ -120,7 +120,7 @@ class User_Actions {
 	}
 
 	/**
-	 *
+	 * Desbloquear usuarios y borrar intentos fallidos
 	 * @param int $user_id
 	 */
 	private function clear_user_attempt($user_id) {
