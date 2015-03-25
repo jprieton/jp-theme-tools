@@ -131,4 +131,15 @@ class User_Actions {
 
 $User_Actions = new User_Actions();
 add_action('wp_ajax_nopriv_user_signon', array($User_Actions, 'user_signon'));
+
 add_action('wp_ajax_nopriv_user_register', array($User_Actions, 'user_register'));
+
+add_action('wp_ajax_user_signon', function() {
+		$error = new WP_Error('is_user_registered', 'Ya estas registrado');
+		wp_send_json_error($error);
+});
+
+add_action('wp_ajax_user_register', function() {
+		$error = new WP_Error('is_user_logged_in', 'Ya has iniciado sesion');
+		wp_send_json_error($error);
+});
