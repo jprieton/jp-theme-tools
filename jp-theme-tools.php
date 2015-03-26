@@ -37,7 +37,6 @@ include_once JPTT_PLUGIN_PATH . 'helpers/user.php';
 include_once JPTT_PLUGIN_PATH . 'includes/class-head-actions.php';
 include_once JPTT_PLUGIN_PATH . 'includes/class-user-actions.php';
 include_once JPTT_PLUGIN_PATH . 'includes/contact.php';
-
 include_once JPTT_PLUGIN_PATH . 'actions/profile-image.php';
 
 global $defer_scripts, $async_scripts;
@@ -62,13 +61,22 @@ if (is_admin()) {
 	add_action('admin_init', 'jptt_admin_settings');
 
 	function jptt_admin_settings() {
+		// Opciones generales
+		register_setting('jptt-general-group', 'remove-generator', 'boolval');
+		register_setting('jptt-general-group', 'remove-feed-links-extra', 'boolval');
+		register_setting('jptt-general-group', 'remove-feed-links', 'boolval');
+		register_setting('jptt-general-group', 'remove-rsd-link', 'boolval');
+		register_setting('jptt-general-group', 'remove-wlwmanifest-link', 'boolval');
+		register_setting('jptt-general-group', 'remove-index-rel-link', 'boolval');
+		register_setting('jptt-general-group', 'remove-parent-post-rel-link', 'boolval');
+		register_setting('jptt-general-group', 'remove-start_post-rel-link', 'boolval');
+		register_setting('jptt-general-group', 'remove-adjacent_posts-rel-link-wp_head', 'boolval');
 		// Analitica y SEO
 		register_setting('jptt-seo-group', 'google-analytics');
 		register_setting('jptt-seo-group', 'google-site-verification');
 		register_setting('jptt-seo-group', 'bing-site-verification');
 		register_setting('jptt-seo-group', 'open-graph-meta', 'boolval');
 		register_setting('jptt-seo-group', 'twitter-card-meta', 'boolval');
-		register_setting('jptt-seo-group', 'remove-generator', 'boolval');
 		// Contacto
 		register_setting('jptt-contact-group', 'contact-form-email', 'sanitize_email');
 		register_setting('jptt-contact-group', 'contact-email', 'sanitize_email');
@@ -114,5 +122,4 @@ if (is_admin()) {
 } else {
 	// Overrides WordPress scripts
 	require_once __DIR__ . '/includes/override-cdn.php';
-	require_once __DIR__ . '/includes/removes.php';
 }

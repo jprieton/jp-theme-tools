@@ -115,9 +115,31 @@ class Head_Actions {
 		}
 	}
 
+	function remove_header_links() {
+		// Remove WordPress Version Number
+		if ((bool) get_option('remove-generator')) remove_action('wp_generator');
+		// Remove Category Feeds
+		if ((bool) get_option('remove-feed-links-extra')) remove_action('wp_head', 'feed_links_extra', 3);
+		// Remove Post and Comment Feeds
+		if ((bool) get_option('remove-feed-links')) remove_action('wp_head', 'feed_links', 2);
+		// Remove EditURI link
+		if ((bool) get_option('remove-rsd-link')) remove_action('wp_head', 'rsd_link');
+		// Remove Windows Live Writer
+		if ((bool) get_option('remove-wlwmanifest-link')) remove_action('wp_head', 'wlwmanifest_link');
+		// Remove index link
+		if ((bool) get_option('remove-index-rel-link')) remove_action('wp_head', 'index_rel_link');
+		// Remove previous link
+		if ((bool) get_option('remove-parent-post-rel-link')) remove_action('wp_head', 'parent_post_rel_link', 10, 0);
+		// Remove start link
+		if ((bool) get_option('remove-start_post-rel-link')) remove_action('wp_head', 'start_post_rel_link', 10, 0);
+		// Remove Links for Adjacent Posts
+		if ((bool) get_option('remove-adjacent_posts-rel-link-wp_head')) remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+	}
+
 }
 
 $Head_Actions = new Head_Actions();
+add_action('init', array($Head_Actions, 'remove_header_links'), 1);
 add_action('wp_head', array($Head_Actions, 'open_graph_meta'), 1);
 add_action('wp_head', array($Head_Actions, 'twitter_card_meta'), 1);
 add_action('wp_head', array($Head_Actions, 'google_site_verification'), 1);
