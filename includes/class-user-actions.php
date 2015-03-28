@@ -10,9 +10,15 @@ class User_Actions {
 	 */
 	private $max_login_attempts;
 
+	/**
+	 *
+	 * @var JPTT_Errors
+	 */
+	private $error;
+
 	public function __construct() {
 		$this->max_login_attempts = (int) get_option('max-login-attemps', -1);
-		$this->max_login_attempts = (int) get_option('max-login-attemps', 3);
+		$this->error = new JPTT_Errors();
 	}
 
 	/**
@@ -21,33 +27,33 @@ class User_Actions {
 	public function user_signon() {
 		$nonce = filter_input(INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING);
 		$verify_nonce = (bool) wp_verify_nonce($nonce, 'user_signon');
-		$user_blocked = false;
 
-		if ($verify_nonce) {
-			$user_id = username_exists($submit['user_login']);
-			$user_blocked = (bool) ($user_id > 0) ? $this->is_user_blocked($user_id) : FALSE;
+		if (!$verify_nonce) {
+			$this->error->method_rejected(__FUNCTION__);
+			wp_send_json_error($this->error);
+		}
 
-			if ($user_blocked) {
-				$error = new WP_Error('user_blocked', 'Disculpa, usuario bloqueado');
-				wp_send_json_error($error);
-			} else {
-				$submit = array(
-						'user_login' => filter_input(INPUT_POST, 'user_login', FILTER_SANITIZE_STRING),
-						'user_password' => filter_input(INPUT_POST, 'user_password', FILTER_SANITIZE_STRING),
-						'remember' => filter_input(INPUT_POST, 'remember', FILTER_SANITIZE_STRING)
-				);
-				$user = wp_signon($submit, false);
-			}
-			if (is_wp_error($user)) {
-				$this->add_user_attempt($user_id);
-				wp_send_json_error($user);
-			} else {
-				$this->clear_user_attempt($user_id);
-				wp_send_json_success();
-			}
+		$user_id = username_exists($submit['user_login']);
+		$user_blocked = (bool) ($user_id > 0) ? $this->is_user_blocked($user_id) : FALSE;
+
+		if ($user_blocked) {
+			$this->error->add('user_blocked', 'Disculpa, usuario bloqueado');
+			wp_send_json_error($this->error);
+		}
+
+		$submit = array(
+				'user_login' => filter_input(INPUT_POST, 'user_login', FILTER_SANITIZE_STRING),
+				'user_password' => filter_input(INPUT_POST, 'user_password', FILTER_SANITIZE_STRING),
+				'remember' => filter_input(INPUT_POST, 'remember', FILTER_SANITIZE_STRING)
+		);
+		$user = wp_signon($submit, false);
+
+		if (is_wp_error($user)) {
+			$this->add_user_attempt($user_id);
+			wp_send_json_error($user);
 		} else {
-			$error = new WP_Error('method_error', 'Método no adimitido');
-			wp_send_json_error($error);
+			$this->clear_user_attempt($user_id);
+			wp_send_json_success();
 		}
 	}
 
@@ -60,7 +66,15 @@ class User_Actions {
 
 		do_action('pre_user_register');
 
-		(($verify_nonce || !is_user_logged_in()) || die('false'));
+		if (!$verify_nonce) {
+			$this->error->method_rejected(__FUNCTION__);
+			wp_send_json_error($this->error);
+		}
+
+		if (is_user_logged_in()) {
+			$this->error->user_logged_in(__FUNCTION__);
+			wp_send_json_error($this->error);
+		}
 
 		$userdata = array(
 				'user_pass' => filter_input(INPUT_POST, 'user_pass'),
@@ -127,19 +141,65 @@ class User_Actions {
 		update_user_meta($user_id, 'login_attempts', 0);
 	}
 
+	public function update_user_pass() {
+		$nonce = filter_input(INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING);
+		$verify_nonce = (bool) wp_verify_nonce($nonce, 'update_user_pass');
+
+		// Verificar si el _wpnonce es valido
+		if (!$verify_nonce) {
+			$this->error->method_rejected(__FUNCTION__);
+			wp_send_json_error($this->error);
+		}
+
+		if (!is_user_logged_in()) {
+			$this->error->user_not_logged(__FUNCTION__);
+			wp_send_json_error($this->error);
+		}
+
+		$current_pass = filter_input(INPUT_POST, 'current_pass');
+		$user_id = get_current_user_id();
+		$current_user = get_user_by('id', $user_id);
+
+		$valid_pass = wp_check_password($current_pass, $current_user->get('user_pass'), $user_id);
+
+		if (!$valid_pass) {
+			$this->error->add('invalid_pass', 'Contraseña actual inválida');
+			wp_send_json_error($this->error);
+		}
+
+		$new_pass = filter_input(INPUT_POST, 'new_user_pass');
+
+		if (empty($new_pass)) {
+			$this->error->add('invalid_pass', 'Nueva contraseña inválida');
+			wp_send_json_error($this->error);
+		}
+
+		wp_set_password($new_pass, $user_id);
+
+		$data[] = array(
+				'code' => 'success_update',
+				'message' => 'Contraseña actualizada exitosamente'
+		);
+		wp_send_json_success($data);
+	}
+
 }
 
 $User_Actions = new User_Actions();
 add_action('wp_ajax_nopriv_user_signon', array($User_Actions, 'user_signon'));
-
 add_action('wp_ajax_nopriv_user_register', array($User_Actions, 'user_register'));
+add_action('wp_ajax_update_user_pass', array($User_Actions, 'update_user_pass'));
 
+add_action('wp_ajax_nopriv_update_user_pass', function() {
+	$error = new WP_Error('is_user_registered', 'Debes iniciar sesion');
+	wp_send_json_error($error);
+});
 add_action('wp_ajax_user_signon', function() {
-		$error = new WP_Error('is_user_registered', 'Ya estas registrado');
-		wp_send_json_error($error);
+	$error = new WP_Error('is_user_registered', 'Ya estas registrado');
+	wp_send_json_error($error);
 });
 
 add_action('wp_ajax_user_register', function() {
-		$error = new WP_Error('is_user_logged_in', 'Ya has iniciado sesion');
-		wp_send_json_error($error);
+	$error = new WP_Error('is_user_logged_in', 'Ya has iniciado sesion');
+	wp_send_json_error($error);
 });
