@@ -4,7 +4,7 @@
  * Plugin Name: JP WordPress Theme Tools
  * Plugin URI: https://github.com/jprieton/jp-theme-tools/
  * Description: Extends WordPress functionality for themes
- * Version: 0.8.0
+ * Version: 0.8.1
  * Author: Javier Prieto
  * Author URI: https://github.com/jprieton/
  * License: GPL2
