@@ -34,49 +34,40 @@ class User_Actions {
 			wp_send_json_error($this->error);
 		}
 
+		$submit = array(
+				'user_login' => filter_input(INPUT_POST, 'user_login', FILTER_SANITIZE_STRING),
+				'user_password' => filter_input(INPUT_POST, 'user_password', FILTER_SANITIZE_STRING),
+				'remember' => filter_input(INPUT_POST, 'remember', FILTER_SANITIZE_STRING)
+		);
+
 		$user_id = username_exists($submit['user_login']);
-		$user_blocked = (bool) ($user_id > 0) ? $this->is_user_blocked($user_id) : FALSE;
+		$user_blocked = (bool) $this->is_user_blocked($user_id);
 
 		if ($user_blocked) {
 			$this->error->add('user_blocked', 'Disculpa, usuario bloqueado');
 			wp_send_json_error($this->error);
 		}
 
-		$submit = array(
-				'user_login' => filter_input(INPUT_POST, 'user_login', FILTER_SANITIZE_STRING),
-				'user_password' => filter_input(INPUT_POST, 'user_password', FILTER_SANITIZE_STRING),
-				'remember' => filter_input(INPUT_POST, 'remember', FILTER_SANITIZE_STRING)
-		);
 		$user = wp_signon($submit, false);
 
 		if (is_wp_error($user)) {
 			$this->add_user_attempt($user_id);
-			wp_send_json_error($user);
+
+			$user_blocked = (bool) $this->is_user_blocked($user_id);
+
 			if ($user_blocked) {
 				$error = new WP_Error('user_blocked', 'Disculpa, usuario bloqueado');
 				wp_send_json_error($error);
 			} else {
-				$submit = array(
-						'user_login' => filter_input(INPUT_POST, 'user_login', FILTER_SANITIZE_STRING),
-						'user_password' => filter_input(INPUT_POST, 'user_password', FILTER_SANITIZE_STRING),
-						'remember' => filter_input(INPUT_POST, 'remember', FILTER_SANITIZE_STRING)
-				);
-				$user = wp_signon($submit, false);
-			}
-			if (is_wp_error($user)) {
-				$this->add_user_attempt($user_id);
 				wp_send_json_error($user);
-			} else {
-				$this->clear_user_attempt($user_id);
-				$response = array(
-						'code' => 'user_signon_success',
-						'message' => 'Has iniciado sesión exitosamente',
-				);
-				wp_send_json_success($response);
 			}
 		} else {
 			$this->clear_user_attempt($user_id);
-			wp_send_json_success();
+			$response = array(
+					'code' => 'user_signon_success',
+					'message' => 'Has iniciado sesión exitosamente',
+			);
+			wp_send_json_success($response);
 		}
 	}
 
@@ -124,10 +115,19 @@ class User_Actions {
 
 	/**
 	 * Verifica si el usuario esta bloqueado
-	 * @param int $user_id
+	 * @param int|string $user_id
 	 * @return boolean
 	 */
 	private function is_user_blocked($user_id) {
+
+		if (!is_int($user_id)) {
+			$user_id = (bool) username_exists($user_id);
+		}
+
+		if ($user_id == 0) {
+			return FALSE;
+		}
+
 		$user_blocked = (bool) get_user_meta($user_id, 'user_blocked', FALSE);
 
 		if ($this->max_login_attempts < 0) return FALSE;
@@ -215,6 +215,7 @@ class User_Actions {
 
 $User_Actions = new User_Actions();
 add_action('wp_ajax_nopriv_user_signon', array($User_Actions, 'user_signon'));
+
 add_action('wp_ajax_nopriv_user_register', array($User_Actions, 'user_register'));
 add_action('wp_ajax_update_user_pass', array($User_Actions, 'update_user_pass'));
 
@@ -222,6 +223,7 @@ add_action('wp_ajax_nopriv_update_user_pass', function() {
 	$error = new WP_Error('is_user_registered', 'Debes iniciar sesion');
 	wp_send_json_error($error);
 });
+
 add_action('wp_ajax_user_signon', function() {
 	$error = new WP_Error('is_user_registered', 'Ya estas registrado');
 	wp_send_json_error($error);
