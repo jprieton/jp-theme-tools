@@ -17,6 +17,7 @@ class User_Actions {
 
 	/**
 	 * Inicio de sesion de usuarios
+	 * JSON
 	 */
 	public function user_signon() {
 		$nonce = filter_input(INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING);
@@ -43,7 +44,11 @@ class User_Actions {
 				wp_send_json_error($user);
 			} else {
 				$this->clear_user_attempt($user_id);
-				wp_send_json_success();
+				$response = array(
+						'code' => 'user_signon_success',
+						'message' => 'Has iniciado sesión exitosamente',
+				);
+				wp_send_json_success($response);
 			}
 		} else {
 			$error = new WP_Error('method_error', 'Método no adimitido');
@@ -53,14 +58,19 @@ class User_Actions {
 
 	/**
 	 * Registro de usuarios
+	 * JSON
 	 */
 	public function user_register() {
 		$nonce = filter_input(INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING);
 		$verify_nonce = (bool) wp_verify_nonce($nonce, 'user_register');
 
-		do_action('pre_user_register');
 
-		(($verify_nonce || !is_user_logged_in()) || die('false'));
+		if (!$verify_nonce) {
+			$error = new WP_Error('method_error', 'Método no adimitido');
+			wp_send_json_error($error);
+		}
+
+		do_action('pre_user_register');
 
 		$userdata = array(
 				'user_pass' => filter_input(INPUT_POST, 'user_pass'),
@@ -69,7 +79,7 @@ class User_Actions {
 		);
 
 		if (!is_email($userdata['user_email'])) {
-			$error = new WP_Error('bad_user_email', 'Disculpa, el email suministrado no es válido');
+			$error = new WP_Error('bad_user_email', 'Disculpa, el email suministrado es inválido');
 			wp_send_json_error($error);
 		}
 
@@ -77,7 +87,15 @@ class User_Actions {
 
 		do_action('post_user_register', $user_id);
 
-		is_wp_error($user_id) ? wp_send_json_error($user_id) : wp_send_json_success();
+		if (is_wp_error($user_id)) {
+			wp_send_json_error($user_id);
+		} else {
+			$response = array(
+					'code' => 'user_register_success',
+					'message' => 'Registro exitoso',
+			);
+			wp_send_json_success($response);
+		}
 	}
 
 	/**
@@ -135,11 +153,11 @@ add_action('wp_ajax_nopriv_user_signon', array($User_Actions, 'user_signon'));
 add_action('wp_ajax_nopriv_user_register', array($User_Actions, 'user_register'));
 
 add_action('wp_ajax_user_signon', function() {
-		$error = new WP_Error('is_user_registered', 'Ya estas registrado');
-		wp_send_json_error($error);
+	$error = new WP_Error('is_user_registered', 'Ya estas registrado');
+	wp_send_json_error($error);
 });
 
 add_action('wp_ajax_user_register', function() {
-		$error = new WP_Error('is_user_logged_in', 'Ya has iniciado sesion');
-		wp_send_json_error($error);
+	$error = new WP_Error('is_user_logged_in', 'Ya has iniciado sesion');
+	wp_send_json_error($error);
 });
