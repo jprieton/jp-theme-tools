@@ -11,9 +11,9 @@ if (!function_exists('send_contact_form')) {
 		$address = get_option('contact-form-email');
 
 		if (empty($address)) {
-			$error = new WP_Error('contact_failed', 'Error en el envío: contacte al administrador');
+			$error = new WP_Error('send_contact_failed', 'Error en el envío: contacte al administrador');
 			wp_send_json_error($error);
-		};
+		}
 
 		if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 			$submit = wp_parse_args($_POST);
@@ -24,7 +24,7 @@ if (!function_exists('send_contact_form')) {
 		if (!wp_verify_nonce($submit['_wpnonce'], 'send_contact_form')) return FALSE;
 
 		ob_start();
-		jptt_get_template('contact-email.php');
+		jptt_get_template('email/contact-email.php');
 		$content = ob_get_clean();
 
 		require_once ABSPATH . WPINC . '/class-phpmailer.php';
@@ -38,7 +38,16 @@ if (!function_exists('send_contact_form')) {
 		$mail->IsHTML();
 		$mail->CharSet = 'utf-8';
 
-		($mail->send()) ? wp_send_json_success() : wp_send_json_error();
+		if ($mail->send()) {
+			$response = array(
+					'code' => 'send_contact_success',
+					'message' => 'Tu solicitud fue enviada exitosamente.',
+			);
+			wp_send_json_success($response);
+		} else {
+			$error = new WP_Error('send_contact_failed', 'Error en el envío: contacte al administrador');
+			wp_send_json_error($error);
+		}
 	}
 
 	add_action('wp_ajax_send_contact_form', 'send_contact_form');
