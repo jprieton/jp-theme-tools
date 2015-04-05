@@ -63,7 +63,7 @@ class User_Actions {
 			}
 		} else {
 			$this->clear_user_attempt($user_id);
-			$response = array(
+			$response[] = array(
 					'code' => 'user_signon_success',
 					'message' => 'Has iniciado sesión exitosamente',
 			);
@@ -88,7 +88,7 @@ class User_Actions {
 		do_action('pre_user_register');
 
 		$userdata = array(
-				'user_pass' => filter_input(INPUT_POST, 'user_pass'),
+				'user_pass' => filter_input(INPUT_POST, 'user_password'),
 				'user_login' => filter_input(INPUT_POST, 'user_email'),
 				'user_email' => filter_input(INPUT_POST, 'user_email')
 		);
@@ -105,7 +105,7 @@ class User_Actions {
 		if (is_wp_error($user_id)) {
 			wp_send_json_error($user_id);
 		} else {
-			$response = array(
+			$response[] = array(
 					'code' => 'user_register_success',
 					'message' => 'Registro exitoso',
 			);
