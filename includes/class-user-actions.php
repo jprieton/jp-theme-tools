@@ -105,6 +105,7 @@ class User_Actions {
 		if (is_wp_error($user_id)) {
 			wp_send_json_error($user_id);
 		} else {
+			add_user_meta($user_id, 'show_admin_bar_front', 'false');
 			$response[] = array(
 					'code' => 'user_register_success',
 					'message' => 'Registro exitoso',
