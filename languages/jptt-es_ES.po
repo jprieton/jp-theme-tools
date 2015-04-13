@@ -1,0 +1,174 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: a23\n"
+"POT-Creation-Date: 2015-04-13 09:39-0430\n"
+"PO-Revision-Date: 2015-04-13 09:40-0430\n"
+"Last-Translator: Javier Prieto <jprieton@gmail.com>\n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.5\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../admin-options.php:5 ../settings-contact.php:5 ../settings-social.php:5
+#: ../settings/cdn.php:5 ../settings/seo.php:5 ../settings/timthumb.php:5
+msgid "Settings saved."
+msgstr ""
+
+#: ../admin-options.php:26
+msgid "Remove WordPress Version Number"
+msgstr ""
+
+#: ../admin-options.php:34
+msgid "Remove Category Feeds"
+msgstr ""
+
+#: ../admin-options.php:42
+msgid "Remove Post and Comment Feeds"
+msgstr ""
+
+#: ../admin-options.php:50
+msgid "Remove EditURI link"
+msgstr ""
+
+#: ../admin-options.php:58
+msgid "Remove Windows Live Writer"
+msgstr ""
+
+#: ../admin-options.php:66
+msgid "Remove index link"
+msgstr ""
+
+#: ../admin-options.php:74
+msgid "Remove previous link"
+msgstr ""
+
+#: ../admin-options.php:82
+msgid "Remove start link"
+msgstr ""
+
+#: ../admin-options.php:90
+msgid "Remove Links for Adjacent Posts"
+msgstr ""
+
+#: ../frontend/errors.php:20
+msgid "Method not supported"
+msgstr "Método no soportado"
+
+#: ../frontend/errors.php:31
+msgid "User not logged yet"
+msgstr "Usuario no registrado todavía"
+
+#: ../frontend/errors.php:42
+msgid "User logged in yet"
+msgstr "Usuario conectado todavía"
+
+#~ msgid "result"
+#~ msgid_plural "results"
+#~ msgstr[0] "resultado"
+#~ msgstr[1] "resultados"
+
+#~ msgid "%d result"
+#~ msgid_plural "%d results"
+#~ msgstr[0] "%d resultado"
+#~ msgstr[1] "%d resultados"
+
+#~ msgid "Publications"
+#~ msgstr "Publicaciones"
+
+#~ msgid "Conditions"
+#~ msgstr "Condiciones"
+
+#~ msgid "Condition"
+#~ msgstr "Condición"
+
+#~ msgctxt "taxonomy_slug"
+#~ msgid "condition"
+#~ msgstr "condicion"
+
+#~ msgid "Operation Type"
+#~ msgstr "Tipo de operación"
+
+#~ msgid "Operation Types"
+#~ msgstr "Tipos de operación"
+
+#~ msgctxt "taxonomy_slug"
+#~ msgid "operation"
+#~ msgstr "operacion"
+
+#~ msgid "Cities"
+#~ msgstr "Ciudades"
+
+#~ msgid "City"
+#~ msgstr "Ciudad"
+
+#~ msgctxt "taxonomy_slug"
+#~ msgid "city"
+#~ msgstr "ciudad"
+
+#~ msgid "Property Type"
+#~ msgstr "Tipo de propiedad"
+
+#~ msgid "Property Types"
+#~ msgstr "Tipos de propiedad"
+
+#~ msgctxt "taxonomy_slug"
+#~ msgid "type"
+#~ msgstr "tipo"
+
+#~ msgid "Stratus"
+#~ msgstr "Estrato"
+
+#~ msgctxt "taxonomy_slug"
+#~ msgid "stratus"
+#~ msgstr "estrato"
+
+#~ msgid "Attributes"
+#~ msgstr "Atributos"
+
+#~ msgid "Attribute"
+#~ msgstr "Atributo"
+
+#~ msgctxt "taxonomy_slug"
+#~ msgid "attribute"
+#~ msgstr "atributo"
+
+#~ msgid "Publication"
+#~ msgstr "Publicación"
+
+#~ msgctxt "post_type_slug"
+#~ msgid "publication"
+#~ msgstr "publicacion"
+
+#~ msgid "publication"
+#~ msgstr "publicación"
+
+#~ msgctxt "post_type_slug"
+#~ msgid "publications"
+#~ msgstr "publicaciones"
+
+#~ msgid "Conversations"
+#~ msgstr "Conversaciones"
+
+#~ msgid "Conversation"
+#~ msgstr "Conversación"
+
+#~ msgctxt "post_type_slug"
+#~ msgid "conversation"
+#~ msgstr "conversacion"
+
+#~ msgid "conversation"
+#~ msgstr "conversación"
+
+#~ msgid "Type"
+#~ msgstr "Tipo"
+
+#~ msgctxt "taxonomy_slug"
+#~ msgid "property_type"
+#~ msgstr "tipo_propiedad"

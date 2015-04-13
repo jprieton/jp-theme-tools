@@ -6,6 +6,8 @@
  * Description: Extends WordPress functionality for themes
  * Version: 0.8.3
  * Author: Javier Prieto
+ * Text Domain: jptt
+ * Domain Path: /languages
  * Author URI: https://github.com/jprieton/
  * License: GPL2
  */
@@ -32,6 +34,13 @@ include_once JPTT_PLUGIN_PATH . 'helpers/debug.php';
 include_once JPTT_PLUGIN_PATH . 'helpers/url.php';
 include_once JPTT_PLUGIN_PATH . 'helpers/form.php';
 include_once JPTT_PLUGIN_PATH . 'helpers/user.php';
+
+//Frontend
+//include_once JPTT_PLUGIN_PATH . 'frontend/errors.php';
+//include_once JPTT_PLUGIN_PATH . 'frontend/attachments.php';
+//include_once JPTT_PLUGIN_PATH . 'frontend/galleries.php';
+//include_once JPTT_PLUGIN_PATH . 'frontend/posts.php';
+//include_once JPTT_PLUGIN_PATH . 'frontend/users.php';
 
 // Action hooks
 include_once JPTT_PLUGIN_PATH . 'includes/class-jptt-errors.php';
@@ -124,3 +133,8 @@ if (is_admin()) {
 	// Overrides WordPress scripts
 	require_once __DIR__ . '/includes/override-cdn.php';
 }
+
+
+add_action('plugins_loaded', function() {
+	load_plugin_textdomain('jptt', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+});
