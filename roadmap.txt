@@ -1,5 +1,16 @@
-Actions
+Post
 - frontend_add_post
-- frontend_add_post_attachment
+- frontend_update_post
 - frontend_delete_post
+Attachment
+- frontend_add_post_attachment
 - frontend_delete_post_attachment
+Gallery
+- frontend_add_post_gallery
+- frontend_update_post_gallery
+- frontend_delete_post_gallery
+Users
+- frontend_add_user
+- frontend_update_user
+- frontend_delete_user
+- frontend_login_user
