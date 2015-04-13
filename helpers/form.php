@@ -4,6 +4,7 @@ defined('ABSPATH') or die("No script kiddies please!");
 
 /**
  * Returns nonce field value
+ * @deprecated since version 0.8.3
  * @param srting $name
  * @return srting
  */

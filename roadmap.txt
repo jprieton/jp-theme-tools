@@ -1,0 +1,5 @@
+Actions
+- frontend_add_post
+- frontend_add_post_attachment
+- frontend_delete_post
+- frontend_delete_post_attachment
