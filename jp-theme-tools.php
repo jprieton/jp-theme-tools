@@ -74,6 +74,7 @@ if (is_admin()) {
 		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - Social', 'Social', 'administrator', __DIR__ . '/settings-social.php');
 		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - CDN', 'CDN', 'administrator', __DIR__ . '/settings/cdn.php');
 		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - TimThumb', 'TimThumb', 'administrator', __DIR__ . '/settings/timthumb.php');
+		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - Modules', __('Modules', 'jptt'), 'administrator', __DIR__ . '/settings/modules.php');
 	}
 
 	add_action('admin_init', 'jptt_admin_settings');
@@ -128,6 +129,8 @@ if (is_admin()) {
 		register_setting('jptt-timthumb-group', 'timthumb_default_zc', 'intval');
 		register_setting('jptt-timthumb-group', 'timthumb_default_width', 'intval');
 		register_setting('jptt-timthumb-group', 'timthumb_default_height', 'intval');
+		// Modules
+		register_setting('jptt-modules-group', 'jptt_modules');
 	}
 
 	add_action('admin_enqueue_scripts', 'jptt_admin_style');
