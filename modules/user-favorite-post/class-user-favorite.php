@@ -1,5 +1,12 @@
 <?php
 
+namespace jptt\modules;
+
+defined('ABSPATH') or die('No direct script access allowed');
+
+/**
+ * @since 0.9.0
+ */
 class User_favorite {
 
 	public function __construct() {
@@ -28,16 +35,12 @@ class User_favorite {
 			$user_id = get_current_user_id();
 		}
 
-		if ($this->is_favorite_post($post_id)) {
-			return TRUE;
+		if (!$this->is_favorite_post($post_id)) {
+			global $wpdb;
+			$wpdb instanceof wpdb;
+
+			$wpdb->insert("{$wpdb->prefix}favorites", compact('post_id', 'user_id'));
 		}
-
-		global $wpdb;
-		$wpdb instanceof wpdb;
-
-		$wpdb->insert("{$wpdb->prefix}favorites", compact('post_id', 'user_id'));
-
-		return TRUE;
 	}
 
 	public function remove_post_from_favorites($post_id, $user_id = NULL) {
@@ -73,7 +76,12 @@ class User_favorite {
 		global $wpdb;
 		$wpdb instanceof wpdb;
 
-		$result = $wpdb->get_row("SELECT * FROM {$wpdb->prefix}favorites WHERE `post_id` = " . (int) $post_id . " `user_id` = " . (int) $user_id ." LIMIT 1");
+		$query = "SELECT * FROM {$wpdb->prefix}favorites "
+						. "WHERE `post_id` = " . (int) $post_id . " "
+						. "AND `user_id` = " . (int) $user_id . " "
+						. "LIMIT 1";
+
+		$result = $wpdb->get_row($query);
 		return empty($result);
 	}
 

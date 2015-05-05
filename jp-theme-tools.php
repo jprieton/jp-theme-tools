@@ -49,7 +49,6 @@ include_once JPTT_PLUGIN_PATH . 'helpers/user.php';
 //include_once JPTT_PLUGIN_PATH . 'frontend/galleries.php';
 //include_once JPTT_PLUGIN_PATH . 'frontend/posts.php';
 //include_once JPTT_PLUGIN_PATH . 'frontend/users.php';
-
 // Action hooks
 include_once JPTT_PLUGIN_PATH . 'includes/class-jptt-errors.php';
 include_once JPTT_PLUGIN_PATH . 'includes/class-head-actions.php';
@@ -61,6 +60,14 @@ global $defer_scripts, $async_scripts;
 require_once JPTT_PLUGIN_PATH . '/functions/common-functions.php';
 require_once JPTT_PLUGIN_PATH . '/filters/common-filters.php';
 require_once JPTT_PLUGIN_PATH . '/includes/actions.php';
+
+// Autoload modules
+$jptt_modules = get_option('jptt_modules', array());
+foreach ($jptt_modules as $key => $value) {
+	if (file_exists(JPTT_PLUGIN_PATH."modules/{$key}/module.php")) {
+		include_once JPTT_PLUGIN_PATH."modules/{$key}/module.php";
+	}
+}
 
 if (is_admin()) {
 
