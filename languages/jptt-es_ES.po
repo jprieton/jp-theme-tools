@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: a23\n"
-"POT-Creation-Date: 2015-04-13 09:39-0430\n"
-"PO-Revision-Date: 2015-04-13 09:40-0430\n"
+"POT-Creation-Date: 2015-05-06 01:14-0430\n"
+"PO-Revision-Date: 2015-05-06 01:15-0430\n"
 "Last-Translator: Javier Prieto <jprieton@gmail.com>\n"
 "Language-Team: \n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
@@ -17,7 +17,8 @@ msgstr ""
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../admin-options.php:5 ../settings-contact.php:5 ../settings-social.php:5
-#: ../settings/cdn.php:5 ../settings/seo.php:5 ../settings/timthumb.php:5
+#: ../settings/seo.php:5 ../settings/cdn.php:5 ../settings/timthumb.php:5
+#: ../settings/modules.php:5
 msgid "Settings saved."
 msgstr ""
 
@@ -57,17 +58,45 @@ msgstr ""
 msgid "Remove Links for Adjacent Posts"
 msgstr ""
 
-#: ../frontend/errors.php:20
+#: ../jp-theme-tools.php:84 ../settings/modules.php:2
+msgid "Modules"
+msgstr "Módulos"
+
+#: ../modules/poll/poll-post-type.php:5 ../modules/poll/poll-post-type.php:7
+msgid "Polls"
+msgstr "Encuestas"
+
+#: ../modules/poll/poll-post-type.php:6 ../modules/poll/poll-post-type.php:8
+msgid "Poll"
+msgstr "Encuesta"
+
+#: ../modules/poll/poll-post-type.php:9
+msgid "All Items"
+msgstr ""
+
+#: ../modules/poll/poll-post-type.php:10
+msgid "Search Item"
+msgstr ""
+
+#: ../modules/poll/poll-post-type.php:13
+msgid "poll"
+msgstr ""
+
+#: ../core/JPTT_Error.php:23 ../frontend/errors.php:23
 msgid "Method not supported"
 msgstr "Método no soportado"
 
-#: ../frontend/errors.php:31
+#: ../core/JPTT_Error.php:36 ../frontend/errors.php:36
 msgid "User not logged yet"
 msgstr "Usuario no registrado todavía"
 
-#: ../frontend/errors.php:42
+#: ../core/JPTT_Error.php:49 ../frontend/errors.php:49
 msgid "User logged in yet"
 msgstr "Usuario conectado todavía"
+
+#: ../core/JPTT_Error.php:62
+msgid "Incorrect data"
+msgstr ""
 
 #~ msgid "result"
 #~ msgid_plural "results"
