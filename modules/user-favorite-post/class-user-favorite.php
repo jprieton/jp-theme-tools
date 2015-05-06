@@ -30,22 +30,45 @@ class User_favorite {
 		$wpdb->query($query);
 	}
 
+	/**
+	 * Adds a post to user favorites
+	 * @global \wpdb $wpdb
+	 * @param int $post_id
+	 * @param int $user_id
+	 * @since 0.9.0
+	 */
 	public function add_post_to_favorites($post_id, $user_id = NULL) {
 		if (!is_numeric($user_id) || $user_id == 0) {
 			$user_id = get_current_user_id();
 		}
+		
+		if ($user_id == 0) {
+			return;
+		}
 
 		if (!$this->is_favorite_post($post_id)) {
 			global $wpdb;
-			$wpdb instanceof wpdb;
+			$wpdb instanceof \wpdb;
 
 			$wpdb->insert("{$wpdb->prefix}favorites", compact('post_id', 'user_id'));
 		}
 	}
 
+	/**
+	 * Remove a post from user favorites
+	 * @global \wpdb $wpdb
+	 * @param type $post_id
+	 * @param type $user_id
+	 * @return boolean
+	 * @since 0.9.0
+	 */
 	public function remove_post_from_favorites($post_id, $user_id = NULL) {
 		if (!is_numeric($user_id) || $user_id == 0) {
 			$user_id = get_current_user_id();
+		}
+
+		if ($user_id == 0) {
+			return;
 		}
 
 		global $wpdb;
@@ -56,6 +79,13 @@ class User_favorite {
 		return TRUE;
 	}
 
+	/**
+	 * Toggles add/remove favorite post
+	 * @param type $post_id
+	 * @param type $user_id
+	 * @return boolean
+	 * @since 0.9.0
+	 */
 	public function toggle_favorite_post($post_id, $user_id = NULL) {
 		if (!is_numeric($user_id) || $user_id == 0) {
 			$user_id = get_current_user_id();
@@ -63,26 +93,41 @@ class User_favorite {
 
 		if ($this->is_favorite_post($post_id)) {
 			$this->remove_post_from_favorites($post_id, $user_id);
+			return FALSE;
 		} else {
 			$this->add_post_to_favorites($post_id, $user_id);
+			return TRUE;
 		}
 	}
 
+	/**
+	 * 
+	 * @global \wpdb $wpdb
+	 * @param int $post_id
+	 * @param int $user_id
+	 * @return bool
+	 * @since 0.9.0
+	 */
 	public function is_favorite_post($post_id, $user_id = NULL) {
+
 		if (!is_numeric($user_id) || $user_id == 0) {
 			$user_id = get_current_user_id();
 		}
 
-		global $wpdb;
-		$wpdb instanceof wpdb;
+		if ($user_id == 0) {
+			return FALSE;
+		}
 
-		$query = "SELECT * FROM {$wpdb->prefix}favorites "
+		global $wpdb;
+		$wpdb instanceof \wpdb;
+
+		$query = "SELECT * FROM `{$wpdb->prefix}favorites` "
 						. "WHERE `post_id` = " . (int) $post_id . " "
 						. "AND `user_id` = " . (int) $user_id . " "
 						. "LIMIT 1";
 
 		$result = $wpdb->get_row($query);
-		return empty($result);
+		return !empty($result);
 	}
 
 }
