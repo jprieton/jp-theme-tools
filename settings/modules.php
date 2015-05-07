@@ -15,18 +15,26 @@
 		<table class="form-table">
 
 			<tr valign="top">
-				<th scope="row">USER_FAVORITE_POST</th>
+				<th scope="row">FAVORITE_POST</th>
 				<td>
-					<input type="checkbox" value="1" id="user_favorite_post" name="jptt_modules[user-favorite-post]" <?php checked($option['user-favorite-post']) ?>>
+					<input type="checkbox" value="1" id="user_favorite_post" name="jptt_modules[favorite-post]" <?php checked($option['favorite-post']) ?>>
 					<p class="description">Permite al usuario marcar un post como favorito.</p>
 				</td>
 			</tr>
 
 			<tr valign="top">
-				<th scope="row">USER_VOTE_POST</th>
+				<th scope="row">POST_VOTE</th>
 				<td>
-					<input type="checkbox" value="1" id="user_vote_post" name="jptt_modules[user-vote-post]" <?php checked($option['user-vote-post']) ?>>
+					<input type="checkbox" value="1" id="user_vote_post" name="jptt_modules[post-vote]" <?php checked($option['post-vote']) ?>>
 					<p class="description">Permite al usuario votar por un post.</p>
+				</td>
+			</tr>
+
+			<tr valign="top">
+				<th scope="row">POLL_POST_TYPE</th>
+				<td>
+					<input type="checkbox" value="1" id="user_vote_post" name="jptt_modules[poll-post-type]" <?php checked($option['poll-post-type']) ?>>
+					<p class="description">Activa un post type <b>Encuestas</b>, depende del modulo <code>POST_VOTE</code>.</p>
 				</td>
 			</tr>
 

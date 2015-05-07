@@ -2,10 +2,6 @@
 
 defined('ABSPATH') or die('No direct script access allowed');
 
-if (is_admin()) {
-	return;
-}
-
 require_once __DIR__ . '/class-user-favorite.php';
 require_once JPTT_PLUGIN_PATH . 'core/class-input.php';
 
