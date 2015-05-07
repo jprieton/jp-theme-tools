@@ -11,12 +11,12 @@ require_once JPTT_PLUGIN_PATH . 'core/class-input.php';
  * @return bool
  */
 function is_favorite_post($post_id = NULL) {
-	$user_favorite = new jptt\modules\User_favorite();
+	$User_favorite = new jptt\modules\User_favorite();
 
 	if ($post_id == NULL) {
 		$post_id = get_the_ID();
 	}
-	return $user_favorite->is_favorite_post($post_id);
+	return $User_favorite->is_favorite_post($post_id);
 }
 
 add_action('wp_ajax_add_favorite_post', function() {
@@ -28,9 +28,9 @@ add_action('wp_ajax_add_favorite_post', function() {
 		wp_send_json_error();
 	}
 
-	$user_favorite = new jptt\modules\User_favorite();
+	$User_favorite = new jptt\modules\User_favorite();
 
-	$user_favorite->add_post_to_favorites($post_id);
+	$User_favorite->add_post_to_favorites($post_id);
 
 	wp_send_json_success();
 });
@@ -44,9 +44,9 @@ add_action('wp_ajax_remove_favorite_post', function() {
 		wp_send_json_error();
 	}
 
-	$user_favorite = new jptt\modules\User_favorite();
+	$User_favorite = new jptt\modules\User_favorite();
 
-	$user_favorite->remove_post_from_favorites($post_id);
+	$User_favorite->remove_post_from_favorites($post_id);
 
 	wp_send_json_success();
 });
@@ -60,9 +60,9 @@ add_action('wp_ajax_toggle_favorite_post', function() {
 		wp_send_json_error();
 	}
 
-	$user_favorite = new jptt\modules\User_favorite();
+	$User_favorite = new jptt\modules\User_favorite();
 
-	$is_favorite = $user_favorite->toggle_favorite_post($post_id);
+	$is_favorite = $User_favorite->toggle_favorite_post($post_id);
 
 	wp_send_json_success(compact('is_favorite'));
 });

@@ -32,11 +32,6 @@ define('JPTT_PLUGIN_URI', plugin_dir_url(__FILE__));
 define('JPTT_THEME_PATH', get_stylesheet_directory());
 define('JPTT_THEME_URI', get_stylesheet_directory_uri());
 
-include_once JPTT_PLUGIN_PATH . 'core/JPTT.php';
-global $jptt;
-$jptt = new JPTT();
-$jptt->plugin_init();
-
 //Helpers
 include_once JPTT_PLUGIN_PATH . 'helpers/debug.php';
 include_once JPTT_PLUGIN_PATH . 'helpers/url.php';

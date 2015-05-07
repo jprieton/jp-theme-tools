@@ -39,6 +39,14 @@
 			</tr>
 
 			<tr valign="top">
+				<th scope="row">USER_LOGIN</th>
+				<td>
+					<input type="checkbox" value="1" id="user_vote_post" name="jptt_modules[user-login]" <?php checked($option['user-login']) ?>>
+					<p class="description">Permite al usuario iniciar sesión desde el frontend.</p>
+				</td>
+			</tr>
+
+			<tr valign="top">
 				<th scope="row">USER_SUBSCRIBE</th>
 				<td>
 					<input type="checkbox" value="1" id="user_vote_post" name="jptt_modules[user-subscribe]" <?php checked($option['user-subscribe']) ?>>

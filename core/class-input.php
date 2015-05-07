@@ -2,6 +2,8 @@
 
 namespace jptt\core;
 
+defined('ABSPATH') or die('No direct script access allowed');
+
 /**
  * @since 0.9.0
  */
@@ -33,11 +35,11 @@ class Input {
 		}
 	}
 
-	public function get($field, $args = array()) {
+	private function _input_value($field, $args = array()) {
 		$defaults = array(
-				'filter' => FILTER_DEFAULT,
-				'default' => FALSE,
-				'method' => $this->get_method(),
+				'filter'   => FILTER_DEFAULT,
+				'default'  => FALSE,
+				'method'   => $this->get_method(),
 				'callback' => NULL
 		);
 		$options = wp_parse_args($args, $defaults);
@@ -57,6 +59,60 @@ class Input {
 
 		$value = filter_input($type, $field, $options['filter']);
 		return empty($value) ? $options['default'] : $value;
+	}
+
+	public function post($field, $args = array()) {
+		$defaults = array(
+				'filter'   => FILTER_DEFAULT,
+				'default'  => false,
+				'method'   => 'POST',
+				'callback' => NULL
+		);
+		return $this->_input_value($field, wp_parse_args($args, $defaults));
+	}
+
+	public function get($field, $args = array()) {
+		$defaults = array(
+				'filter'   => FILTER_DEFAULT,
+				'default'  => false,
+				'method'   => 'GET',
+				'callback' => NULL
+		);
+		return $this->_input_value($field, wp_parse_args($args, $defaults));
+	}
+
+	/**
+	 *
+	 * @param string $field
+	 * @param string $method
+	 * @return string
+	 * @since 0.9.0
+	 * @author jprieton
+	 */
+	public function get_wpnonce($field = '_wpnonce', $method = 'POST') {
+
+		$args = array(
+				'filter'   => FILTER_SANITIZE_STRIPPED,
+				'default'  => FALSE,
+				'method'   => $method,
+				'callback' => NULL
+		);
+
+		return $this->_input_value($field, $args);
+	}
+
+	/**
+	 *
+	 * @param string $action
+	 * @param string $key
+	 * @param string $method
+	 * @return int
+	 * @since 0.9.0
+	 * @author jprieton
+	 */
+	public function verify_wpnonce($action, $key = '_wpnonce', $method = 'POST') {
+		$nonce = $this->get_wpnonce($key, $method);
+		return wp_verify_nonce($nonce, $action);
 	}
 
 }

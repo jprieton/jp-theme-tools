@@ -1,13 +1,14 @@
 <?php
 
+namespace jptt\core;
+
 defined('ABSPATH') or die('No direct script access allowed');
 
 /**
-/**
- * @deprecated since version 0.9.0
+ * @since  0.9.0
  * @author jprieton
  */
-class JPTT_Error extends WP_Error {
+class Error extends \WP_Error {
 
 	public function __construct($code = '', $message = '', $data = '') {
 		parent::__construct($code, $message, $data);

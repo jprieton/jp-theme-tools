@@ -1,7 +1,9 @@
 <?php
 
 defined('ABSPATH') OR exit('No direct script access allowed');
-
+/**
+ * @deprecated since version 0.9.0
+ */
 class JPTT_Input {
 
 	public function post($index, $fallback = '', $filter = FILTER_DEFAULT, $options = array()) {

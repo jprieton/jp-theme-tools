@@ -15,8 +15,8 @@ add_action('wp_ajax_post_vote', function() {
 		wp_send_json_error();
 	}
 
-	$post_vote = new jptt\modules\Post_vote();
+	$Post_vote = new jptt\modules\Post_vote();
 
-	$post_vote->add_post_vote($post_id, $value);
+	$Post_vote->add_post_vote($post_id, $value);
 	wp_send_json_success();
 });
