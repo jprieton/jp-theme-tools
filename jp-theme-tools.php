@@ -45,7 +45,6 @@ include_once JPTT_PLUGIN_PATH . 'helpers/user.php';
 //include_once JPTT_PLUGIN_PATH . 'frontend/posts.php';
 //include_once JPTT_PLUGIN_PATH . 'frontend/users.php';
 // Action hooks
-include_once JPTT_PLUGIN_PATH . 'includes/class-jptt-errors.php';
 include_once JPTT_PLUGIN_PATH . 'includes/class-head-actions.php';
 include_once JPTT_PLUGIN_PATH . 'includes/class-user-actions.php';
 include_once JPTT_PLUGIN_PATH . 'includes/contact.php';

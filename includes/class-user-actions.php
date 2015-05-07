@@ -2,6 +2,8 @@
 
 defined('ABSPATH') or die("No script kiddies please!");
 
+require_once JPTT_PLUGIN_PATH . 'core/class-error.php';
+
 class User_Actions {
 
 	/**
@@ -12,13 +14,13 @@ class User_Actions {
 
 	/**
 	 *
-	 * @var JPTT_Errors
+	 * @var \jptt\core\Error
 	 */
 	private $error;
 
 	public function __construct() {
 		$this->max_login_attempts = (int) get_option('max-login-attemps', -1);
-		$this->error = new JPTT_Errors();
+		$this->error = new \jptt\core\Error();
 	}
 
 	/**
