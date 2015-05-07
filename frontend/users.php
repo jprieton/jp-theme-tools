@@ -17,7 +17,7 @@ class Frontend_Users {
 
 	public function __construct() {
 		$this->max_login_attempts = (int) get_option('max-login-attemps', -1);
-		$this->error = new Frontend_Errors();
+		$this->error = new \jptt\core\Error();
 	}
 
 	/**

@@ -9,7 +9,7 @@ defined('ABSPATH') or die('No direct script access allowed');
 class Frontend_Posts {
 
 	public function __construct() {
-		$this->error = new Frontend_Errors();
+		$this->error = new \jptt\core\Error();
 	}
 
 	/**

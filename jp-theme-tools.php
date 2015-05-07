@@ -39,7 +39,6 @@ include_once JPTT_PLUGIN_PATH . 'helpers/form.php';
 include_once JPTT_PLUGIN_PATH . 'helpers/user.php';
 
 //Frontend
-//include_once JPTT_PLUGIN_PATH . 'frontend/errors.php';
 //include_once JPTT_PLUGIN_PATH . 'frontend/attachments.php';
 //include_once JPTT_PLUGIN_PATH . 'frontend/galleries.php';
 //include_once JPTT_PLUGIN_PATH . 'frontend/posts.php';
