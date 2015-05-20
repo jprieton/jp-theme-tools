@@ -4,7 +4,7 @@ if (is_admin()) {
 
 	add_action('admin_action_update', function() {
 		$submit = wp_parse_args($_POST);
-		if ($submit['option_page'] != 'jptt-timthumb-group') return;
+		if (!empty($submit['option_page']) && $submit['option_page'] != 'jptt-timthumb-group') return;
 
 		global $wpdb;
 		$wpdb instanceof wpdb;

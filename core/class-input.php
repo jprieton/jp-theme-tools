@@ -40,7 +40,7 @@ class Input {
 				'filter'   => FILTER_DEFAULT,
 				'default'  => FALSE,
 				'method'   => $this->get_method(),
-				'callback' => NULL
+				'options' => NULL
 		);
 		$options = wp_parse_args($args, $defaults);
 
@@ -57,7 +57,7 @@ class Input {
 				break;
 		}
 
-		$value = filter_input($type, $field, $options['filter']);
+		$value = filter_input($type, $field, $options['filter'], $options['options']);
 		return empty($value) ? $options['default'] : $value;
 	}
 
@@ -66,7 +66,7 @@ class Input {
 				'filter'   => FILTER_DEFAULT,
 				'default'  => false,
 				'method'   => 'POST',
-				'callback' => NULL
+				'options' => NULL
 		);
 		return $this->_input_value($field, wp_parse_args($args, $defaults));
 	}
@@ -76,7 +76,7 @@ class Input {
 				'filter'   => FILTER_DEFAULT,
 				'default'  => false,
 				'method'   => 'GET',
-				'callback' => NULL
+				'options' => NULL
 		);
 		return $this->_input_value($field, wp_parse_args($args, $defaults));
 	}
@@ -95,7 +95,7 @@ class Input {
 				'filter'   => FILTER_SANITIZE_STRIPPED,
 				'default'  => FALSE,
 				'method'   => $method,
-				'callback' => NULL
+				'options' => NULL
 		);
 
 		return $this->_input_value($field, $args);
