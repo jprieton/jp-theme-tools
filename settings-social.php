@@ -41,6 +41,12 @@
 										<input type="text" class="regular-text" name="social-twitter" value="<?php echo esc_attr(get_option('social-twitter')); ?>" />
 								</td>
 						</tr>
+						<tr valign="top">
+								<th scope="row">YouTube</th>
+								<td>
+										<input type="text" class="regular-text" name="social-youtube" value="<?php echo esc_attr(get_option('social-youtube')); ?>" />
+								</td>
+						</tr>
 				</table>
 				<?php submit_button(); ?>
 		</form>

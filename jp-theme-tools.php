@@ -110,6 +110,7 @@ if (is_admin()) {
 		register_setting('jptt-social-group', 'social-instagram', 'jptt_valid_url');
 		register_setting('jptt-social-group', 'social-pinterest', 'jptt_valid_url');
 		register_setting('jptt-social-group', 'social-twitter', 'jptt_valid_url');
+		register_setting('jptt-social-group', 'social-youtube', 'jptt_valid_url');
 		// CDN
 		register_setting('jptt-cdn-group', 'cdn-jquery', 'jptt_valid_url');
 		register_setting('jptt-cdn-group', 'cdn-jquery-migrate', 'jptt_valid_url');
