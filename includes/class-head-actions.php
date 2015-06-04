@@ -117,7 +117,7 @@ class Head_Actions {
 
 	function remove_header_links() {
 		// Remove WordPress Version Number
-		if ((bool) get_option('remove-generator')) remove_action('wp_generator');
+		if ((bool) get_option('remove-generator')) remove_action('wp_head', 'wp_generator');
 		// Remove Category Feeds
 		if ((bool) get_option('remove-feed-links-extra')) remove_action('wp_head', 'feed_links_extra', 3);
 		// Remove Post and Comment Feeds
