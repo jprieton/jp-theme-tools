@@ -58,7 +58,7 @@ require_once __DIR__ . '/core/class-error.php';
 require_once __DIR__ . '/core/class-input.php';
 
 // Autoload modules
-$jptt_modules = get_option('jptt_modules', array());
+$jptt_modules = (array) get_option('jptt_modules', array());
 foreach ($jptt_modules as $key => $value) {
 	if (file_exists(JPTT_PLUGIN_PATH . "modules/{$key}/module.php")) {
 		include_once JPTT_PLUGIN_PATH . "modules/{$key}/module.php";
