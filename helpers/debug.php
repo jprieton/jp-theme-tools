@@ -22,3 +22,15 @@ if (!function_exists('debug')) {
 	}
 
 }
+
+if (!function_exists('debug_template')) {
+
+	function debug_template() {
+		add_filter('template_include', function ($template) {
+			global $wp_query;
+			debug($template);
+			debug($wp_query, 1);
+		}, 99);
+	}
+
+}
