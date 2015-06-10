@@ -16,7 +16,7 @@ class Input {
 	public $request_method;
 
 	/**
-	 * Devuelve el método de petición empleado para acceder a la página
+	 * Returns request method was used to access the page
 	 * @return string
 	 */
 	public function get_method() {
@@ -28,7 +28,7 @@ class Input {
 	}
 
 	/**
-	 * Establece el método de petición empleado para acceder a la página
+	 * Set request method was used to access the page
 	 * @param string $method
 	 */
 	public function set_method($method = NULL) {
