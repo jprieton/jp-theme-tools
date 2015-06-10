@@ -15,6 +15,10 @@ class Input {
 	 */
 	public $request_method;
 
+	/**
+	 * Devuelve el método de petición empleado para acceder a la página
+	 * @return string
+	 */
 	public function get_method() {
 		if (empty($this->request_method)) {
 			return filter_var($_SERVER['REQUEST_METHOD']);
@@ -23,23 +27,27 @@ class Input {
 		}
 	}
 
-	public function set_method($method) {
+	/**
+	 * Establece el método de petición empleado para acceder a la página
+	 * @param string $method
+	 */
+	public function set_method($method = NULL) {
 		switch (strtoupper($method)) {
 			case 'GET':
 			case 'POST':
 				$this->request_method = strtoupper($method);
 				break;
 			default:
-				$this->request_method = NULL;
+				$this->request_method = $this->get_method();
 				break;
 		}
 	}
 
-	private function _input_value($field, $args = array()) {
+	private function _input($field, $args = array()) {
 		$defaults = array(
-				'filter'   => FILTER_DEFAULT,
-				'default'  => FALSE,
-				'method'   => $this->get_method(),
+				'filter'  => FILTER_DEFAULT,
+				'default' => FALSE,
+				'method'  => $this->get_method(),
 				'options' => NULL
 		);
 		$options = wp_parse_args($args, $defaults);
@@ -63,26 +71,26 @@ class Input {
 
 	public function post($field, $args = array()) {
 		$defaults = array(
-				'filter'   => FILTER_DEFAULT,
-				'default'  => false,
-				'method'   => 'POST',
+				'filter'  => FILTER_DEFAULT,
+				'default' => false,
+				'method'  => 'POST',
 				'options' => NULL
 		);
-		return $this->_input_value($field, wp_parse_args($args, $defaults));
+		return $this->_input($field, wp_parse_args($args, $defaults));
 	}
 
 	public function get($field, $args = array()) {
 		$defaults = array(
-				'filter'   => FILTER_DEFAULT,
-				'default'  => false,
-				'method'   => 'GET',
+				'filter'  => FILTER_DEFAULT,
+				'default' => false,
+				'method'  => 'GET',
 				'options' => NULL
 		);
-		return $this->_input_value($field, wp_parse_args($args, $defaults));
+		return $this->_input($field, wp_parse_args($args, $defaults));
 	}
 
 	/**
-	 *
+	 * Get value of nonce field
 	 * @param string $field
 	 * @param string $method
 	 * @return string
@@ -92,21 +100,21 @@ class Input {
 	public function get_wpnonce($field = '_wpnonce', $method = 'POST') {
 
 		$args = array(
-				'filter'   => FILTER_SANITIZE_STRIPPED,
-				'default'  => FALSE,
-				'method'   => $method,
+				'filter'  => FILTER_SANITIZE_STRIPPED,
+				'default' => FALSE,
+				'method'  => $method,
 				'options' => NULL
 		);
 
-		return $this->_input_value($field, $args);
+		return $this->_input($field, $args);
 	}
 
 	/**
-	 *
+	 * Wrapper to verify that correct nonce was used with time limit.
 	 * @param string $action
 	 * @param string $key
 	 * @param string $method
-	 * @return int
+	 * @return false|int
 	 * @since 0.9.0
 	 * @author jprieton
 	 */
