@@ -86,3 +86,36 @@ if (!function_exists('update_term_meta')) {
 	}
 
 }
+
+
+if (!function_exists('has_term_thumbnail')) {
+
+	/**
+	 * Check if term has an image attached.
+	 *
+	 * @since 0.9.3
+	 *
+	 * @param int $term_id Optional. Post ID.
+	 * @return bool Whether term has an image attached.
+	 */
+	function has_term_thumbnail($term_id) {
+		return (bool) get_term_thumbnail_id((int) $term_id);
+	}
+
+}
+
+if (!function_exists('get_term_thumbnail_id')) {
+
+	/**
+	 * Retrieve Term Thumbnail ID.
+	 *
+	 * @since 0.9.3
+	 *
+	 * @param int $term_id Optional. Term ID.
+	 * @return int
+	 */
+	function get_term_thumbnail_id($term_id) {
+		return get_term_meta((int) $term_id, '_thumbnail_id', true);
+	}
+
+}
