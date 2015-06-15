@@ -2,10 +2,6 @@
 
 defined('ABSPATH') or die('No direct script access allowed');
 
-require_once JPTT_PLUGIN_PATH . 'core/class-schema.php';
-
-jptt\core\Schema::create_termmeta_table();
-
 if (!function_exists('add_term_meta')) {
 
 	/**

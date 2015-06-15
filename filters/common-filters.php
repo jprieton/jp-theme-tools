@@ -15,7 +15,7 @@ add_filter('mailto', function($str) {
 	return $mail;
 });
 
-add_filter('mod_rewrite_rules', function($rule) {
+add_filter('__mod_rewrite_rules', function($rule) {
 
 	if (get_option('use-timthumb-htaccess', false)) {
 

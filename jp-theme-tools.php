@@ -32,6 +32,8 @@ define('JPTT_PLUGIN_URI', plugin_dir_url(__FILE__));
 define('JPTT_THEME_PATH', get_stylesheet_directory());
 define('JPTT_THEME_URI', get_stylesheet_directory_uri());
 
+include_once JPTT_PLUGIN_PATH . 'includes/taxonomy.php';
+
 //Helpers
 include_once JPTT_PLUGIN_PATH . 'helpers/debug.php';
 include_once JPTT_PLUGIN_PATH . 'helpers/url.php';
@@ -149,7 +151,12 @@ if (is_admin()) {
 	require_once __DIR__ . '/includes/override-cdn.php';
 }
 
-
 add_action('plugins_loaded', function() {
 	load_plugin_textdomain('jptt', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+});
+
+
+register_activation_hook(__FILE__, function() {
+	require_once JPTT_PLUGIN_PATH . 'core/class-schema.php';
+	jptt\core\Schema::create_termmeta_table();
 });

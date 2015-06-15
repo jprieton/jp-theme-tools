@@ -54,14 +54,6 @@
 				</td>
 			</tr>
 
-			<tr valign="top">
-				<th scope="row">TERM_META</th>
-				<td>
-					<input type="checkbox" value="1" id="user_vote_post" name="jptt_modules[term-meta]" <?php checked($option['term-meta']) ?>>
-					<p class="description">Permite agregar metadata a las taxonomías. Genera la tabla <code>termmeta</code>.</p>
-				</td>
-			</tr>
-
 		</table>
 		<?php submit_button() ?>
 	</form>
