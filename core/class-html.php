@@ -6,14 +6,32 @@ defined('ABSPATH') or die('No direct script access allowed');
 
 class Html {
 
-	public function options($data = array(), $options = array()) {
+	public function select($attr = array(), $data = array(), $options = array(), $echo = false) {
+		$attr_defaults = array(
+				'class' => 'form-control',
+				'id' => '',
+				'name' => ''
+		);
+		$attr = wp_parse_args($attr, $attr_defaults);
+
+		$format = '<select %s>%s</select>';
+
+		$attribute = $this->parse_attributes($attr);
+		$content = $this->options($data, $options);
+
+		$html = sprintf($format, $attribute, $content);
+
+		if ($echo) echo $html;
+		return $html;
+	}
+
+	public function options($data = array(), $options = array(), $echo = false) {
 		$format = '<option value="%s" %s>%s</option>';
 
 		$defaults = array(
 				'value' => 'value',
 				'text' => 'text',
 				'selected' => '',
-				'echo' => FALSE,
 		);
 
 		$options = (object) wp_parse_args($options, $defaults);
@@ -23,9 +41,18 @@ class Html {
 			$html .= sprintf($format, $item->{$options->value}, selected($item->{$options->value}, $options->selected, FALSE), $item->{$options->text});
 		}
 
-		if ($options->echo) {
-			echo $html;
+		if ($echo) echo $html;
+		return $html;
+	}
+
+	public function parse_attributes($attr = array(), $echo = false) {
+		$attr = array_map('esc_attr', $attr);
+		$html = '';
+		foreach ($attr as $name => $value) {
+			$html .= " $name=" . '"' . trim($value) . '"';
 		}
+
+		if ($echo) echo $html;
 		return $html;
 	}
 
