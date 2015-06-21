@@ -2,6 +2,10 @@
 
 defined('ABSPATH') or die('No direct script access allowed');
 
+global $wpdb;
+$wpdb instanceof wpdb;
+$wpdb->termmeta = "{$wpdb->prefix}termmeta";
+
 if (!function_exists('add_term_meta')) {
 
 	/**
