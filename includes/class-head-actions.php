@@ -1,6 +1,6 @@
 <?php
 
-defined('ABSPATH') or die("No script kiddies please!");
+defined('ABSPATH') or die('No direct script access allowed');
 
 class Head_Actions {
 
@@ -90,7 +90,7 @@ class Head_Actions {
 	}
 
 	function admin_ajax() {
-		$admin_ajax = admin_url('admin-ajax.php');
+		$admin_ajax = apply_filters('admin_ajax', admin_url('admin-ajax.php'));
 		printf("<script>var admin_url = '%s';</script>\n", $admin_ajax);
 	}
 

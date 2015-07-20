@@ -26,10 +26,3 @@ if (!function_exists('boolval')) {
 	}
 
 }
-
-function get_post_thumbnail_src($post_id, $size = null)
-{
-	$attachment_id = get_post_thumbnail_id($post_id);
-	$thumb_url = wp_get_attachment_image_src($attachment_id, $size, true);
-	return $thumb_url[0];
-}

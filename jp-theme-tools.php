@@ -46,6 +46,8 @@ include_once JPTT_PLUGIN_PATH . 'helpers/user.php';
 //include_once JPTT_PLUGIN_PATH . 'frontend/posts.php';
 //include_once JPTT_PLUGIN_PATH . 'frontend/users.php';
 // Action hooks
+include_once JPTT_PLUGIN_PATH . 'includes/link-template.php';
+include_once JPTT_PLUGIN_PATH . 'includes/post-thumbnail-template.php';
 include_once JPTT_PLUGIN_PATH . 'includes/class-head-actions.php';
 include_once JPTT_PLUGIN_PATH . 'includes/class-user-actions.php';
 include_once JPTT_PLUGIN_PATH . 'includes/contact.php';
@@ -112,6 +114,7 @@ if (is_admin()) {
 		register_setting('jptt-social-group', 'social-instagram', 'jptt_valid_url');
 		register_setting('jptt-social-group', 'social-pinterest', 'jptt_valid_url');
 		register_setting('jptt-social-group', 'social-twitter', 'jptt_valid_url');
+		register_setting('jptt-social-group', 'social-yelp', 'jptt_valid_url');
 		register_setting('jptt-social-group', 'social-youtube', 'jptt_valid_url');
 		// CDN
 		register_setting('jptt-cdn-group', 'cdn-jquery', 'jptt_valid_url');

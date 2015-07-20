@@ -1,5 +1,5 @@
 <div class="wrap">
-	<h2>JP Theme Tools - Opciones Generales</h2>
+	<h2>JP Theme Tools - <?php _e('General Options', 'jptt') ?></h2>
 	<?php if (isset($_GET['settings-updated'])) { ?>
 		<div id="message" class="updated">
 			<p><strong><?php _e('Settings saved.') ?></strong></p>
