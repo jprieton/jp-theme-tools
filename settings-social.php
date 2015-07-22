@@ -30,6 +30,12 @@
 				</td>
 			</tr>
 			<tr valign="top">
+				<th scope="row">LinkedIn</th>
+				<td>
+					<input type="text" class="regular-text" name="social-linkedin" value="<?php echo esc_attr(get_option('social-linkedin')); ?>" />
+				</td>
+			</tr>
+			<tr valign="top">
 				<th scope="row">Pinterest</th>
 				<td>
 					<input type="text" class="regular-text" name="social-pinterest" value="<?php echo esc_attr(get_option('social-pinterest')); ?>" />

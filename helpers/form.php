@@ -3,17 +3,6 @@
 defined('ABSPATH') or die("No script kiddies please!");
 
 /**
- * Returns nonce field value
- * @deprecated since version 0.8.3
- * @param srting $name
- * @return srting
- */
-function get_nonce_value($name = '_wpnonce') {
-	$nonce = filter_input(INPUT_POST, $name, FILTER_SANITIZE_STRING)? : filter_input(INPUT_GET, $name, FILTER_SANITIZE_STRING);
-	return $nonce;
-}
-
-/**
  * Returns an Bootstrap checkbox element
  * @param string $identifier
  * @param string $label
