@@ -78,7 +78,7 @@ if (is_admin()) {
 		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - Generales', 'Generales', 'administrator', __DIR__ . '/admin-options.php');
 		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - Anal&iacute;tica y SEO', ' Anal&iacute;tica y SEO', 'administrator', __DIR__ . '/settings/seo.php');
 		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - Contacto', 'Contacto', 'administrator', __DIR__ . '/settings-contact.php');
-		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - Social', 'Social', 'administrator', __DIR__ . '/settings-social.php');
+		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - Social', 'Social', 'administrator', __DIR__ . '/settings/social.php');
 		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - CDN', 'CDN', 'administrator', __DIR__ . '/settings/cdn.php');
 		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - TimThumb', 'TimThumb', 'administrator', __DIR__ . '/settings/timthumb.php');
 		add_submenu_page(__DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - Modules', __('Modules', 'jptt'), 'administrator', __DIR__ . '/settings/modules.php');
@@ -110,6 +110,8 @@ if (is_admin()) {
 		register_setting('jptt-contact-group', 'google-maps');
 		// Social
 		register_setting('jptt-social-group', 'social-facebook', 'jptt_valid_url');
+		register_setting('jptt-social-group', 'social-facebook-admins');
+		register_setting('jptt-social-group', 'social-facebook-app-id');
 		register_setting('jptt-social-group', 'social-googleplus', 'jptt_valid_url');
 		register_setting('jptt-social-group', 'social-instagram', 'jptt_valid_url');
 		register_setting('jptt-social-group', 'social-pinterest', 'jptt_valid_url');

@@ -20,7 +20,8 @@ class Head_Actions {
 	function open_graph_meta() {
 		$has_open_graph_meta = (bool) get_option('open-graph-meta', TRUE);
 
-		if (!$has_open_graph_meta) return;
+		if (!$has_open_graph_meta)
+			return;
 
 		$meta['og:type'] = 'website';
 		$meta['og:site_name'] = get_bloginfo('name');
@@ -60,7 +61,8 @@ class Head_Actions {
 	function twitter_card_meta() {
 		$has_twitter_card_meta = (bool) get_option('twitter-card-meta', TRUE);
 
-		if (!$has_twitter_card_meta) return;
+		if (!$has_twitter_card_meta)
+			return;
 
 		$meta['twitter:card'] = 'summary';
 
@@ -85,6 +87,29 @@ class Head_Actions {
 		foreach ($meta as $key => $value) {
 			if (!empty($value)) {
 				printf('<meta name="%s" content="%s" />' . "\n", $key, $value);
+			}
+		}
+	}
+
+	function facebook_meta() {
+
+		echo "<!-- Facebook -->\n";
+
+		$facebook_admins = (string) get_option('social-facebook-admins', TRUE);
+		$fb_explode = explode(',', $facebook_admins);
+		foreach ($fb_explode as $admin) {
+			$admin_id = (int) $admin;
+			if ($admin_id > 0) {
+				printf('<meta property="fb:admins" content="%s" />' . "\n", $admin_id);
+			}
+		}
+
+		$facebook_app_id = (string) get_option('social-facebook-app_id', TRUE);
+		$fb_explode = explode(',', $facebook_admins);
+		foreach ($fb_explode as $admin) {
+			$admin_id = (int) $admin;
+			if ($admin_id > 0) {
+				printf('<meta property="fb:app_id" content="%s" />' . "\n", $admin_id);
 			}
 		}
 	}
@@ -117,23 +142,32 @@ class Head_Actions {
 
 	function remove_header_links() {
 		// Remove WordPress Version Number
-		if ((bool) get_option('remove-generator')) remove_action('wp_head', 'wp_generator');
+		if ((bool) get_option('remove-generator'))
+			remove_action('wp_head', 'wp_generator');
 		// Remove Category Feeds
-		if ((bool) get_option('remove-feed-links-extra')) remove_action('wp_head', 'feed_links_extra', 3);
+		if ((bool) get_option('remove-feed-links-extra'))
+			remove_action('wp_head', 'feed_links_extra', 3);
 		// Remove Post and Comment Feeds
-		if ((bool) get_option('remove-feed-links')) remove_action('wp_head', 'feed_links', 2);
+		if ((bool) get_option('remove-feed-links'))
+			remove_action('wp_head', 'feed_links', 2);
 		// Remove EditURI link
-		if ((bool) get_option('remove-rsd-link')) remove_action('wp_head', 'rsd_link');
+		if ((bool) get_option('remove-rsd-link'))
+			remove_action('wp_head', 'rsd_link');
 		// Remove Windows Live Writer
-		if ((bool) get_option('remove-wlwmanifest-link')) remove_action('wp_head', 'wlwmanifest_link');
+		if ((bool) get_option('remove-wlwmanifest-link'))
+			remove_action('wp_head', 'wlwmanifest_link');
 		// Remove index link
-		if ((bool) get_option('remove-index-rel-link')) remove_action('wp_head', 'index_rel_link');
+		if ((bool) get_option('remove-index-rel-link'))
+			remove_action('wp_head', 'index_rel_link');
 		// Remove previous link
-		if ((bool) get_option('remove-parent-post-rel-link')) remove_action('wp_head', 'parent_post_rel_link', 10, 0);
+		if ((bool) get_option('remove-parent-post-rel-link'))
+			remove_action('wp_head', 'parent_post_rel_link', 10, 0);
 		// Remove start link
-		if ((bool) get_option('remove-start_post-rel-link')) remove_action('wp_head', 'start_post_rel_link', 10, 0);
+		if ((bool) get_option('remove-start_post-rel-link'))
+			remove_action('wp_head', 'start_post_rel_link', 10, 0);
 		// Remove Links for Adjacent Posts
-		if ((bool) get_option('remove-adjacent_posts-rel-link-wp_head')) remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+		if ((bool) get_option('remove-adjacent_posts-rel-link-wp_head'))
+			remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
 	}
 
 }
@@ -142,6 +176,7 @@ $Head_Actions = new Head_Actions();
 add_action('init', array($Head_Actions, 'remove_header_links'), 1);
 add_action('wp_head', array($Head_Actions, 'open_graph_meta'), 1);
 add_action('wp_head', array($Head_Actions, 'twitter_card_meta'), 1);
+add_action('wp_head', array($Head_Actions, 'facebook'), 1);
 add_action('wp_head', array($Head_Actions, 'google_site_verification'), 1);
 add_action('wp_head', array($Head_Actions, 'bing_site_verification'), 1);
 add_action('wp_head', array($Head_Actions, 'google_analytics_tracking_code'), 99);
