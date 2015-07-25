@@ -99,16 +99,16 @@ class Head_Actions {
 		$fb_explode = explode(',', $facebook_admins);
 		foreach ($fb_explode as $admin) {
 			$admin_id = (int) $admin;
-			if ($admin_id > 0) {
+			if ($admin_id > 1) {
 				printf('<meta property="fb:admins" content="%s" />' . "\n", $admin_id);
 			}
 		}
 
 		$facebook_app_id = (string) get_option('social-facebook-app_id', TRUE);
-		$fb_explode = explode(',', $facebook_admins);
+		$fb_explode = explode(',', $facebook_app_id);
 		foreach ($fb_explode as $admin) {
 			$admin_id = (int) $admin;
-			if ($admin_id > 0) {
+			if ($admin_id > 1) {
 				printf('<meta property="fb:app_id" content="%s" />' . "\n", $admin_id);
 			}
 		}
@@ -176,7 +176,7 @@ $Head_Actions = new Head_Actions();
 add_action('init', array($Head_Actions, 'remove_header_links'), 1);
 add_action('wp_head', array($Head_Actions, 'open_graph_meta'), 1);
 add_action('wp_head', array($Head_Actions, 'twitter_card_meta'), 1);
-add_action('wp_head', array($Head_Actions, 'facebook'), 1);
+add_action('wp_head', array($Head_Actions, 'facebook_meta'), 1);
 add_action('wp_head', array($Head_Actions, 'google_site_verification'), 1);
 add_action('wp_head', array($Head_Actions, 'bing_site_verification'), 1);
 add_action('wp_head', array($Head_Actions, 'google_analytics_tracking_code'), 99);
