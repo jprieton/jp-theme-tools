@@ -158,6 +158,7 @@ if (is_admin()) {
 
 add_action('plugins_loaded', function() {
 	load_plugin_textdomain('jptt', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+	do_action('jptt_load_modules');
 });
 
 
@@ -165,3 +166,4 @@ register_activation_hook(__FILE__, function() {
 	require_once JPTT_PLUGIN_PATH . 'core/class-schema.php';
 	jptt\core\Schema::create_termmeta_table();
 });
+
