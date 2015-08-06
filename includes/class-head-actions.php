@@ -75,6 +75,7 @@ class Head_Actions {
 			$meta['twitter:url'] = get_permalink($this->current_post->ID);
 
 			if ($this->attachmet_image) {
+				$meta['twitter:card'] = 'summary_large_image';
 				$meta['twitter:image:src'] = $this->attachmet_image[0];
 				$meta['twitter:image:width'] = $this->attachmet_image[1];
 				$meta['twitter:image:height'] = $this->attachmet_image[2];
