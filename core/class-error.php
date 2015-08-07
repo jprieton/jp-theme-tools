@@ -24,7 +24,7 @@ class Error extends \WP_Error {
 		$code = 'method_not_supported';
 		$message = __('Method not supported', 'jptt');
 		$this->add($code, $message);
-		$this->add('action', $method);
+		if (!empty($method)) $this->add('action', $method);
 	}
 
 	/**
@@ -37,7 +37,7 @@ class Error extends \WP_Error {
 		$code = 'user_not_logged';
 		$message = __('User not logged yet', 'jptt');
 		$this->add($code, $message);
-		$this->add('action', $method);
+		if (!empty($method)) $this->add('action', $method);
 	}
 
 	/**
@@ -50,11 +50,11 @@ class Error extends \WP_Error {
 		$code = 'user_logged_in';
 		$message = __('User logged in yet', 'jptt');
 		$this->add($code, $message);
-		$this->add('action', $method);
+		if (!empty($method)) $this->add('action', $method);
 	}
 
 	/**
-	 * Shortcut fot <i>user logged in</i> error
+	 * Shortcut fot <i>incorrect data</i> error
 	 * @since v0.9.0
 	 * @param string $method
 	 * @author jprieton
@@ -63,7 +63,33 @@ class Error extends \WP_Error {
 		$code = 'incorrect_data';
 		$message = __('Incorrect data', 'jptt');
 		$this->add($code, $message);
-		$this->add('action', $method);
+		if (!empty($method)) $this->add('action', $method);
+	}
+
+	/**
+	 * Shortcut fot <i>invalid email</i> error
+	 * @since v0.12.0
+	 * @param string $method
+	 * @author jprieton
+	 */
+	public function invalid_email($method = null) {
+		$code = 'invalid_email';
+		$message = __('Invalid email', 'jptt');
+		$this->add($code, $message);
+		if (!empty($method)) $this->add('action', $method);
+	}
+
+	/**
+	 * Shortcut fot <i>empty field</i> error
+	 * @since v0.12.0
+	 * @param string $method
+	 * @author jprieton
+	 */
+	public function empty_field($field, $method = null) {
+		$code = 'empty_field';
+		$message = sprintf(__("The %s field must be filled", 'jptt'), $field);
+		$this->add($code, $message);
+		if (!empty($method)) if (!empty($method)) $this->add('action', $method);
 	}
 
 }

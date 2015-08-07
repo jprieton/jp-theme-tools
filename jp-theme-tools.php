@@ -38,7 +38,7 @@ include_once JPTT_PLUGIN_PATH . 'includes/taxonomy.php';
 include_once JPTT_PLUGIN_PATH . 'helpers/debug.php';
 include_once JPTT_PLUGIN_PATH . 'helpers/url.php';
 include_once JPTT_PLUGIN_PATH . 'helpers/form.php';
-include_once JPTT_PLUGIN_PATH . 'helpers/user.php';
+// include_once JPTT_PLUGIN_PATH . 'helpers/user.php';
 
 //Frontend
 //include_once JPTT_PLUGIN_PATH . 'frontend/attachments.php';
@@ -49,7 +49,7 @@ include_once JPTT_PLUGIN_PATH . 'helpers/user.php';
 include_once JPTT_PLUGIN_PATH . 'includes/link-template.php';
 include_once JPTT_PLUGIN_PATH . 'includes/post-thumbnail-template.php';
 include_once JPTT_PLUGIN_PATH . 'includes/class-head-actions.php';
-include_once JPTT_PLUGIN_PATH . 'includes/class-user-actions.php';
+//include_once JPTT_PLUGIN_PATH . 'includes/class-user-actions.php';
 include_once JPTT_PLUGIN_PATH . 'includes/contact.php';
 include_once JPTT_PLUGIN_PATH . 'actions/profile-image.php';
 
