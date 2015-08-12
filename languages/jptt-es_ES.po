@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: a23\n"
-"POT-Creation-Date: 2015-07-20 12:02-0430\n"
-"PO-Revision-Date: 2015-07-20 12:04-0430\n"
+"POT-Creation-Date: 2015-08-12 14:45-0430\n"
+"PO-Revision-Date: 2015-08-12 14:46-0430\n"
 "Last-Translator: Javier Prieto <jprieton@gmail.com>\n"
 "Language-Team: \n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.2\n"
+"X-Generator: Poedit 1.8.4\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
@@ -20,15 +20,15 @@ msgstr ""
 msgid "General Options"
 msgstr "Opciones generales"
 
-#: ../admin-options.php:5 ../settings-contact.php:5 ../settings-social.php:5
-#: ../settings/cdn.php:5 ../settings/modules.php:5 ../settings/seo.php:5
+#: ../admin-options.php:5 ../settings-contact.php:5 ../settings/cdn.php:5
+#: ../settings/modules.php:5 ../settings/seo.php:5 ../settings/social.php:5
 #: ../settings/timthumb.php:5
 msgid "Settings saved."
-msgstr ""
+msgstr "Ajustes guardados."
 
 #: ../admin-options.php:26
 msgid "Remove WordPress Version Number"
-msgstr ""
+msgstr "Remover la versión de WordPress"
 
 #: ../admin-options.php:34
 msgid "Remove Category Feeds"
@@ -76,7 +76,17 @@ msgstr "Usuario conectado todavía"
 
 #: ../core/class-error.php:64
 msgid "Incorrect data"
-msgstr ""
+msgstr "Datos incorrectos"
+
+#: ../core/class-error.php:77
+#: ../modules/user-subscribe/class-user-subscribe.php:48
+msgid "Invalid email"
+msgstr "Email inválido"
+
+#: ../core/class-error.php:90
+#, php-format
+msgid "The %s field must be filled"
+msgstr "El campo %s es requerido"
 
 #: ../core/class-users.php:160
 msgid "Current pass invalid"
@@ -86,31 +96,14 @@ msgstr ""
 msgid "Modules"
 msgstr "Módulos"
 
-#: ../modules/poll-post-type/poll-post-type.php:5
-#: ../modules/poll-post-type/poll-post-type.php:7
-msgid "Polls"
-msgstr "Encuestas"
+#~ msgid "Polls"
+#~ msgstr "Encuestas"
 
-#: ../modules/poll-post-type/poll-post-type.php:6
-#: ../modules/poll-post-type/poll-post-type.php:8
-msgid "Poll"
-msgstr "Encuesta"
+#~ msgid "Poll"
+#~ msgstr "Encuesta"
 
-#: ../modules/poll-post-type/poll-post-type.php:9
-msgid "All Items"
-msgstr "Todos los elementos"
-
-#: ../modules/poll-post-type/poll-post-type.php:10
-msgid "Search Item"
-msgstr ""
-
-#: ../modules/poll-post-type/poll-post-type.php:13
-msgid "poll"
-msgstr ""
-
-#: ../modules/user-subscribe/class-user-subscribe.php:48
-msgid "Invalid email"
-msgstr "Email inválido"
+#~ msgid "All Items"
+#~ msgstr "Todos los elementos"
 
 #~ msgid "result"
 #~ msgid_plural "results"
