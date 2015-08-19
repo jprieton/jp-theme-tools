@@ -122,7 +122,7 @@ class Head_Actions {
 
 	function google_analytics_tracking_code() {
 		$google_analytics = get_option('google-analytics', '');
-		if (!empty($google_analitics)) {
+		if (!empty($google_analytics)) {
 			printf("<script>\n%s\n</script>\n", $google_analytics);
 		}
 	}
