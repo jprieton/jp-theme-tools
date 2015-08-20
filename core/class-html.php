@@ -45,6 +45,13 @@ class Html {
 		return $html;
 	}
 
+	/**
+	 * Must use <i>HTML::attributes()</i>
+	 * @deprecated since version 0.12.2
+	 * @param type $attr
+	 * @param type $echo
+	 * @return string
+	 */
 	public function parse_attributes($attr = array(), $echo = false) {
 		$attr = array_map('esc_attr', $attr);
 		$html = '';
