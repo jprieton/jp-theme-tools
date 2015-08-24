@@ -24,7 +24,7 @@ class Upload {
 		$image_data = wp_handle_upload($_FILES[$field], $overrides);
 
 		if (isset($image_data['error']) || isset($image_data['upload_error_handler'])) {
-			return new WP_Error('upload_error', $image_data['error']);
+			return new \jptt\core\Error('upload_error', $image_data['error']);
 		}
 
 		$image_string = file_get_contents($image_data['file']);
@@ -64,7 +64,7 @@ class Upload {
 					break;
 			}
 		} catch (Exception $e) {
-			return new WP_Error('upload_error', 'Hubo un error al subir la imagen.');
+						return new \jptt\core\Error('upload_error', 'Hubo un error al subir la imagen.');
 		}
 
 		$post_title = preg_replace('/\.[^.]+$/', '', basename($image_data['file']));
