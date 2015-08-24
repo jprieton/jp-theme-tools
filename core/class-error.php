@@ -2,7 +2,7 @@
 
 namespace jptt\core;
 
-defined('ABSPATH') or die('No direct script access allowed');
+defined( 'ABSPATH' ) or die( 'No direct script access allowed' );
 
 /**
  * @since  0.9.0
@@ -10,8 +10,8 @@ defined('ABSPATH') or die('No direct script access allowed');
  */
 class Error extends \WP_Error {
 
-	public function __construct($code = '', $message = '', $data = '') {
-		parent::__construct($code, $message, $data);
+	public function __construct( $code = '', $message = '', $data = '' ) {
+		parent::__construct( $code, $message, $data );
 	}
 
 	/**
@@ -20,11 +20,11 @@ class Error extends \WP_Error {
 	 * @author jprieton
 	 * @param string $method
 	 */
-	public function method_not_supported($method = null) {
+	public function method_not_supported( $method = null ) {
 		$code = 'method_not_supported';
-		$message = __('Method not supported', 'jptt');
-		$this->add($code, $message);
-		if (!empty($method)) $this->add('action', $method);
+		$message = __( 'Method not supported', 'jptt' );
+		$this->add( $code, $message );
+		if ( !empty( $method ) ) $this->add( 'action', $method );
 	}
 
 	/**
@@ -33,11 +33,11 @@ class Error extends \WP_Error {
 	 * @param string $method
 	 * @author jprieton
 	 */
-	public function user_not_logged($method = null) {
+	public function user_not_logged( $method = null ) {
 		$code = 'user_not_logged';
-		$message = __('User not logged yet', 'jptt');
-		$this->add($code, $message);
-		if (!empty($method)) $this->add('action', $method);
+		$message = __( 'User not logged yet', 'jptt' );
+		$this->add( $code, $message );
+		if ( !empty( $method ) ) $this->add( 'action', $method );
 	}
 
 	/**
@@ -46,11 +46,11 @@ class Error extends \WP_Error {
 	 * @param string $method
 	 * @author jprieton
 	 */
-	public function user_logged_in($method = null) {
+	public function user_logged_in( $method = null ) {
 		$code = 'user_logged_in';
-		$message = __('User logged in yet', 'jptt');
-		$this->add($code, $message);
-		if (!empty($method)) $this->add('action', $method);
+		$message = __( 'User logged in yet', 'jptt' );
+		$this->add( $code, $message );
+		if ( !empty( $method ) ) $this->add( 'action', $method );
 	}
 
 	/**
@@ -59,11 +59,11 @@ class Error extends \WP_Error {
 	 * @param string $method
 	 * @author jprieton
 	 */
-	public function incorrect_data($method = null) {
+	public function incorrect_data( $method = null ) {
 		$code = 'incorrect_data';
-		$message = __('Incorrect data', 'jptt');
-		$this->add($code, $message);
-		if (!empty($method)) $this->add('action', $method);
+		$message = __( 'Incorrect data', 'jptt' );
+		$this->add( $code, $message );
+		if ( !empty( $method ) ) $this->add( 'action', $method );
 	}
 
 	/**
@@ -72,11 +72,11 @@ class Error extends \WP_Error {
 	 * @param string $method
 	 * @author jprieton
 	 */
-	public function invalid_email($method = null) {
+	public function invalid_email( $method = null ) {
 		$code = 'invalid_email';
-		$message = __('Invalid email', 'jptt');
-		$this->add($code, $message);
-		if (!empty($method)) $this->add('action', $method);
+		$message = __( 'Invalid email', 'jptt' );
+		$this->add( $code, $message );
+		if ( !empty( $method ) ) $this->add( 'action', $method );
 	}
 
 	/**
@@ -85,11 +85,17 @@ class Error extends \WP_Error {
 	 * @param string $method
 	 * @author jprieton
 	 */
-	public function empty_field($field, $method = null) {
+	public function empty_field( $field, $method = null ) {
 		$code = 'empty_field';
-		$message = sprintf(__("The %s field must be filled", 'jptt'), $field);
-		$this->add($code, $message);
-		if (!empty($method)) if (!empty($method)) $this->add('action', $method);
+		$message = sprintf( __( "The %s field must be filled", 'jptt' ), $field );
+		$this->add( $code, $message );
+		if ( !empty( $method ) ) if ( !empty( $method ) ) $this->add( 'action', $method );
 	}
 
 }
+
+/**
+ * @global Error $error
+ */
+global $error;
+$error = new \jptt\core\Error();

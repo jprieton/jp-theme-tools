@@ -63,6 +63,8 @@ require_once JPTT_PLUGIN_PATH . '/includes/actions.php';
 require_once __DIR__ . '/core/class-error.php';
 require_once __DIR__ . '/core/class-input.php';
 
+require_once __DIR__ . '/core/class-request.php';
+
 // Autoload modules
 $jptt_modules = (array) get_option('jptt_modules', array());
 foreach ($jptt_modules as $key => $value) {

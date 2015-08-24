@@ -1,5 +1,9 @@
 <?php
 
+namespace jptt\core;
+
+defined( 'ABSPATH' ) or die( 'No direct script access allowed' );
+
 /**
  * Class Request
  */
@@ -17,7 +21,7 @@ class Request {
 		$defaults = array(
 				'filter' => FILTER_DEFAULT,
 				'default' => FALSE,
-				'method' => filter_input( INPUT_SERVER, 'REQUEST_METHOD' ),
+				'method' => $this->method(),
 				'options' => NULL
 		);
 		$options = wp_parse_args( $args, $defaults );
@@ -79,7 +83,7 @@ class Request {
 	 * @since 0.12.2
 	 * @author jprieton
 	 */
-	public function valid_ip( $ip, $which = '' ) {
+	public function is_valid_ip( $ip, $which = '' ) {
 		switch ( strtolower( $which ) ) {
 			case 'ipv4':
 				$which = FILTER_FLAG_IPV4;
@@ -127,10 +131,18 @@ class Request {
 		return $ip_address;
 	}
 
+	/**
+	 * Returns request method was used to access the page
+	 * @return string
+	 */
+	public function method() {
+		return filter_input( INPUT_SERVER, 'REQUEST_METHOD' );
+	}
+
 }
 
 /**
  * @global Request $request
  */
 global $request;
-$request = new Request();
+$request = new \jptt\core\Request();
