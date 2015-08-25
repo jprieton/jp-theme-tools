@@ -27,46 +27,6 @@ class Upload {
 			return new \jptt\core\Error('upload_error', $image_data['error']);
 		}
 
-		$image_string = file_get_contents($image_data['file']);
-
-		$image = imagecreatefromstring($image_string);
-
-		$orig_w = imagesx($image);
-		$orig_h = imagesy($image);
-
-		$icr = image_resize_dimensions($orig_w, $orig_h, $a = 1000, $b = 1000);
-
-		if (!$icr) {
-			$icr = array(
-					$orig_w,
-					$orig_h,
-					0,
-					0,
-					$orig_w,
-					$orig_h,
-					$orig_w,
-					$orig_h,
-			);
-		}
-
-		$thumb = imagecreatetruecolor($icr[4], $icr[5]);
-		try {
-			imagecopyresampled($thumb, $image, $icr[0], $icr[1], $icr[2], $icr[3], $icr[4], $icr[5], $icr[6], $icr[7]);
-
-			switch ($image_data['type']) {
-				case 'image/bmp': imagewbmp($thumb, $image_data['file']);
-					break;
-				case 'image/gif': imagegif($thumb, $image_data['file']);
-					break;
-				case 'image/jpg': imagejpeg($thumb, $image_data['file']);
-					break;
-				case 'image/png': imagepng($thumb, $image_data['file']);
-					break;
-			}
-		} catch (Exception $e) {
-						return new \jptt\core\Error('upload_error', 'Hubo un error al subir la imagen.');
-		}
-
 		$post_title = preg_replace('/\.[^.]+$/', '', basename($image_data['file']));
 
 		$pub_id = 1;
