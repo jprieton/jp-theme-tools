@@ -93,9 +93,3 @@ class Error extends \WP_Error {
 	}
 
 }
-
-/**
- * @global Error $error
- */
-global $error;
-$error = new \jptt\core\Error();
