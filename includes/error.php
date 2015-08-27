@@ -1,7 +1,9 @@
 <?php
 
+defined( 'ABSPATH' ) or die( 'No direct script access allowed' );
+
 /**
- * Shortcut fot <i>401 Unauthorized</i> error
+ * Shortcut for <i>401 Unauthorized</i> error
  * @since v0.12.2
  * @author jprieton
  * @param string $method
@@ -24,7 +26,7 @@ function error_unauthorized( $method = null, $wp_die = FALSE, $status_code = 401
 }
 
 /**
- * Shortcut fot <i>403 Forbidden</i> error
+ * Shortcut for <i>403 Forbidden</i> error
  * @since v0.12.2
  * @author jprieton
  * @param string $method
@@ -47,7 +49,7 @@ function error_forbidden( $method = null, $wp_die = FALSE, $status_code = 403 ) 
 }
 
 /**
- * Shortcut fot <i>404 Not Found</i> error
+ * Shortcut for <i>404 Not Found</i> error
  * @since v0.12.2
  * @author jprieton
  * @param string $method
@@ -70,7 +72,7 @@ function error_not_found( $method = null, $wp_die = FALSE, $status_code = 404 ) 
 }
 
 /**
- * Shortcut fot <i>405 Method Not Allowed</i> error
+ * Shortcut for <i>405 Method Not Allowed</i> error
  * @since v0.12.2
  * @author jprieton
  * @param string $method
