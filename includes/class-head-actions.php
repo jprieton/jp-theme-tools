@@ -47,8 +47,9 @@ class Head_Actions {
 				$meta['article:modified_time'] = mysql2date('c', $this->current_post->post_modified);
 			}
 
-			$meta = (array) apply_filters('open_graph_meta', $meta);
 		}
+
+		$meta = (array) apply_filters('open_graph_meta', $meta);
 
 		echo "<!-- Open Graph -->\n";
 		foreach ($meta as $key => $value) {

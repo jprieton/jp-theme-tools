@@ -23,7 +23,7 @@ if (!function_exists('send_contact_form')) {
 		if (!wp_verify_nonce($submit['_wpnonce'], 'send_contact_form')) return FALSE;
 
 		ob_start();
-		jptt_get_template('contact-email.php');
+		jptt_get_template('email/contact-email.php');
 		$content = ob_get_clean();
 
 		require_once ABSPATH . WPINC . '/class-phpmailer.php';
