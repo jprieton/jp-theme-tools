@@ -1,6 +1,6 @@
 <?php
 
-if (is_admin()) {
+if (is_admin() && FALSE) {
 
 	add_action('admin_action_update', function() {
 		$submit = wp_parse_args($_POST);
