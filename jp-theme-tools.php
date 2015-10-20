@@ -13,6 +13,8 @@
  */
 defined( 'ABSPATH' ) or die( 'No direct script access allowed' );
 
+// https://developer.wordpress.org/plugins/the-basics/best-practices/
+
 // Updates
 if ( is_admin() ) {
 
@@ -121,6 +123,7 @@ if ( is_admin() ) {
 		register_setting( 'jptt-social-group', 'social-facebook-app-id' );
 		register_setting( 'jptt-social-group', 'social-googleplus', 'jptt_valid_url' );
 		register_setting( 'jptt-social-group', 'social-instagram', 'jptt_valid_url' );
+		register_setting( 'jptt-social-group', 'social-linkedin', 'jptt_valid_url' );
 		register_setting( 'jptt-social-group', 'social-pinterest', 'jptt_valid_url' );
 		register_setting( 'jptt-social-group', 'social-twitter', 'jptt_valid_url' );
 		register_setting( 'jptt-social-group', 'social-yelp', 'jptt_valid_url' );
