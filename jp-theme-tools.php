@@ -11,28 +11,26 @@
  * Author URI: https://github.com/jprieton/
  * License: GPL2
  */
-defined( 'ABSPATH' ) or die( 'No direct script access allowed' );
-
 // https://developer.wordpress.org/plugins/the-basics/best-practices/
 
-// Updates
-if ( is_admin() ) {
-
-	if ( !class_exists( 'BFIGitHubPluginUpdater' ) ) {
-		require_once __DIR__ . '/updater/BFIGitHubPluginUpdater.php';
-	}
-	if ( !class_exists( 'Parsedown' ) ) {
-		// We're going to parse the GitHub markdown release notes, include the parser
-		require_once __DIR__ . '/updater/Parsedown.php';
-	}
-	new BFIGitHubPluginUpdater( __FILE__, 'jprieton', 'jp-theme-tools' );
-}
+defined( 'ABSPATH' ) or die( 'No direct script access allowed' );
 
 define( 'JPTT_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'JPTT_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
 
 define( 'JPTT_THEME_PATH', get_stylesheet_directory() );
 define( 'JPTT_THEME_URI', get_stylesheet_directory_uri() );
+
+include_once __DIR__ . '/includes/core.php';
+
+
+require_once __DIR__ . '/updater/Parsedown.php';
+require_once __DIR__ . '/updater/GitHubUpdater.php';
+
+// Updates
+add_action( 'admin_init', function () {
+	new GitHubUpdater( __FILE__, 'jprieton', 'jp-theme-tools' );
+}, 99 );
 
 include_once __DIR__ . '/includes/input.php';
 include_once __DIR__ . '/includes/user.php';
