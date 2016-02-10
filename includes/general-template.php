@@ -1,0 +1,73 @@
+<?php
+
+/**
+ * Outputs publish date as time since posted
+ * 
+ * @since 0.14.0
+ * 
+ * @param string $date
+ * @param bool $full
+ * 
+ * @return string|void String if retrieving.
+ */
+function the_time_ago( $before = '', $after = '', $full = false, $echo = true ) {
+	$time_ago = $before . get_the_time_ago( null , $full ) . $after;
+	$time_ago = apply_filters( 'the_time_ago', $time_ago, $before, $after );
+	if ( $echo ) {
+		echo $time_ago;
+	} else {
+		return $time_ago;
+	}
+}
+
+/**
+ * Retrieve publish date as time since posted
+ * 
+ * @since 0.14.0
+ * 
+ * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default current post.
+ * @param type $full
+ * 
+ * @return string
+ */
+function get_the_time_ago( $post = null, $full = false ) {
+	$post = get_post( $post );
+
+	if ( !$post ) {
+		return false;
+	}
+
+	$post_time = new DateTime( $post->post_date );
+	$current_time = new DateTime( current_time( 'mysql' ) );
+
+	$diff = $current_time->diff( $post_time );
+	$diff instanceof DateInterval;
+
+	$time_ago = array();
+
+	if ( $diff->y ) {
+		$time_ago[] = $diff->y . ' ' . _n( 'year', 'years', $diff->y, JPTT_TEXTDOMAIN );
+	}
+	if ( $diff->m ) {
+		$time_ago[] = $diff->m . ' ' . _n( 'month', 'months', $diff->m, JPTT_TEXTDOMAIN );
+	}
+	if ( $diff->d ) {
+		$time_ago[] = $diff->d . ' ' . _n( 'day', 'days', $diff->d, JPTT_TEXTDOMAIN );
+	}
+	if ( $diff->h ) {
+		$time_ago[] = $diff->h . ' ' . _n( 'hour', 'hours', $diff->h, JPTT_TEXTDOMAIN );
+	}
+	if ( $diff->m ) {
+		$time_ago[] = $diff->m . ' ' . _n( 'minute', 'minutes', $diff->m, JPTT_TEXTDOMAIN );
+	}
+
+	if ( empty( $time_ago ) ) {
+		$time_ago[] = __( 'a few seconds', JPTT_TEXTDOMAIN );
+	}
+
+	$string = ($full) ? implode( ', ', $time_ago ) . ' ago' : $time_ago[0] . ' ago';
+
+	$string = apply_filters( 'get_the_time_ago', $string, $time_ago, $diff );
+
+	return $string;
+}

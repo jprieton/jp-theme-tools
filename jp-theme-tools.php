@@ -15,7 +15,8 @@
 
 defined( 'ABSPATH' ) or die( 'No direct script access allowed' );
 
-define( 'JPTT_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+require( dirname( __FILE__ ) . '/config.php' );
+
 define( 'JPTT_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
 
 define( 'JPTT_THEME_PATH', get_stylesheet_directory() );
