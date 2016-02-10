@@ -4,7 +4,7 @@
  * Plugin Name: JP WordPress Theme Tools
  * Plugin URI: https://github.com/jprieton/jp-theme-tools/
  * Description: Extends WordPress functionality for themes
- * Version: 0.13.0
+ * Version: 0.14.0
  * Author: Javier Prieto
  * Text Domain: jptt
  * Domain Path: /languages
@@ -16,6 +16,10 @@
 defined( 'ABSPATH' ) or die( 'No direct script access allowed' );
 
 require( dirname( __FILE__ ) . '/config.php' );
+
+/**
+ * Cleanup 10/02/2016
+ */
 
 define( 'JPTT_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
 

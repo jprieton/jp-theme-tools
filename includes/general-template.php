@@ -11,7 +11,7 @@
  * @return string|void String if retrieving.
  */
 function the_time_ago( $before = '', $after = '', $full = false, $echo = true ) {
-	$time_ago = $before . get_the_time_ago( null , $full ) . $after;
+	$time_ago = $before . get_the_time_ago( null, $full ) . $after;
 	$time_ago = apply_filters( 'the_time_ago', $time_ago, $before, $after );
 	if ( $echo ) {
 		echo $time_ago;
@@ -65,7 +65,9 @@ function get_the_time_ago( $post = null, $full = false ) {
 		$time_ago[] = __( 'a few seconds', JPTT_TEXTDOMAIN );
 	}
 
-	$string = ($full) ? implode( ', ', $time_ago ) . ' ago' : $time_ago[0] . ' ago';
+	$string = ($full) ? implode( ', ', $time_ago ) : $time_ago[0];
+
+	$string = sprintf( _x( '%s ago', 'time_ago', JPTT_TEXTDOMAIN ), $string );
 
 	$string = apply_filters( 'get_the_time_ago', $string, $time_ago, $diff );
 
