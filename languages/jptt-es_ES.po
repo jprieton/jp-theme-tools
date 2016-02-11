@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: a23\n"
-"POT-Creation-Date: 2015-08-12 14:45-0430\n"
-"PO-Revision-Date: 2015-08-12 14:46-0430\n"
+"POT-Creation-Date: 2016-02-10 02:58-0430\n"
+"PO-Revision-Date: 2016-02-10 02:59-0430\n"
 "Last-Translator: Javier Prieto <jprieton@gmail.com>\n"
 "Language-Team: \n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
@@ -92,9 +92,69 @@ msgstr "El campo %s es requerido"
 msgid "Current pass invalid"
 msgstr ""
 
-#: ../jp-theme-tools.php:84 ../settings/modules.php:2
+#: ../includes/error.php:15
+msgid "Unauthorized"
+msgstr ""
+
+#: ../includes/error.php:38
+msgid "Forbidden"
+msgstr ""
+
+#: ../includes/error.php:61
+msgid "Not Found"
+msgstr ""
+
+#: ../includes/error.php:84
+msgid "Method not allowed"
+msgstr "Método no permitido"
+
+#: ../includes/general-template.php:49
+msgid "year"
+msgid_plural "years"
+msgstr[0] "año"
+msgstr[1] "años"
+
+#: ../includes/general-template.php:52
+msgid "month"
+msgid_plural "months"
+msgstr[0] "mes"
+msgstr[1] "meses"
+
+#: ../includes/general-template.php:55
+msgid "day"
+msgid_plural "days"
+msgstr[0] "día"
+msgstr[1] "días"
+
+#: ../includes/general-template.php:58
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "hora"
+msgstr[1] "horas"
+
+#: ../includes/general-template.php:61
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "minuto"
+msgstr[1] "minutos"
+
+#: ../includes/general-template.php:65
+msgid "a few seconds"
+msgstr "unos segundos"
+
+#: ../includes/general-template.php:70
+#, php-format
+msgctxt "time_ago"
+msgid "%s ago"
+msgstr "hace %s"
+
+#: ../jp-theme-tools.php:96 ../settings/modules.php:2
 msgid "Modules"
 msgstr "Módulos"
+
+#: ../templates/email/contact-email.php:11
+msgid "Web Contact"
+msgstr ""
 
 #~ msgid "Polls"
 #~ msgstr "Encuestas"
