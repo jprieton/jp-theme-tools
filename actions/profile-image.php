@@ -8,9 +8,9 @@ defined('ABSPATH') or die("No script kiddies please!");
 add_action('wp_ajax_delete_profile_image', function() {
 	$nonce = get_nonce_value();
 	$verify_nonce = wp_verify_nonce($nonce, 'delete_profile_image');
-	
+
 	($verify_nonce || is_user_logged_in() || die(0));
-	
+
 	delete_profile_image(get_current_user_id());
 	die(1);
 });
@@ -54,5 +54,5 @@ add_action('wp_ajax_update_profile_image', function() {
  * Deletes image profile on delete user
  */
 add_action('delete_user', function ($user_id) {
-	delete_profile_image((int) $user_id);
+//	delete_profile_image((int) $user_id);
 }, 1);
