@@ -4,7 +4,7 @@
  * Plugin Name: JP WordPress Theme Tools
  * Plugin URI: https://github.com/jprieton/jp-theme-tools/
  * Description: Extends WordPress functionality for themes
- * Version: 0.14.1
+ * Version: 0.14.2
  * Author: Javier Prieto
  * Text Domain: jptt
  * Domain Path: /languages
@@ -111,6 +111,7 @@ if ( is_admin() ) {
 		register_setting( 'jptt-general-group', 'remove-adjacent_posts-rel-link-wp_head', 'boolval' );
 		// Analitica y SEO
 		register_setting( 'jptt-seo-group', 'google-analytics' );
+		register_setting( 'jptt-seo-group', 'google-tag-manager' );
 		register_setting( 'jptt-seo-group', 'google-site-verification' );
 		register_setting( 'jptt-seo-group', 'bing-site-verification' );
 		register_setting( 'jptt-seo-group', 'open-graph-meta', 'boolval' );

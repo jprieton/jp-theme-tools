@@ -28,6 +28,12 @@
 					</td>
 				</tr>
 				<tr valign="top">
+					<th scope="row">Google Tag Manager</th>
+					<td>
+						<textarea rows="6" class="large-text code" name="google-analytics"><?php echo get_option('google-tag-manager') ?></textarea>
+					</td>
+				</tr>
+				<tr valign="top">
 					<th scope="row">Google Site Verification code</th>
 					<td>
 						<input type="text" class="regular-text" name="google-site-verification" value="<?php echo esc_attr(get_option('google-site-verification')); ?>" />

@@ -123,8 +123,20 @@ class Head_Actions {
 
 	function google_analytics_tracking_code() {
 		$google_analytics = get_option('google-analytics', '');
+		$has_tags = !is_bool(strpos($google_analytics, '<script>'));
+
+		$format = ($has_tags) ? '%s\n': "<script>\n%s\n</script>\n";
+
 		if (!empty($google_analytics)) {
-			printf("<script>\n%s\n</script>\n", $google_analytics);
+			printf($format, $google_analytics);
+		}
+	}
+
+	function google_tag_manager_code() {
+		$google_tag_manager = get_option('google-tag-manager', '');
+
+		if (!empty($google_tag_manager)) {
+			printf("\n%s\n", $google_tag_manager);
 		}
 	}
 
@@ -182,4 +194,5 @@ add_action('wp_head', array($Head_Actions, 'facebook_meta'), 1);
 add_action('wp_head', array($Head_Actions, 'google_site_verification'), 1);
 add_action('wp_head', array($Head_Actions, 'bing_site_verification'), 1);
 add_action('wp_head', array($Head_Actions, 'google_analytics_tracking_code'), 99);
+add_action('wp_head', array($Head_Actions, 'google_tag_manager_code'), 99);
 add_action('wp_head', array($Head_Actions, 'admin_ajax'), 99);
