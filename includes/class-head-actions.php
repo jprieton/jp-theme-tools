@@ -194,5 +194,5 @@ add_action('wp_head', array($Head_Actions, 'facebook_meta'), 1);
 add_action('wp_head', array($Head_Actions, 'google_site_verification'), 1);
 add_action('wp_head', array($Head_Actions, 'bing_site_verification'), 1);
 add_action('wp_head', array($Head_Actions, 'google_analytics_tracking_code'), 99);
-add_action('wp_head', array($Head_Actions, 'google_tag_manager_code'), 99);
+//add_action('wp_head', array($Head_Actions, 'google_tag_manager_code'), 99);
 add_action('wp_head', array($Head_Actions, 'admin_ajax'), 99);

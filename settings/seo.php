@@ -30,7 +30,7 @@
 				<tr valign="top">
 					<th scope="row">Google Tag Manager</th>
 					<td>
-						<textarea rows="6" class="large-text code" name="google-analytics"><?php echo get_option('google-tag-manager') ?></textarea>
+						<textarea rows="6" class="large-text code" name="google-tag-manager"><?php echo get_option('google-tag-manager') ?></textarea>
 					</td>
 				</tr>
 				<tr valign="top">
