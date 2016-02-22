@@ -1,5 +1,10 @@
 JP Theme Tools
 ===========
 
-Extensión de funcionalidad de WordPress con múltiples opciones manipulables desde el admin
 
+
+
+Bug tracker
+-----------
+
+Have a bug? Please create an issue on GitHub at https://github.com/jprieton/jp-theme-tools/issues
