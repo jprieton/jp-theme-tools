@@ -4,7 +4,7 @@
  * Plugin Name: JP WordPress Theme Tools
  * Plugin URI: https://github.com/jprieton/jp-theme-tools/
  * Description: Extends WordPress functionality for themes
- * Version: 0.14.3
+ * Version: 0.15.0
  * Author: Javier Prieto
  * Text Domain: jptt
  * Domain Path: /languages
@@ -16,6 +16,7 @@
 defined( 'ABSPATH' ) or die( 'No direct script access allowed' );
 
 require( dirname( __FILE__ ) . '/config.php' );
+require( dirname( __FILE__ ) . '/includes/admin/admin-menu.php' );
 
 /**
  * Cleanup 10/02/2016
@@ -83,18 +84,6 @@ foreach ( $jptt_modules as $key => $value ) {
 
 if ( is_admin() ) {
 
-	add_action( 'admin_menu', 'theme_tools_admin_menu' );
-
-	function theme_tools_admin_menu() {
-		add_menu_page( 'JP Theme Tools Plugin Settings', 'JP Theme Tools', 'administrator', __DIR__ . '/admin-options.php', '', 'dashicons-admin-generic' );
-		add_submenu_page( __DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - Generales', 'Generales', 'administrator', __DIR__ . '/admin-options.php' );
-		add_submenu_page( __DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - Anal&iacute;tica y SEO', ' Anal&iacute;tica y SEO', 'administrator', __DIR__ . '/settings/seo.php' );
-		add_submenu_page( __DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - Contacto', 'Contacto', 'administrator', __DIR__ . '/settings-contact.php' );
-		add_submenu_page( __DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - Social', 'Social', 'administrator', __DIR__ . '/settings/social.php' );
-		add_submenu_page( __DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - CDN', 'CDN', 'administrator', __DIR__ . '/settings/cdn.php' );
-		add_submenu_page( __DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - TimThumb', 'TimThumb', 'administrator', __DIR__ . '/settings/timthumb.php' );
-		add_submenu_page( __DIR__ . '/admin-options.php', 'JP Theme Tools Plugin Settings - Modules', __( 'Modules', 'jptt' ), 'administrator', __DIR__ . '/settings/modules.php' );
-	}
 
 	add_action( 'admin_init', 'jptt_admin_settings' );
 
