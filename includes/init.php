@@ -9,7 +9,7 @@ define( 'JPTT_TEXTDOMAIN', 'jptt' );
 require_once JPTT_SYSTEM . DIRECTORY_SEPARATOR . 'class-jptt.php';
 require_once JPTT_SYSTEM . DIRECTORY_SEPARATOR . 'class-config.php';
 require_once JPTT_SYSTEM . DIRECTORY_SEPARATOR . 'class-input.php';
-require_once JPTT_SYSTEM . DIRECTORY_SEPARATOR . 'class-instagram.php';
+require_once JPTT_SYSTEM . DIRECTORY_SEPARATOR . 'class-jptt_instagram.php';
 
 global $jptt;
 $jptt = new \jptt\jptt();

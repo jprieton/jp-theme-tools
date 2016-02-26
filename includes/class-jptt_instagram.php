@@ -1,16 +1,14 @@
 <?php
 
-namespace jptt;
-
 /** Block direct access */
 defined( 'ABSPATH' ) or die( 'No direct script access allowed' );
 
 /**
- *
+ * Wrapper for Instagram API
  * @since 1.0.0
  *
  */
-class Instagram {
+class JPTT_Instagram {
 
 	private $client_id;
 	private $access_token;
@@ -24,10 +22,11 @@ class Instagram {
 	 */
 	public function __construct( $args = array() ) {
 		if ( !empty( $args['client_id'] ) ) $this->set_client_id( $args['client_id'] );
-		if ( !empty( $args['access_token'] ) ) $this->set_client_id( $args['access_token'] );
+		if ( !empty( $args['access_token'] ) ) $this->set_access_token( $args['access_token'] );
 	}
 
 	/**
+	 * Sets the Client ID
 	 *
 	 * @since 1.0.0
 	 *
@@ -38,6 +37,7 @@ class Instagram {
 	}
 
 	/**
+	 * Sets the Access Token
 	 *
 	 * @since 1.0.0
 	 *
@@ -48,6 +48,7 @@ class Instagram {
 	}
 
 	/**
+	 * Retrieve the API Response without caching
 	 *
 	 * @since 1.0.0
 	 *
@@ -67,6 +68,7 @@ class Instagram {
 	}
 
 	/**
+	 * Retrieve the API Response cached
 	 *
 	 * @since 1.0.0
 	 *
@@ -81,12 +83,12 @@ class Instagram {
 			$expiration = 12 * HOUR_IN_SECONDS;
 		}
 
-		$transient = 'ig_' . md5( $this->_get_endpoint_url( $endpoint, $args ) );
+		$transient = 'instagram_' . md5( $this->_get_endpoint_url( $endpoint, $args ) );
 
 		$response = get_transient( $transient );
 
 		if ( !$response ) {
-			$response = $this->get_endpoint( $endpoint, $args );
+			$response = $this->get_endpoint_response( $endpoint, $args );
 			set_transient( $transient, $response, $expiration );
 		}
 
@@ -94,6 +96,7 @@ class Instagram {
 	}
 
 	/**
+	 * Retrieve the Authorize url to get access token
 	 *
 	 * @since 1.0.0
 	 *
@@ -110,6 +113,7 @@ class Instagram {
 	}
 
 	/**
+	 * Generate the endponit url
 	 *
 	 * @since 1.0.0
 	 *
@@ -127,10 +131,14 @@ class Instagram {
 				'access_token' => $this->access_token,
 		);
 
-		$args = wp_parse_args( $args, $defaults );
+		$start = (int) ( $endpoint[0] == '/' );
+		$length = ( substr( $endpoint, -1 ) == '/' ) ? -1 : strlen( $endpoint );
+		$endpoint = substr( $endpoint, $start, $length );
+		substr( $endpoint, $start, $length );
 
-		$query = build_query( $args );
-		$url = "{$this->api_url}/{$endpoint}/?{$query}";
+		$args = wp_parse_args( $args, $defaults );
+		$query_string = build_query( $args );
+		$url = "{$this->api_url}/{$endpoint}/?{$query_string}";
 
 		return $url;
 	}

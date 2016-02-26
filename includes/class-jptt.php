@@ -18,12 +18,10 @@ class jptt {
 
 	public $config;
 	public $input;
-	public $instagram;
 
 	public function __construct() {
 		$this->config = new Config();
 		$this->input = new Input();
-		$this->$instagram = new Instagram();
 	}
 
 }
