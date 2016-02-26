@@ -1,0 +1,26 @@
+<?php
+
+namespace jptt;
+
+/** Block direct access */
+defined( 'ABSPATH' ) or die( 'No direct script access allowed' );
+
+/**
+ * 
+ * @since 1.0.0
+ * 
+ * @property Config $config
+ * @property Input $input
+ * 
+ */
+class jptt {
+
+	public $config;
+	public $input;
+
+	public function __construct() {
+		$this->config = new Config();
+		$this->input = new Input();
+	}
+
+}

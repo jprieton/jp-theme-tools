@@ -9,12 +9,12 @@ add_action( 'admin_menu', function () {
 
 	/** Menu item */
 	add_menu_page( 'JP Theme Tools Plugin Settings', 'JP Theme Tools', 'administrator', $parent_slug, function() {
-		include_once JPTT_PLUGIN_PATH . '/includes/admin/general-options.php';
+		include_once JPTT_PLUGIN_PATH . '/_includes/admin/general-options.php';
 	}, 'dashicons-admin-generic' );
 
 	/** Submenu items */
 	add_submenu_page( $parent_slug, 'JP Theme Tools - ' . __( 'General', JPTT_TEXTDOMAIN ), __( 'General', JPTT_TEXTDOMAIN ), 'administrator', $parent_slug, function() {
-		include_once JPTT_PLUGIN_PATH . '/includes/admin/general-options.php';
+		include_once JPTT_PLUGIN_PATH . '/_includes/admin/general-options.php';
 	} );
 
 	add_submenu_page( $parent_slug, 'JP Theme Tools Plugin Settings - Anal&iacute;tica y SEO', ' Anal&iacute;tica y SEO', 'administrator', JPTT_PLUGIN_PATH . '/settings/seo.php' );
