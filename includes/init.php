@@ -3,6 +3,7 @@
 /** Constants */
 define( 'JPTT_BASEPATH', realpath( __DIR__ . '/..' ) );
 define( 'JPTT_SYSTEM', realpath( JPTT_BASEPATH . DIRECTORY_SEPARATOR . 'includes' ) );
+define( 'JPTT_LIBRARIES', realpath( JPTT_BASEPATH . DIRECTORY_SEPARATOR . 'libraries' ) );
 define( 'JPTT_TEXTDOMAIN', 'jptt' );
 
 /** Required files */
@@ -10,6 +11,11 @@ require_once JPTT_SYSTEM . DIRECTORY_SEPARATOR . 'class-jptt.php';
 require_once JPTT_SYSTEM . DIRECTORY_SEPARATOR . 'class-config.php';
 require_once JPTT_SYSTEM . DIRECTORY_SEPARATOR . 'class-input.php';
 require_once JPTT_SYSTEM . DIRECTORY_SEPARATOR . 'class-jptt_instagram.php';
+
+if ( is_admin() ) {
+	/** Required libraries */
+	require_once JPTT_BASEPATH . '/libraries/parsedown.php';
+}
 
 global $jptt;
 $jptt = new \jptt\jptt();

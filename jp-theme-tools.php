@@ -53,7 +53,6 @@ define( 'JPTT_THEME_URI', get_stylesheet_directory_uri() );
 include_once __DIR__ . '/_includes/core.php';
 
 
-require_once __DIR__ . '/updater/Parsedown.php';
 require_once __DIR__ . '/updater/GitHubUpdater.php';
 
 // Updates
