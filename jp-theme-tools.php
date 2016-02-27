@@ -19,7 +19,7 @@ require( dirname( __FILE__ ) . '/config.php' );
 require( dirname( __FILE__ ) . '/includes/admin/admin-menu.php' );
 
 /**
- * Cleanup 10/02/2016
+ * Cleanup 27/02/2016
  */
 
 define( 'JPTT_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
