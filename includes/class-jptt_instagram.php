@@ -130,13 +130,13 @@ class JPTT_Instagram {
 		$defaults = array(
 				'access_token' => $this->access_token,
 		);
+		$args = wp_parse_args( $args, $defaults );
 
 		$start = (int) ( $endpoint[0] == '/' );
 		$length = ( substr( $endpoint, -1 ) == '/' ) ? -1 : strlen( $endpoint );
 		$endpoint = substr( $endpoint, $start, $length );
 		substr( $endpoint, $start, $length );
 
-		$args = wp_parse_args( $args, $defaults );
 		$query_string = build_query( $args );
 		$url = "{$this->api_url}/{$endpoint}/?{$query_string}";
 
