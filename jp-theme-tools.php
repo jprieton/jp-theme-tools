@@ -4,7 +4,7 @@
  * Plugin Name: JP WordPress Theme Tools
  * Plugin URI: https://github.com/jprieton/jp-theme-tools/
  * Description: Extends WordPress functionality for themes
- * Version: 0.15.1
+ * Version: 0.16.0
  * Author: Javier Prieto
  * Text Domain: jptt
  * Domain Path: /languages
@@ -58,6 +58,7 @@ include_once JPTT_PLUGIN_PATH . 'core/Common.php';
 // Action hooks
 include_once JPTT_PLUGIN_PATH . 'includes/link-template.php';
 include_once JPTT_PLUGIN_PATH . 'includes/class-html.php';
+include_once JPTT_PLUGIN_PATH . 'includes/class-jptt_instagram.php';
 include_once JPTT_PLUGIN_PATH . 'includes/post-thumbnail-template.php';
 include_once JPTT_PLUGIN_PATH . 'includes/class-head-actions.php';
 //include_once JPTT_PLUGIN_PATH . 'includes/class-user-actions.php';
