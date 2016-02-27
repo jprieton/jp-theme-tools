@@ -48,9 +48,9 @@ class Upload {
 		);
 
 		if (!function_exists('wp_generate_attachment_metadata')) {
-			require_once(ABSPATH . "wp-admin" . '/includes/image.php');
-			require_once(ABSPATH . "wp-admin" . '/includes/file.php');
-			require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+			require_once(ABSPATH . "wp-admin" . '/_includes/image.php');
+			require_once(ABSPATH . "wp-admin" . '/_includes/file.php');
+			require_once(ABSPATH . "wp-admin" . '/_includes/media.php');
 		}
 		$wp_upload_dir = wp_upload_dir();
 		$filename = str_replace($wp_upload_dir['baseurl'] . '/', '', $image_data['url']);
