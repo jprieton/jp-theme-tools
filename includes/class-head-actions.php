@@ -136,7 +136,7 @@ class Head_Actions {
 		$google_tag_manager = get_option('google-tag-manager', '');
 
 		if (!empty($google_tag_manager)) {
-			printf("\n%s\n", $google_tag_manager);
+			echo "\n {$google_tag_manager} \n";
 		}
 	}
 
