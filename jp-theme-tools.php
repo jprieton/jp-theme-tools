@@ -4,13 +4,13 @@
  * Plugin Name: JP WordPress Theme Tools (dev)
  * Plugin URI: https://github.com/jprieton/jp-theme-tools/
  * Description: Extends WordPress functionality for themes
- * Version: 1.0.0
+ * Version: 0.17.0
  * Author: Javier Prieto
  * Text Domain: jptt
  * Domain Path: /languages
  * Author URI: https://github.com/jprieton/
  * GitHub Plugin URI: jprieton/jp-theme-tools
- * GitHub Branch: v1-dev
+ * GitHub Branch: master
  * License: GPL2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -29,7 +29,7 @@ require JPTT_INCLUDES . DIRECTORY_SEPARATOR . 'init.php';
 
 /**
  * -----------------------------------------------------
- * Cleanup/Rewrite 26/02/2016
+ * Cleanup/Rewrite 03/03/2016
  * -----------------------------------------------------
  */
 
@@ -138,6 +138,8 @@ if ( is_admin() ) {
 		register_setting( 'jptt-social-group', 'social-facebook-app-id' );
 		register_setting( 'jptt-social-group', 'social-googleplus', 'jptt_valid_url' );
 		register_setting( 'jptt-social-group', 'social-instagram', 'jptt_valid_url' );
+		register_setting( 'jptt-social-group', 'social-instagram-client-id' );
+		register_setting( 'jptt-social-group', 'social-instagram-access-token' );
 		register_setting( 'jptt-social-group', 'social-linkedin', 'jptt_valid_url' );
 		register_setting( 'jptt-social-group', 'social-pinterest', 'jptt_valid_url' );
 		register_setting( 'jptt-social-group', 'social-twitter', 'jptt_valid_url' );
