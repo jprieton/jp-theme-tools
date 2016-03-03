@@ -1,36 +1,58 @@
 <?php
 
 /**
- * Plugin Name: JP WordPress Theme Tools
+ * Plugin Name: JP WordPress Theme Tools (dev)
  * Plugin URI: https://github.com/jprieton/jp-theme-tools/
  * Description: Extends WordPress functionality for themes
- * Version: 0.16.0
+ * Version: 0.17.0
  * Author: Javier Prieto
  * Text Domain: jptt
  * Domain Path: /languages
  * Author URI: https://github.com/jprieton/
- * License: GPL2
+ * GitHub Plugin URI: jprieton/jp-theme-tools
+ * GitHub Branch: master
+ * License: GPL2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-// https://developer.wordpress.org/plugins/the-basics/best-practices/
 
+/** Block direct access */
 defined( 'ABSPATH' ) or die( 'No direct script access allowed' );
 
-require( dirname( __FILE__ ) . '/config.php' );
-require( dirname( __FILE__ ) . '/includes/admin/admin-menu.php' );
+/** Constants */
+define( 'JPTT_INCLUDES', realpath( __DIR__ . DIRECTORY_SEPARATOR . 'includes' ) );
+
+/** Init */
+require JPTT_INCLUDES . DIRECTORY_SEPARATOR . 'init.php';
+
+
+
 
 /**
- * Cleanup 27/02/2016
+ * -----------------------------------------------------
+ * Cleanup/Rewrite 03/03/2016
+ * -----------------------------------------------------
  */
+
+
+
+
+define( 'JPTT_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+
+require( dirname( __FILE__ ) . '/_includes/general-template.php' );
+require( dirname( __FILE__ ) . '/_includes/functions-scripts.php' );
+
+// https://developer.wordpress.org/plugins/the-basics/best-practices/
+
+require( dirname( __FILE__ ) . '/_includes/admin/admin-menu.php' );
 
 define( 'JPTT_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
 
 define( 'JPTT_THEME_PATH', get_stylesheet_directory() );
 define( 'JPTT_THEME_URI', get_stylesheet_directory_uri() );
 
-include_once __DIR__ . '/includes/core.php';
+include_once __DIR__ . '/_includes/core.php';
 
 
-require_once __DIR__ . '/updater/Parsedown.php';
 require_once __DIR__ . '/updater/GitHubUpdater.php';
 
 // Updates
@@ -38,11 +60,11 @@ add_action( 'admin_init', function () {
 	new GitHubUpdater( __FILE__, 'jprieton', 'jp-theme-tools' );
 }, 99 );
 
-include_once __DIR__ . '/includes/input.php';
-include_once __DIR__ . '/includes/user.php';
-include_once __DIR__ . '/includes/error.php';
+include_once __DIR__ . '/_includes/input.php';
+include_once __DIR__ . '/_includes/user.php';
+include_once __DIR__ . '/_includes/error.php';
 
-include_once JPTT_PLUGIN_PATH . 'includes/taxonomy.php';
+include_once JPTT_PLUGIN_PATH . '_includes/taxonomy.php';
 
 //Helpers
 include_once JPTT_PLUGIN_PATH . 'helpers/debug.php';
@@ -56,19 +78,20 @@ include_once JPTT_PLUGIN_PATH . 'core/Common.php';
 //include_once JPTT_PLUGIN_PATH . 'frontend/posts.php';
 //include_once JPTT_PLUGIN_PATH . 'frontend/users.php';
 // Action hooks
-include_once JPTT_PLUGIN_PATH . 'includes/link-template.php';
-include_once JPTT_PLUGIN_PATH . 'includes/class-html.php';
+include_once JPTT_PLUGIN_PATH . '_includes/link-template.php';
+include_once JPTT_PLUGIN_PATH . '_includes/class-html.php';
+include_once JPTT_PLUGIN_PATH . '_includes/post-thumbnail-template.php';
+include_once JPTT_PLUGIN_PATH . '_includes/class-head-actions.php';
 include_once JPTT_PLUGIN_PATH . 'includes/class-jptt_instagram.php';
-include_once JPTT_PLUGIN_PATH . 'includes/post-thumbnail-template.php';
-include_once JPTT_PLUGIN_PATH . 'includes/class-head-actions.php';
+
 //include_once JPTT_PLUGIN_PATH . 'includes/class-user-actions.php';
-include_once JPTT_PLUGIN_PATH . 'includes/contact.php';
+include_once JPTT_PLUGIN_PATH . '_includes/contact.php';
 include_once JPTT_PLUGIN_PATH . 'actions/profile-image.php';
 
 global $defer_scripts, $async_scripts;
 require_once JPTT_PLUGIN_PATH . '/functions/common-functions.php';
 require_once JPTT_PLUGIN_PATH . '/filters/common-filters.php';
-require_once JPTT_PLUGIN_PATH . '/includes/actions.php';
+require_once JPTT_PLUGIN_PATH . '/_includes/actions.php';
 
 require_once __DIR__ . '/core/class-error.php';
 require_once __DIR__ . '/core/class-input.php';
@@ -117,6 +140,8 @@ if ( is_admin() ) {
 		register_setting( 'jptt-social-group', 'social-facebook-app-id' );
 		register_setting( 'jptt-social-group', 'social-googleplus', 'jptt_valid_url' );
 		register_setting( 'jptt-social-group', 'social-instagram', 'jptt_valid_url' );
+		register_setting( 'jptt-social-group', 'social-instagram-client-id' );
+		register_setting( 'jptt-social-group', 'social-instagram-access-token' );
 		register_setting( 'jptt-social-group', 'social-linkedin', 'jptt_valid_url' );
 		register_setting( 'jptt-social-group', 'social-pinterest', 'jptt_valid_url' );
 		register_setting( 'jptt-social-group', 'social-twitter', 'jptt_valid_url' );
@@ -157,13 +182,9 @@ if ( is_admin() ) {
 
 } else {
 	// Overrides WordPress scripts
-	require_once __DIR__ . '/includes/override-cdn.php';
+	require_once __DIR__ . '/_includes/override-cdn.php';
 }
 
-add_action( 'plugins_loaded', function() {
-	load_plugin_textdomain( 'jptt', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-	do_action( 'jptt_load_modules' );
-} );
 
 register_activation_hook( __FILE__, function() {
 	require_once JPTT_PLUGIN_PATH . 'core/class-schema.php';
