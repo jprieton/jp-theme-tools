@@ -10,7 +10,7 @@ class BS_Navbar_Menu_Widget extends WP_Widget {
 						// id_base
 						'bs_navbar_menu',
 						// name
-						'Bootstrap Navbar Menu',
+						'BS Navbar Menu',
 						// widget_options
 						array( 'description' => 'Bootstrap Navbar Menu Box' ),
 						// control_options

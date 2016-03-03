@@ -10,7 +10,7 @@ class BS_Sidebar_Search_Widget extends WP_Widget {
 						// id_base
 						'bs_sidebar_search',
 						// name
-						'Bootstrap Sidebar Search',
+						'BS Sidebar Search',
 						// widget_options
 						array( 'description' => 'Bootstrap Sidebar Search Box' ),
 						// control_options

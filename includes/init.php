@@ -28,5 +28,6 @@ add_action( 'plugins_loaded', function() {
 
 /** Widgets */
 require_once realpath( JPTT_BASEPATH . '/widgets/bs-sidebar-search.php' ) ;
-require_once realpath( JPTT_BASEPATH . '/widgets/bs-navbar-search.php' ) ;
 require_once realpath( JPTT_BASEPATH . '/widgets/bs-navbar-menu.php' ) ;
+require_once realpath( JPTT_BASEPATH . '/widgets/bs-navbar-search.php' ) ;
+require_once realpath( JPTT_BASEPATH . '/widgets/bs-navbar-subscribe.php' ) ;
