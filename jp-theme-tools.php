@@ -82,6 +82,8 @@ include_once JPTT_PLUGIN_PATH . '_includes/link-template.php';
 include_once JPTT_PLUGIN_PATH . '_includes/class-html.php';
 include_once JPTT_PLUGIN_PATH . '_includes/post-thumbnail-template.php';
 include_once JPTT_PLUGIN_PATH . '_includes/class-head-actions.php';
+include_once JPTT_PLUGIN_PATH . 'includes/class-jptt_instagram.php';
+
 //include_once JPTT_PLUGIN_PATH . 'includes/class-user-actions.php';
 include_once JPTT_PLUGIN_PATH . '_includes/contact.php';
 include_once JPTT_PLUGIN_PATH . 'actions/profile-image.php';

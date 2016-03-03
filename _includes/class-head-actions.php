@@ -125,7 +125,7 @@ class Head_Actions {
 		$google_analytics = get_option('google-analytics', '');
 		$has_tags = !is_bool(strpos($google_analytics, '<script>'));
 
-		$format = ($has_tags) ? '%s\n': "<script>\n%s\n</script>\n";
+		$format = ($has_tags) ? "%s\n": "<script>\n%s\n</script>\n";
 
 		if (!empty($google_analytics)) {
 			printf($format, $google_analytics);
@@ -136,7 +136,7 @@ class Head_Actions {
 		$google_tag_manager = get_option('google-tag-manager', '');
 
 		if (!empty($google_tag_manager)) {
-			printf("\n%s\n", $google_tag_manager);
+			echo "\n {$google_tag_manager} \n";
 		}
 	}
 
