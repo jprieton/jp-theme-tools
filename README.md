@@ -2,8 +2,6 @@ JP Theme Tools
 ===========
 
 
-
-
 Bug tracker
 -----------
 

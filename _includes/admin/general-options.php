@@ -23,14 +23,6 @@
 		<div class="data-tab" id="settings-wordpress">
 			<table class="form-table">
 				<tr valign="top">
-					<th scope="row"><?php _e('Remove WordPress Version Number', 'jptt') ?></th>
-					<td>
-							<?php $checked = ((bool) get_option('remove-generator')) ? 'checked' : '' ?>
-						<input type="checkbox" value="1" id="remove-generator" name="remove-generator" <?php echo $checked ?>>
-						<p class="description">Elimina la etiqueta meta generator que indica la versión de WordPress.</p>
-					</td>
-				</tr>
-				<tr valign="top">
 					<th scope="row"><?php _e('Remove Category Feeds', 'jptt') ?></th>
 					<td>
 							<?php $checked = ((bool) get_option('remove-feed-links-extra')) ? 'checked' : '' ?>
@@ -43,22 +35,6 @@
 					<td>
 							<?php $checked = ((bool) get_option('remove-feed-links')) ? 'checked' : '' ?>
 						<input type="checkbox" value="1" id="remove-feed-links" name="remove-feed-links" <?php echo $checked ?>>
-						<!--<p class="description">Elimina la etiqueta meta generator que indica la versión de WordPress.</p>-->
-					</td>
-				</tr>
-				<tr valign="top">
-					<th scope="row"><?php _e('Remove EditURI link', 'jptt') ?></th>
-					<td>
-							<?php $checked = ((bool) get_option('remove-rsd-link')) ? 'checked' : '' ?>
-						<input type="checkbox" value="1" id="remove-rsd-link" name="remove-rsd-link" <?php echo $checked ?>>
-						<!--<p class="description">Elimina la etiqueta meta generator que indica la versión de WordPress.</p>-->
-					</td>
-				</tr>
-				<tr valign="top">
-					<th scope="row"><?php _e('Remove Windows Live Writer', 'jptt') ?></th>
-					<td>
-							<?php $checked = ((bool) get_option('remove-wlwmanifest-link')) ? 'checked' : ''; ?>
-						<input type="checkbox" value="1" id="remove-wlwmanifest-link" name="remove-wlwmanifest-link" <?php echo $checked ?>>
 						<!--<p class="description">Elimina la etiqueta meta generator que indica la versión de WordPress.</p>-->
 					</td>
 				</tr>
