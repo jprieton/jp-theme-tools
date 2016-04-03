@@ -9,9 +9,27 @@
 
 		<div>
 			<h2 class="nav-tab-wrapper">
-				<a href="#" class="nav-tab nav-tab-active" data-target="#settings-develop">Development</a>
+				<a href="#" class="nav-tab nav-tab-active" data-target="#settings-modules">Modules</a>
+				<a href="#" class="nav-tab" data-target="#settings-develop">Development</a>
 				<a href="#" class="nav-tab" data-target="#settings-security">Security</a>
 			</h2>
+		</div>
+
+		<div class="data-tab" id="settings-modules">
+			<table class="form-table">
+				<tr valign="top">
+					<th scope="row"><h2 class="no-margin-top">User</h2></th>
+					<td>
+						<label for="theming_helper">
+							<input type="hidden" name="jptt_options[module_favorite]" value="0">
+							<input type="checkbox" value="1" id="theming_helper" name="jptt_options[module_favorite]" <?php checked( (bool) jptt_get_option( 'module_favorite' ) ) ?>>
+							<b><?php _e( 'Favorite posts', 'jptt' ) ?></b>
+						</label>
+						<p class="description">Enables the capability to autenticated users to mark/unmark posts as favorites.</p>
+					</td>
+				</tr>
+			</table>
+			<?php submit_button(); ?>
 		</div>
 
 		<div class="data-tab" id="settings-develop">
@@ -20,7 +38,7 @@
 					<th scope="row"><h2 class="no-margin-top">Theming</h2></th>
 					<td>
 						<label for="theming_helper">
-								<?php $checked = ((bool) jptt_get_option( 'theming_helper' )) ? 'checked' : '' ?>
+							<?php $checked = ((bool) jptt_get_option( 'theming_helper' )) ? 'checked' : '' ?>
 							<input type="hidden" name="jptt_options[theming_helper]" value="0">
 							<input type="checkbox" value="1" id="theming_helper" name="jptt_options[theming_helper]" <?php echo $checked ?>>
 							<b><?php _e( 'Show theming helper', 'jptt' ) ?></b>
@@ -79,16 +97,16 @@
 </div>
 
 <script>
-  jQuery(function () {
-      jQuery('.nav-tab-wrapper a').click(function (e) {
-          e.preventDefault();
-          jQuery('.data-tab').hide();
-          jQuery('.nav-tab-wrapper a').removeClass('nav-tab-active');
-          var tabContent = jQuery(this).data('target');
-          jQuery(tabContent).stop().show();
-          jQuery(this).addClass('nav-tab-active');
-      });
+	jQuery(function () {
+		jQuery('.nav-tab-wrapper a').click(function (e) {
+			e.preventDefault();
+			jQuery('.data-tab').hide();
+			jQuery('.nav-tab-wrapper a').removeClass('nav-tab-active');
+			var tabContent = jQuery(this).data('target');
+			jQuery(tabContent).stop().show();
+			jQuery(this).addClass('nav-tab-active');
+		});
 
-      jQuery('a.nav-tab-active').trigger('click');
-  });
+		jQuery('a.nav-tab-active').trigger('click');
+	});
 </script>

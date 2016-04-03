@@ -38,6 +38,10 @@ add_action( 'admin_menu', function () {
 	} );
 } );
 
+/** Favorite post module */
+if ( jptt_get_option( 'module_favorite' ) ) {
+	require_once realpath( JPTT_BASEPATH . '/includes/class-jptt-favorite.php' );
+}
 
 require_once JPTT_BASEPATH . DIRECTORY_SEPARATOR . 'includes/class-jptt_instagram.php';
 //require_once JPTT_BASEPATH . DIRECTORY_SEPARATOR . 'class-post-stats.php';

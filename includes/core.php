@@ -3,6 +3,12 @@
 /** Filter to merge current options with new values */
 add_filter( 'pre_update_option_jptt_options', function($value, $old_value, $option) {
 	$jptt_option = get_option( $option, array() );
+
+	if ( !empty( $value['module_favorite'] ) && (bool) $value['module_favorite'] ) {
+		$favorite = JPTT_Favorite::get_instance();
+		$favorite->create_table();
+	}
+
 	return array_merge( $jptt_option, $value );
 }, 10, 3 );
 
