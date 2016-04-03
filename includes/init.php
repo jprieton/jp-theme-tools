@@ -10,6 +10,10 @@ define( 'JPTT_TEXTDOMAIN', 'jptt' );
 /** Required files */
 require_once realpath( JPTT_BASEPATH . '/includes/class-jptt.php' );
 require_once realpath( JPTT_BASEPATH . '/includes/functions.php' );
+/** Favorite post module */
+if ( jptt_get_option( 'module_favorite' ) ) {
+	require_once realpath( JPTT_BASEPATH . '/includes/class-jptt-favorite.php' );
+}
 require_once realpath( JPTT_BASEPATH . '/includes/core.php' );
 
 /** Admin menu */
@@ -37,11 +41,6 @@ add_action( 'admin_menu', function () {
 		include_once realpath( JPTT_BASEPATH . '/admin/general-settings.php' );
 	} );
 } );
-
-/** Favorite post module */
-if ( jptt_get_option( 'module_favorite' ) ) {
-	require_once realpath( JPTT_BASEPATH . '/includes/class-jptt-favorite.php' );
-}
 
 require_once JPTT_BASEPATH . DIRECTORY_SEPARATOR . 'includes/class-jptt_instagram.php';
 //require_once JPTT_BASEPATH . DIRECTORY_SEPARATOR . 'class-post-stats.php';
