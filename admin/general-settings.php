@@ -39,9 +39,8 @@
 					<th scope="row">Theming</th>
 					<td>
 						<label for="theming_helper">
-							<?php $checked = ((bool) jptt_get_option( 'theming_helper' )) ? 'checked' : '' ?>
 							<input type="hidden" name="jptt_options[theming_helper]" value="0">
-							<input type="checkbox" value="1" id="theming_helper" name="jptt_options[theming_helper]" <?php echo $checked ?>>
+							<input type="checkbox" value="1" id="theming_helper" name="jptt_options[theming_helper]" <?php checked( jptt_get_option( 'theming_helper' ) ) ?>>
 							<b><?php _e( 'Show theming helper', 'jptt' ) ?></b>
 						</label>
 						<p class="description">Shows a box with info about current Bootstrap breakpoint, resolution and modernizr features.</p>
