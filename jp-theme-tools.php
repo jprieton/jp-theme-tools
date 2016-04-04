@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: JP WordPress Theme Tools (dev)
+ * Plugin Name: JP WordPress Theme Tools
  * Plugin URI: https://github.com/jprieton/jp-theme-tools/
  * Description: Extends WordPress functionality for themes
  * Version: 0.17.0

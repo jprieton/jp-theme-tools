@@ -15,7 +15,7 @@ class JPTT {
 
 	/**
 	 * Creates or returns an instance of this class.
-	 * @return JPTT_Options A single instance of this class.
+	 * @return JPTT A single instance of this class.
 	 */
 	public static function get_instance() {
 
