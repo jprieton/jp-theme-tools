@@ -15,6 +15,9 @@ class JPTT_Favorite {
 
 	/**
 	 * Creates or returns an instance of this class.
+	 *
+	 * @since 1.0.0
+	 *
 	 * @return JPTT_Favorite A single instance of this class.
 	 */
 	public static function get_instance() {
@@ -32,6 +35,9 @@ class JPTT_Favorite {
 
 	/**
 	 * Creates favorite table
+	 *
+	 * @since 1.0.0
+	 *
 	 * @global wpdb $wpdb
 	 */
 	public function create_table() {
@@ -59,6 +65,9 @@ class JPTT_Favorite {
 
 	/**
 	 * Add post to user favorites
+	 *
+	 * @since 1.0.0
+	 *
 	 * @global wpdb $wpdb
 	 * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global `$post`.
 	 * @param int|string|WP_User $user Optional. User ID, user login or  WP_User object. Defaults to current user.
@@ -91,7 +100,10 @@ class JPTT_Favorite {
 	}
 
 	/**
-	 * Remove post from user favorites 
+	 * Remove post from user favorites
+	 *
+	 * @since 1.0.0
+	 *
 	 * @global wpdb $wpdb
 	 * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global `$post`.
 	 * @param int|string|WP_User $user Optional. User ID, user login or  WP_User object. Defaults to current user.
@@ -125,6 +137,9 @@ class JPTT_Favorite {
 
 	/**
 	 * Toggle favorite status
+	 *
+	 * @since 1.0.0
+	 *
 	 * @global wpdb $wpdb
 	 * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global `$post`.
 	 * @param int|string|WP_User $user Optional. User ID, user login or  WP_User object. Defaults to current user.
@@ -144,9 +159,12 @@ class JPTT_Favorite {
 
 	/**
 	 * Is favorite post?
+	 *
+	 * @since 1.0.0
+	 *
 	 * @global wpdb $wpdb
 	 * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global `$post`.
-	 * @param int|string|WP_User $user Optional. User ID, user login or  WP_User object. Defaults to current user.
+	 * @param int|string|WP_User $user Optional. User ID, user login or WP_User object. Defaults to current user.
 	 * @return boolean
 	 */
 	public function is_favorite( $post = null, $user = null ) {
@@ -168,12 +186,53 @@ class JPTT_Favorite {
 		}
 
 		$is_favorite = (bool) $wpdb->get_var( "SELECT post_id "
-						. "FROM {$wpdb->prefix}favorite "
-						. "WHERE post_id = '{$post->ID}' "
-						. "AND user_id = '{$_userdata->ID}' "
-						. "LIMIT 1" );
+										. "FROM {$wpdb->prefix}favorite "
+										. "WHERE post_id = '{$post->ID}' "
+										. "AND user_id = '{$_userdata->ID}' "
+										. "LIMIT 1" );
 
 		return $is_favorite;
+	}
+
+	/**
+	 * Delete all favorites by post
+	 *
+	 * @since 1.0.0
+	 *
+	 * @global wpdb $wpdb
+	 * @param @param int|WP_Post $post Post ID or WP_Post object.
+	 */
+	public function delete_favorites_by_post( $post ) {
+		global $wpdb;
+
+		$post = get_post( $post );
+		if ( $post ) {
+			$wpdb->query( "DELETE FROM {$wpdb->prefix}favorite WHERE post_id = '{$post->ID}'" );
+		}
+	}
+
+	/**
+	 * Delete all favorites by user
+	 *
+	 * @since 1.0.0
+	 *
+	 * @global wpdb $wpdb
+	 * @param int|string|WP_User $user User ID, user login or WP_User object.
+	 */
+	public function delete_favorites_by_user( $user ) {
+		global $wpdb;
+
+		if ( is_int( $user ) ) {
+			$_userdata = get_userdata( $user );
+		} elseif ( is_string( $_userdata ) ) {
+			$_userdata = get_user_by( 'login', $user );
+		} elseif ( $user instanceof WP_User ) {
+			$_userdata = $user;
+		} else {
+			return;
+		}
+
+		$wpdb->query( "DELETE FROM {$wpdb->prefix}favorite WHERE user_id = '{$_userdata->ID}" );
 	}
 
 }
@@ -206,4 +265,14 @@ add_action( 'wp_ajax_user_add_favorite', function() {
 	$favorite->add_favorite( $post_id, $user_id );
 
 	wp_send_json_success();
+} );
+
+add_action( 'before_delete_post', function ($post_id) {
+	$favorite = JPTT_Favorite::get_instance();
+	$favorite->delete_favorites_by_post( $post_id );
+} );
+
+add_action( 'delete_user', function ($user_id) {
+	$favorite = JPTT_Favorite::get_instance();
+	$favorite->delete_favorites_by_user( $user_id );
 } );
