@@ -1,4 +1,5 @@
 <div class="wrap">
+	<h1><?php _e( 'General Settings' ) ?></h1>
 	<form method="post" action="options.php">
 
 		<?php
@@ -42,12 +43,11 @@
 		<div class="data-tab" id="settings-develop">
 			<table class="form-table">
 				<tr valign="top">
-					<th scope="row"><h2 class="no-margin-top">Theming</h2></th>
+					<th scope="row">Theming</th>
 					<td>
 						<label for="theming_helper">
-							<?php $checked = ((bool) jptt_get_option( 'theming_helper' )) ? 'checked' : '' ?>
 							<input type="hidden" name="jptt_options[theming_helper]" value="0">
-							<input type="checkbox" value="1" id="theming_helper" name="jptt_options[theming_helper]" <?php echo $checked ?>>
+							<input type="checkbox" value="1" id="theming_helper" name="jptt_options[theming_helper]" <?php checked( jptt_get_option( 'theming_helper' ) ) ?>>
 							<b><?php _e( 'Show theming helper', 'jptt' ) ?></b>
 						</label>
 						<p class="description">Shows a box with info about current Bootstrap breakpoint, resolution and modernizr features.</p>
@@ -61,7 +61,7 @@
 
 			<table class="form-table">
 				<tr valign="top">
-					<th scope="row"><h2 class="no-margin-top">Header</h2></th>
+					<th scope="row">Header</th>
 					<td>
 						<label for="remove_version">
 							<input type="hidden" name="jptt_options[remove_version]" value="0">
@@ -79,7 +79,7 @@
 					</td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><h2 class="no-margin-top">XML-RPC</h2></th>
+					<th scope="row">XML-RPC</th>
 					<td>
 						<label for="xmlrpc_pingback_disabled">
 							<input type="hidden" name="jptt_options[xmlrpc_pingback_disabled]" value="0">
