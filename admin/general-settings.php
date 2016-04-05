@@ -21,12 +21,19 @@
 				<tr valign="top">
 					<th scope="row"><h2 class="no-margin-top">User</h2></th>
 					<td>
-						<label for="theming_helper">
+						<label for="module_favorite">
 							<input type="hidden" name="jptt_options[module_favorite]" value="0">
-							<input type="checkbox" value="1" id="theming_helper" name="jptt_options[module_favorite]" <?php checked( (bool) jptt_get_option( 'module_favorite' ) ) ?>>
+							<input type="checkbox" value="1" id="module_favorite" name="jptt_options[module_favorite]" <?php checked( (bool) jptt_get_option( 'module_favorite' ) ) ?>>
 							<b><?php _e( 'Favorite posts', 'jptt' ) ?></b>
 						</label>
-						<p class="description">Enables the capability to autenticated users to mark/unmark posts as favorites.</p>
+						<p class="description">Enables users to mark/unmark posts as favorites.</p>
+						<br />
+						<label for="module_login">
+							<input type="hidden" name="jptt_options[module_login]" value="0">
+							<input type="checkbox" value="1" id="module_login" name="jptt_options[module_login]" <?php checked( (bool) jptt_get_option( 'module_login' ) ) ?>>
+							<b><?php _e( 'Login', 'jptt' ) ?></b>
+						</label>
+						<p class="description">Enables users to login.</p>
 					</td>
 				</tr>
 			</table>

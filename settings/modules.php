@@ -15,14 +15,6 @@
 		<table class="form-table">
 
 			<tr valign="top">
-				<th scope="row">FAVORITE_POST</th>
-				<td>
-					<input type="checkbox" value="1" id="user_favorite_post" name="jptt_modules[favorite-post]" <?php checked($option['favorite-post']) ?>>
-					<p class="description">Permite al usuario marcar un post como favorito.</p>
-				</td>
-			</tr>
-
-			<tr valign="top">
 				<th scope="row">POST_VOTE</th>
 				<td>
 					<input type="checkbox" value="1" id="user_vote_post" name="jptt_modules[post-vote]" <?php checked($option['post-vote']) ?>>
