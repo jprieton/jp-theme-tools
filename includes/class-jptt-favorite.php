@@ -49,12 +49,12 @@ class JPTT_Favorite {
 		$collate = !empty( $wpdb->collate ) ?
 						"COLLATE {$wpdb->collate}" :
 						'';
-		$query = "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}favorite` ("
+		$query = "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}favorites` ("
 						. "`post_id` bigint(20) unsigned NOT NULL, "
 						. "`user_id` bigint(20) unsigned NOT NULL, "
 						. "KEY `post_id` (`post_id`), "
 						. "KEY `user_id` (`user_id`)"
-						. ") ENGINE=InnoDB {$charset} {$collate} AUTO_INCREMENT=1";
+						. ") ENGINE=InnoDB {$charset} {$collate}";
 		$wpdb->query( $query );
 	}
 
@@ -91,12 +91,12 @@ class JPTT_Favorite {
 			$_userdata = $this->userdata;
 		}
 
-		$insert_data = array(
+		$data = array(
 				'post_id' => (int) $post->ID,
 				'user_id' => (int) $_userdata->ID
 		);
 
-		$wpdb->insert( "{$wpdb->prefix}favorite", $insert_data );
+		$wpdb->insert( "{$wpdb->prefix}favorites", $data );
 	}
 
 	/**
@@ -127,12 +127,12 @@ class JPTT_Favorite {
 			$_userdata = $this->userdata;
 		}
 
-		$delete_data = array(
+		$where = array(
 				'post_id' => (int) $post->ID,
 				'user_id' => (int) $_userdata->ID
 		);
 
-		$wpdb->delete( "{$wpdb->prefix}favorite", $delete_data );
+		$wpdb->delete( "{$wpdb->prefix}favorites", $where );
 	}
 
 	/**
@@ -186,7 +186,7 @@ class JPTT_Favorite {
 		}
 
 		$is_favorite = (bool) $wpdb->get_var( "SELECT post_id "
-										. "FROM {$wpdb->prefix}favorite "
+										. "FROM {$wpdb->prefix}favorites "
 										. "WHERE post_id = '{$post->ID}' "
 										. "AND user_id = '{$_userdata->ID}' "
 										. "LIMIT 1" );
@@ -207,7 +207,7 @@ class JPTT_Favorite {
 
 		$post = get_post( $post );
 		if ( $post ) {
-			$wpdb->query( "DELETE FROM {$wpdb->prefix}favorite WHERE post_id = '{$post->ID}'" );
+			$wpdb->delete( "{$wpdb->prefix}favorites", array( 'post_id' => "{$post->ID}" ) );
 		}
 	}
 
@@ -232,7 +232,7 @@ class JPTT_Favorite {
 			return;
 		}
 
-		$wpdb->query( "DELETE FROM {$wpdb->prefix}favorite WHERE user_id = '{$_userdata->ID}" );
+		$wpdb->delete( "{$wpdb->prefix}favorites", array( 'user_id' => "{$_userdata->ID}" ) );
 	}
 
 }
