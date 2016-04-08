@@ -44,8 +44,9 @@ class JPTT_User {
 	 */
 	public function quick_register( $user_email, $user_pass ) {
 
-		$user_email = trim( $user_email );
-		$user_login = $user_pass = trim( $user_pass );
+		$user_email = strtolower(trim( $user_email ));
+
+		$user_login = $user_email = trim( $user_email );
 
 		if ( !filter_var( $user_email, FILTER_VALIDATE_EMAIL ) ) {
 			return new WP_Error( 'invalid_email', __( 'Invalid email' ) );
@@ -56,8 +57,7 @@ class JPTT_User {
 		}
 
 		$userdata = compact( 'user_login', 'user_email', 'user_pass' );
-
-		$userdata = apply_filters( 'pre_user_quick_register', $userdata );
+		$userdata = apply_filters( 'filter_pre_user_quick_register', $userdata );
 
 		if ( is_wp_error( $userdata ) ) {
 			return $userdata;
