@@ -21,12 +21,19 @@
 				<tr valign="top">
 					<th scope="row"><h2 class="no-margin-top">User</h2></th>
 					<td>
-						<label for="module_favorite">
-							<input type="hidden" name="jptt_options[module_favorite]" value="0">
-							<input type="checkbox" value="1" id="module_favorite" name="jptt_options[module_favorite]" <?php checked( (bool) jptt_get_option( 'module_favorite' ) ) ?>>
+						<label for="module_favorites">
+							<input type="hidden" name="jptt_options[module_favorites]" value="0">
+							<input type="checkbox" value="1" id="module_favorites" name="jptt_options[module_favorites]" <?php checked( (bool) jptt_get_option( 'module_favorites' ) ) ?>>
 							<b><?php _e( 'Favorite posts', 'jptt' ) ?></b>
 						</label>
 						<p class="description">Enables users to mark/unmark posts as favorites.</p>
+						<br />
+						<label for="module_subscribers">
+							<input type="hidden" name="jptt_options[module_subscribers]" value="0">
+							<input type="checkbox" value="1" id="module_subscribers" name="jptt_options[module_subscribers]" <?php checked( (bool) jptt_get_option( 'module_subscribers' ) ) ?>>
+							<b><?php _e( 'Subscribers', 'jptt' ) ?></b>
+						</label>
+						<p class="description">Stores emails from "Subscribe to newsletter" form.</p>
 						<br />
 						<label for="module_login">
 							<input type="hidden" name="jptt_options[module_login]" value="0">
@@ -104,16 +111,16 @@
 </div>
 
 <script>
-	jQuery(function () {
-		jQuery('.nav-tab-wrapper a').click(function (e) {
-			e.preventDefault();
-			jQuery('.data-tab').hide();
-			jQuery('.nav-tab-wrapper a').removeClass('nav-tab-active');
-			var tabContent = jQuery(this).data('target');
-			jQuery(tabContent).stop().show();
-			jQuery(this).addClass('nav-tab-active');
-		});
+  jQuery(function () {
+      jQuery('.nav-tab-wrapper a').click(function (e) {
+          e.preventDefault();
+          jQuery('.data-tab').hide();
+          jQuery('.nav-tab-wrapper a').removeClass('nav-tab-active');
+          var tabContent = jQuery(this).data('target');
+          jQuery(tabContent).stop().show();
+          jQuery(this).addClass('nav-tab-active');
+      });
 
-		jQuery('a.nav-tab-active').trigger('click');
-	});
+      jQuery('a.nav-tab-active').trigger('click');
+  });
 </script>

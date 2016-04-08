@@ -11,6 +11,8 @@ define( 'JPTT_TEXTDOMAIN', 'jptt' );
 require_once realpath( JPTT_BASEPATH . '/includes/class-jptt.php' );
 require_once realpath( JPTT_BASEPATH . '/includes/functions.php' );
 require_once realpath( JPTT_BASEPATH . '/includes/class-jptt-favorite.php' );
+require_once realpath( JPTT_BASEPATH . '/includes/class-jptt-subscriber.php' );
+require_once realpath( JPTT_BASEPATH . '/includes/class-jptt-user.php' );
 require_once realpath( JPTT_BASEPATH . '/includes/core.php' );
 
 /** Admin menu */

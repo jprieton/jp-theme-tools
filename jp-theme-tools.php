@@ -26,7 +26,6 @@ require_once realpath( JPTT_BASEPATH . '/includes/init.php' );
 
 
 
-
 /**
  * -----------------------------------------------------
  * Cleanup/Rewrite 01/04/2016

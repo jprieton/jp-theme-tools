@@ -12,6 +12,7 @@ class JPTT_Favorite {
 
 	/** Refers to a single instance of this class. */
 	private static $instance = null;
+	private static $table_exists = null;
 
 	/**
 	 * Creates or returns an instance of this class.
@@ -24,6 +25,11 @@ class JPTT_Favorite {
 
 		if ( self::$instance == null ) {
 			self::$instance = new self;
+		}
+
+		if ( self::$table_exists == null ) {
+			global $wpdb;
+			self::$table_exists = (bool) $wpdb->get_row( "SHOW TABLES LIKE '{$wpdb->prefix}favorites'" );
 		}
 
 		return self::$instance;
@@ -43,12 +49,8 @@ class JPTT_Favorite {
 	public function create_table() {
 		global $wpdb;
 		$wpdb instanceof wpdb;
-		$charset = !empty( $wpdb->charset ) ?
-						"DEFAULT CHARACTER SET {$wpdb->charset}" :
-						'';
-		$collate = !empty( $wpdb->collate ) ?
-						"COLLATE {$wpdb->collate}" :
-						'';
+		$charset = $wpdb->charset ? "DEFAULT CHARACTER SET {$wpdb->charset}" : '';
+		$collate = $wpdb->collate ? "COLLATE {$wpdb->collate}" : '';
 		$query = "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}favorites` ("
 						. "`post_id` bigint(20) unsigned NOT NULL, "
 						. "`user_id` bigint(20) unsigned NOT NULL, "
@@ -205,6 +207,10 @@ class JPTT_Favorite {
 	public function delete_favorites_by_post( $post ) {
 		global $wpdb;
 
+		if ( !self::$table_exists ) {
+			return;
+		}
+
 		$post = get_post( $post );
 		if ( $post ) {
 			$wpdb->delete( "{$wpdb->prefix}favorites", array( 'post_id' => "{$post->ID}" ) );
@@ -221,6 +227,10 @@ class JPTT_Favorite {
 	 */
 	public function delete_favorites_by_user( $user ) {
 		global $wpdb;
+
+		if ( !self::$table_exists ) {
+			return;
+		}
 
 		if ( is_int( $user ) ) {
 			$_userdata = get_userdata( $user );
@@ -267,11 +277,13 @@ add_action( 'wp_ajax_user_add_favorite', function() {
 	wp_send_json_success();
 } );
 
+/** Delete favorites before post is deleted */
 add_action( 'before_delete_post', function ($post_id) {
 	$favorite = JPTT_Favorite::get_instance();
 	$favorite->delete_favorites_by_post( $post_id );
 } );
 
+/** Delete favorites when user is deleted */
 add_action( 'delete_user', function ($user_id) {
 	$favorite = JPTT_Favorite::get_instance();
 	$favorite->delete_favorites_by_user( $user_id );

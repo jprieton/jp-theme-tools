@@ -4,13 +4,19 @@
 add_filter( 'pre_update_option_jptt_options', function($value, $old_value, $option) {
 	$jptt_option = get_option( $option, array() );
 
-	if ( !empty( $value['module_favorite'] ) && (bool) $value['module_favorite'] ) {
-		$favorite = JPTT_Favorite::get_instance();
-		$favorite->create_table();
+	if ( !empty( $value['module_favorites'] ) && (bool) $value['module_favorites'] ) {
+		$favorite = JPTT_User::get_instance();
+		$favorite->create_favorite_table();
+	}
+
+	if ( !empty( $value['module_subscribers'] ) && (bool) $value['module_subscribers'] ) {
+		$subscriber = JPTT_Subscriber::get_instance();
+		$subscriber->create_table();
 	}
 
 	return array_merge( $jptt_option, $value );
 }, 10, 3 );
+
 
 if ( ((bool) jptt_get_option( 'xmlrpc_pingback_disabled' ) || (bool) jptt_get_option( 'xmlrpc_all_disabled' )) && !is_admin() ) {
 	/** 	Disable XML-RCP pingback methods */
@@ -57,3 +63,5 @@ if ( (bool) jptt_get_option( 'theming_helper' ) ) {
 		include_once realpath( JPTT_BASEPATH . '/templates/responsive-helper.php' );
 	}, 99 );
 }
+
+
