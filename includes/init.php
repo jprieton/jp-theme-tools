@@ -34,7 +34,6 @@ add_action( 'admin_menu', function () {
 	add_submenu_page( $parent_slug, 'JP Theme Tools Plugin Settings - Social', 'Social', 'administrator', JPTT_BASEPATH . '/settings/social.php' );
 	add_submenu_page( $parent_slug, 'JP Theme Tools Plugin Settings - CDN', 'CDN', 'administrator', JPTT_BASEPATH . '/settings/cdn.php' );
 	add_submenu_page( $parent_slug, 'JP Theme Tools Plugin Settings - TimThumb', 'TimThumb', 'administrator', JPTT_BASEPATH . '/settings/timthumb.php' );
-	add_submenu_page( $parent_slug, 'JP Theme Tools Plugin Settings - Modules', __( 'Modules', 'jptt' ), 'administrator', JPTT_BASEPATH . '/settings/modules.php' );
 
 	add_submenu_page( $parent_slug, __( 'Settings' ), __( 'Settings' ), 'administrator', $parent_slug . '-settings', function() {
 		include_once realpath( JPTT_BASEPATH . '/admin/general-settings.php' );

@@ -168,8 +168,6 @@ if ( is_admin() ) {
 		register_setting( 'jptt-timthumb-group', 'timthumb_default_zc', 'intval' );
 		register_setting( 'jptt-timthumb-group', 'timthumb_default_width', 'intval' );
 		register_setting( 'jptt-timthumb-group', 'timthumb_default_height', 'intval' );
-		// Modules
-		register_setting( 'jptt-modules-group', 'jptt_modules' );
 	}
 
 	add_action( 'admin_enqueue_scripts', 'jptt_admin_style' );

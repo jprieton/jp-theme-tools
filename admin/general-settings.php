@@ -40,7 +40,14 @@
 							<input type="checkbox" value="1" id="module_login" name="jptt_options[module_login]" <?php checked( (bool) jptt_get_option( 'module_login' ) ) ?>>
 							<b><?php _e( 'Login', 'jptt' ) ?></b>
 						</label>
-						<p class="description">Enables users to login.</p>
+						<p class="description">Enables users to login from custom form.</p>
+						<br />
+						<label for="module_login">
+							<input type="hidden" name="jptt_options[module_register]" value="0">
+							<input type="checkbox" value="1" id="module_register" name="jptt_options[module_register]" <?php checked( (bool) jptt_get_option( 'module_register' ) ) ?>>
+							<b><?php _e( 'Register', 'jptt' ) ?></b>
+						</label>
+						<p class="description">Enables users to register from custom form.</p>
 					</td>
 				</tr>
 			</table>
