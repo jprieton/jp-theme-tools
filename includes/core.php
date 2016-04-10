@@ -5,8 +5,8 @@ add_filter( 'pre_update_option_jptt_options', function($value, $old_value, $opti
 	$jptt_option = get_option( $option, array() );
 
 	if ( !empty( $value['module_favorites'] ) && (bool) $value['module_favorites'] ) {
-		$favorite = JPTT_User::get_instance();
-		$favorite->create_favorite_table();
+		$favorite = JPTT_Favorite::get_instance();
+		$favorite->create_table();
 	}
 
 	if ( !empty( $value['module_subscribers'] ) && (bool) $value['module_subscribers'] ) {
