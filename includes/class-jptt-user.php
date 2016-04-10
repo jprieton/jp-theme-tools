@@ -30,7 +30,7 @@ class JPTT_User {
 	}
 
 	private function __construct() {
-
+		
 	}
 
 	/**
@@ -44,7 +44,7 @@ class JPTT_User {
 	 */
 	public function quick_register( $user_email, $user_pass ) {
 
-		$user_email = strtolower(trim( $user_email ));
+		$user_email = strtolower( trim( $user_email ) );
 
 		$user_login = $user_email = trim( $user_email );
 
@@ -81,6 +81,12 @@ add_action( 'wp_ajax_nopriv_user_quick_register', function() {
 
 	$user_email = trim( filter_input( INPUT_POST, 'user_email', FILTER_SANITIZE_EMAIL ) );
 	$user_pass = filter_input( INPUT_POST, 'user_password', FILTER_SANITIZE_STRING );
+
+	$c_pass = filter_input( INPUT_POST, 'c_user_password' );
+	if ( $pass != $c_pass ) {
+		$error = new WP_Error( 'password_error', __( "Passwords don't match" ) );
+		wp_send_json_error( $error );
+	}
 
 	do_action( 'pre_user_quick_register', $user_email, $user_pass );
 
