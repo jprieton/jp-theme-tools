@@ -181,10 +181,3 @@ if ( is_admin() ) {
 	// Overrides WordPress scripts
 	require_once __DIR__ . '/_includes/override-cdn.php';
 }
-
-/*
-register_activation_hook( __FILE__, function() {
-	require_once JPTT_PLUGIN_PATH . 'core/class-schema.php';
-	jptt\core\Schema::create_termmeta_table();
-} );
-*/
