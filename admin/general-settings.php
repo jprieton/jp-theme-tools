@@ -134,6 +134,13 @@
 							<b><?php _e( 'Disable PHP Execution in uploads folder by .htaccess', 'jptt' ) ?></b>
 						</label>
 						<p class="description">Disable direct code execution in <code>wp-content/uploads</code> folder.</p>
+						<br>
+						<label for="disable_direct_execution_languages">
+							<input type="hidden" name="jptt_options[disable_direct_execution_languages]" value="0">
+							<input type="checkbox" value="1" id="disable_direct_execution_languages" name="jptt_options[disable_direct_execution_languages]" <?php checked( jptt_get_option( 'disable_direct_execution_languages' ) ) ?>>
+							<b><?php _e( 'Disable PHP Execution in languages folder by .htaccess', 'jptt' ) ?></b>
+						</label>
+						<p class="description">Disable direct code execution in <code>wp-content/languages</code> folder.</p>
 					</td>
 				</tr>
 			</table>

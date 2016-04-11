@@ -30,7 +30,7 @@ class JPTT_User {
 	}
 
 	private function __construct() {
-		
+
 	}
 
 	/**
@@ -57,7 +57,7 @@ class JPTT_User {
 		}
 
 		$userdata = compact( 'user_login', 'user_email', 'user_pass' );
-		$userdata = apply_filters( 'filter_pre_user_quick_register', $userdata );
+		$userdata = apply_filters( 'filter_pre_jptt_user_register', $userdata );
 
 		if ( is_wp_error( $userdata ) ) {
 			return $userdata;
@@ -69,7 +69,7 @@ class JPTT_User {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param string $user_email
 	 * @param string $user_pass
 	 * @param bool $remember

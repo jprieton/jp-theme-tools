@@ -65,7 +65,7 @@ class JPTT_Security {
 	public function write_htaccess( $folder ) {
 		$folder = trim( strtolower( $folder ) );
 
-		if ( !in_array( $folder, array( 'plugins', 'themes', 'uploads' ) ) ) {
+		if ( !in_array( $folder, array( 'plugins', 'themes', 'uploads', 'languages' ) ) ) {
 			return false;
 		}
 
@@ -88,7 +88,7 @@ class JPTT_Security {
 	public function remove_htaccess( $folder ) {
 		$folder = trim( strtolower( $folder ) );
 
-		if ( !in_array( $folder, array( 'plugins', 'themes', 'uploads' ) ) ) {
+		if ( !in_array( $folder, array( 'plugins', 'themes', 'uploads', 'languages' ) ) ) {
 			return false;
 		}
 
