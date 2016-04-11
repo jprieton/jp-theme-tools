@@ -32,11 +32,11 @@ require_once realpath( JPTT_BASEPATH . '/includes/init.php' );
  * -----------------------------------------------------
  */
 
-/** On activate plugin */
+/** On activate plugin * /
 register_activation_hook( __FILE__, function() {
 	Post_Stats::create_table();
 } );
-
+*/
 define( 'JPTT_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 require( dirname( __FILE__ ) . '/_includes/functions-scripts.php' );

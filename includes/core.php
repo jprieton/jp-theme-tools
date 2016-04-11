@@ -14,6 +14,30 @@ add_filter( 'pre_update_option_jptt_options', function($value, $old_value, $opti
 		$subscriber->create_table();
 	}
 
+	require_once realpath( JPTT_BASEPATH . '/includes/class-jptt-security.php' );
+	$security = JPTT_Security::get_instance();
+
+	$direct_execution_plugin = empty( $value['disable_direct_execution_plugins'] ) ? false : (bool) $value['disable_direct_execution_plugins'];
+	if ( $direct_execution_plugin ) {
+		$security->write_htaccess( 'plugins' );
+	} else {
+		$security->remove_htaccess( 'plugins' );
+	}
+
+	$direct_execution_plugin = empty( $value['disable_direct_execution_themes'] ) ? false : (bool) $value['disable_direct_execution_themes'];
+	if ( $direct_execution_plugin ) {
+		$security->write_htaccess( 'themes' );
+	} else {
+		$security->remove_htaccess( 'themes' );
+	}
+
+	$direct_execution_plugin = empty( $value['disable_direct_execution_uploads'] ) ? false : (bool) $value['disable_direct_execution_uploads'];
+	if ( $direct_execution_plugin ) {
+		$security->write_htaccess( 'uploads' );
+	} else {
+		$security->remove_htaccess( 'uploads' );
+	}
+
 	return array_merge( $jptt_option, $value );
 }, 10, 3 );
 

@@ -111,6 +111,31 @@
 						<p class="description">Disable XML-RPC completely. This setting implies the <b>Disable XML-RPC Pingback</b> and <b>Remove EditURI link</b>. <a href="https://www.littlebizzy.com/blog/disable-xml-rpc" target="_blank">More info</a></p>
 					</td>
 				</tr>
+				<tr valign="top">
+					<th scope="row">Direct Code Execution</th>
+					<td>
+						<label for="disable_direct_execution_plugins">
+							<input type="hidden" name="jptt_options[disable_direct_execution_plugins]" value="0">
+							<input type="checkbox" value="1" id="disable_direct_execution_plugins" name="jptt_options[disable_direct_execution_plugins]" <?php checked( jptt_get_option( 'disable_direct_execution_plugins' ) ) ?>>
+							<b><?php _e( 'Disable PHP Execution in plugins folder by .htaccess', 'jptt' ) ?></b>
+						</label>
+						<p class="description">Disable direct code execution in <code>wp-content/plugins</code> folder.</p>
+						<br>
+						<label for="disable_direct_execution_themes">
+							<input type="hidden" name="jptt_options[disable_direct_execution_themes]" value="0">
+							<input type="checkbox" value="1" id="disable_direct_execution_themes" name="jptt_options[disable_direct_execution_themes]" <?php checked( jptt_get_option( 'disable_direct_execution_themes' ) ) ?>>
+							<b><?php _e( 'Disable PHP Execution in themes folder by .htaccess', 'jptt' ) ?></b>
+						</label>
+						<p class="description">Disable direct code execution in <code>wp-content/themes</code> folder.</p>
+						<br>
+						<label for="disable_direct_execution_uploads">
+							<input type="hidden" name="jptt_options[disable_direct_execution_uploads]" value="0">
+							<input type="checkbox" value="1" id="disable_direct_execution_uploads" name="jptt_options[disable_direct_execution_uploads]" <?php checked( jptt_get_option( 'disable_direct_execution_uploads' ) ) ?>>
+							<b><?php _e( 'Disable PHP Execution in uploads folder by .htaccess', 'jptt' ) ?></b>
+						</label>
+						<p class="description">Disable direct code execution in <code>wp-content/uploads</code> folder.</p>
+					</td>
+				</tr>
 			</table>
 			<?php submit_button(); ?>
 		</div>
