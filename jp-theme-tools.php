@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: JP WordPress Theme Tools (dev)
+ * Plugin Name: JP WordPress Theme Tools
  * Plugin URI: https://github.com/jprieton/jp-theme-tools/
  * Description: Extends WordPress functionality for themes
  * Version: 0.17.0
@@ -19,38 +19,36 @@
 defined( 'ABSPATH' ) or die( 'No direct script access allowed' );
 
 /** Constants */
-define( 'JPTT_INCLUDES', realpath( __DIR__ . DIRECTORY_SEPARATOR . 'includes' ) );
+define( 'JPTT_BASEPATH', realpath( __DIR__ ) );
 
 /** Init */
-require JPTT_INCLUDES . DIRECTORY_SEPARATOR . 'init.php';
-
+require_once realpath( JPTT_BASEPATH . '/includes/init.php' );
 
 
 
 /**
  * -----------------------------------------------------
- * Cleanup/Rewrite 03/03/2016
+ * Cleanup/Rewrite 01/04/2016
  * -----------------------------------------------------
  */
 
-
-
-
+/** On activate plugin * /
+register_activation_hook( __FILE__, function() {
+	Post_Stats::create_table();
+} );
+*/
 define( 'JPTT_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
-require( dirname( __FILE__ ) . '/_includes/general-template.php' );
 require( dirname( __FILE__ ) . '/_includes/functions-scripts.php' );
 
 // https://developer.wordpress.org/plugins/the-basics/best-practices/
-
-require( dirname( __FILE__ ) . '/_includes/admin/admin-menu.php' );
+// require( dirname( __FILE__ ) . '/_includes/admin/admin-menu.php' );
 
 define( 'JPTT_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
 
 define( 'JPTT_THEME_PATH', get_stylesheet_directory() );
 define( 'JPTT_THEME_URI', get_stylesheet_directory_uri() );
 
-include_once __DIR__ . '/_includes/core.php';
 
 
 require_once __DIR__ . '/updater/GitHubUpdater.php';
@@ -113,6 +111,7 @@ if ( is_admin() ) {
 
 	function jptt_admin_settings() {
 		// Opciones generales
+		register_setting( 'jptt-general-group', 'jptt_options' );
 		register_setting( 'jptt-general-group', 'remove-generator', 'boolval' );
 		register_setting( 'jptt-general-group', 'remove-feed-links-extra', 'boolval' );
 		register_setting( 'jptt-general-group', 'remove-feed-links', 'boolval' );
@@ -169,8 +168,6 @@ if ( is_admin() ) {
 		register_setting( 'jptt-timthumb-group', 'timthumb_default_zc', 'intval' );
 		register_setting( 'jptt-timthumb-group', 'timthumb_default_width', 'intval' );
 		register_setting( 'jptt-timthumb-group', 'timthumb_default_height', 'intval' );
-		// Modules
-		register_setting( 'jptt-modules-group', 'jptt_modules' );
 	}
 
 	add_action( 'admin_enqueue_scripts', 'jptt_admin_style' );
@@ -184,10 +181,3 @@ if ( is_admin() ) {
 	// Overrides WordPress scripts
 	require_once __DIR__ . '/_includes/override-cdn.php';
 }
-
-
-register_activation_hook( __FILE__, function() {
-	require_once JPTT_PLUGIN_PATH . 'core/class-schema.php';
-	jptt\core\Schema::create_termmeta_table();
-} );
-

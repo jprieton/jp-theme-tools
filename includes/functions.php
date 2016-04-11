@@ -1,13 +1,59 @@
 <?php
 
+defined( 'ABSPATH' ) or die( 'No direct script access allowed' );
+
+if ( !function_exists( 'is_url' ) ) {
+
+	/**
+	 * Verifies that an url is valid.
+	 * @since 0.12.3
+	 * @param string $url Url address to verify.
+	 * @return string|bool Either false or the valid url address.
+	 */
+	function is_url( $url ) {
+		return filter_var( $url, FILTER_VALIDATE_URL );
+	}
+
+}
+
+/**
+ * Wrapper that retrieve plugin option value based on name of option.
+ *
+ * @since 1.0.0
+ *
+ * @param string      $option   Name of option to retrieve. Expected to not be SQL-escaped.
+ * @param mixed       $value    Optional. Default value to return if the option does not exist.
+ * @return mixed Value set for the option.
+ */
+function jptt_get_option( $option, $default = false ) {
+	$jptt = JPTT::get_instance();
+	return $jptt->get_option( $option, $default );
+}
+
+/**
+ * Wrapper that update the value of an plugin option that was already added.
+ *
+ * If the option does not exist, then the option will be added with the option value
+ *
+ * @since 1.0.0
+ *
+ * @param string      $option   Option name. Expected to not be SQL-escaped.
+ * @param mixed       $value    Option value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+ * @return boolean
+ */
+function jptt_update_option( $option, $value ) {
+	$jptt = JPTT::get_instance();
+	return $jptt->update_option( $option, $value );
+}
+
 /**
  * Outputs publish date as time since posted
- * 
+ *
  * @since 0.14.0
- * 
+ *
  * @param string $date
  * @param bool $full
- * 
+ *
  * @return string|void String if retrieving.
  */
 function the_time_ago( $before = '', $after = '', $full = false, $echo = true ) {
@@ -22,12 +68,12 @@ function the_time_ago( $before = '', $after = '', $full = false, $echo = true ) 
 
 /**
  * Retrieve publish date as time since posted
- * 
+ *
  * @since 0.14.0
- * 
+ *
  * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default current post.
  * @param type $full
- * 
+ *
  * @return string
  */
 function get_the_time_ago( $post = null, $full = false ) {
@@ -72,4 +118,21 @@ function get_the_time_ago( $post = null, $full = false ) {
 	$string = apply_filters( 'get_the_time_ago', $string, $time_ago, $diff );
 
 	return $string;
+}
+
+/**
+ * Is favorite post?
+ * 
+ * @since 1.0.0
+ * 
+ * @global wpdb $wpdb
+ * 
+ * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global `$post`.
+ * @param int|string|WP_User $user Optional. User ID, user login or  WP_User object. Defaults to current user.
+ * 
+ * @return boolean
+ */
+function is_favorite( $post = null, $user = null ) {
+	$favorite = JPTT_Favorite::get_instance();
+	return $favorite->is_favorite( $post, $user );
 }

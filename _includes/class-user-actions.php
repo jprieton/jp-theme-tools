@@ -219,7 +219,6 @@ class User_Actions {
 $User_Actions = new User_Actions();
 add_action('wp_ajax_nopriv_user_signon', array($User_Actions, 'user_signon'));
 
-add_action('wp_ajax_nopriv_user_register', array($User_Actions, 'user_register'));
 add_action('wp_ajax_update_user_pass', array($User_Actions, 'update_user_pass'));
 
 add_action('wp_ajax_nopriv_update_user_pass', function() {

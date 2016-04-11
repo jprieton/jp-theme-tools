@@ -25,12 +25,12 @@ class BS_Navbar_Menu_Widget extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 		$term = get_term( $instance['menu'] );
-		$menu_class = !empty($instance['menu_class']) ? $instance['menu_class'] : '';
+		$menu_class = !empty( $instance['menu_class'] ) ? $instance['menu_class'] : '';
 
-		include_once JPTT_INCLUDES . '/class-walker-nav-menu-bootstrap.php';
+		require_once realpath( JPTT_BASEPATH . '/includes/class-walker-nav-menu-bootstrap.php' );
 		wp_nav_menu( array(
 				'menu' => $term->term_id,
-				'container'         => '',
+				'container' => '',
 				'menu_class' => 'nav navbar-nav ' . $menu_class,
 				'walker' => new Walker_Nav_Menu_Bootstrap()
 		) );

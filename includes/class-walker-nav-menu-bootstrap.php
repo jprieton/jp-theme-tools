@@ -37,6 +37,8 @@ class Walker_Nav_Menu_Bootstrap extends Walker_Nav_Menu {
 	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
+		$args = (object) $args;
+
 		/**
 		 * Dividers, Headers or Disabled
 		 * =============================
