@@ -179,7 +179,7 @@ class JPTT_Favorite {
 
 		if ( is_int( $user ) ) {
 			$_userdata = get_userdata( $user );
-		} elseif ( is_string( $_userdata ) ) {
+		} elseif ( is_string( $user ) ) {
 			$_userdata = get_user_by( 'login', $user );
 		} elseif ( $user instanceof WP_User ) {
 			$_userdata = $user;
@@ -213,7 +213,7 @@ class JPTT_Favorite {
 
 		$post = get_post( $post );
 		if ( $post ) {
-			$wpdb->delete( "{$wpdb->prefix}favorites", array( 'post_id' => "{$post->ID}" ) );
+			$wpdb->delete( "{$wpdb->prefix}favorites", array('post_id' => "{$post->ID}") );
 		}
 	}
 
@@ -242,7 +242,27 @@ class JPTT_Favorite {
 			return;
 		}
 
-		$wpdb->delete( "{$wpdb->prefix}favorites", array( 'user_id' => "{$_userdata->ID}" ) );
+		$wpdb->delete( "{$wpdb->prefix}favorites", array('user_id' => "{$_userdata->ID}") );
+	}
+
+	public function post_favorite_count( $post = null ) {
+		global $wpdb;
+
+		if ( is_int( $post ) && $post > 0 ) {
+			$post_id = (int) $post;
+		} else {
+			$post = get_post( $post );
+			if ( !$post ) {
+				return 0;
+			}
+			$post_id = $post->ID;
+		}
+
+		$total = $wpdb->get_var( "SELECT count(post_id) as total "
+						. "FROM {$wpdb->prefix}favorites "
+						. "WHERE post_id = '{$post_id}' " );
+
+		return $total;
 	}
 
 }
@@ -254,6 +274,8 @@ add_action( 'wp_ajax_user_toogle_favorite', function() {
 	$favorite = JPTT_Favorite::get_instance();
 	$is_favorite = (bool) $favorite->toggle_favorite( $post_id, $user_id );
 
+	do_action( 'jptt_user_toggle_favorite', $is_favorite, $post_id, $user_id );
+
 	$is_favorite ? wp_send_json_success() : wp_send_json_error();
 } );
 
@@ -264,6 +286,8 @@ add_action( 'wp_ajax_user_remove_favorite', function() {
 	$favorite = JPTT_Favorite::get_instance();
 	$favorite->remove_favorite( $post_id, $user_id );
 
+	do_action( 'jptt_user_remove_favorite', $post_id, $user_id );
+
 	wp_send_json_error();
 } );
 
@@ -273,6 +297,8 @@ add_action( 'wp_ajax_user_add_favorite', function() {
 
 	$favorite = JPTT_Favorite::get_instance();
 	$favorite->add_favorite( $post_id, $user_id );
+
+	do_action( 'jptt_user_add_favorite', $post_id, $user_id );
 
 	wp_send_json_success();
 } );

@@ -75,10 +75,9 @@ class JPTT_User {
 	 * @param bool $remember
 	 * @return WP_User|WP_Error WP_User on success, WP_Error on failure.
 	 */
-	public function user_login_by_email( $user_email, $user_pass, $remember = null ) {
+	public function user_login( $user_login, $user_password, $remember = null ) {
 
-		$user_email = strtolower( trim( $user_email ) );
-		$user_pass = trim( $user_pass );
+		$user_login = strtolower( trim( $user_login ) );
 
 		$credentials = compact( 'user_login', 'user_password', 'remember' );
 		$user = wp_signon( $credentials, false );
@@ -127,7 +126,7 @@ add_action( 'wp_ajax_nopriv_jptt_user_register', function() {
 
 add_action( 'wp_ajax_nopriv_jptt_user_login', function() {
 	$nonce = filter_input( INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING );
-	$verify_nonce = (bool) wp_verify_nonce( $nonce, 'user_login' );
+	$verify_nonce = (bool) wp_verify_nonce( $nonce, 'jptt_user_login' );
 
 	if ( !$verify_nonce ) {
 		$error = new WP_Error( 'action_disabled', __( 'Action disabled' ) );
@@ -141,7 +140,7 @@ add_action( 'wp_ajax_nopriv_jptt_user_login', function() {
 	do_action( 'pre_user_user_login', $user_email, $user_pass );
 
 	$user = JPTT_User::get_instance();
-	$userdata = $user->user_login_by_email( $user_email, $user_pass, (bool) $remember );
+	$userdata = $user->user_login( $user_email, $user_pass, (bool) $remember );
 
 	do_action( 'post_user_user_login', $userdata );
 
