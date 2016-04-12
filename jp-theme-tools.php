@@ -20,6 +20,7 @@ defined( 'ABSPATH' ) or die( 'No direct script access allowed' );
 
 /** Constants */
 define( 'JPTT_BASEPATH', realpath( __DIR__ ) );
+define( 'JPTT_TEMPLATE_PATH', realpath( __DIR__ .'/templates/' ) );
 
 /** Init */
 require_once realpath( JPTT_BASEPATH . '/includes/init.php' );
