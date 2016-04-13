@@ -187,6 +187,10 @@ class JPTT_Favorite {
 			$_userdata = $this->userdata;
 		}
 
+		if ( !$_userdata ) {
+			return false;
+		}
+
 		$is_favorite = (bool) $wpdb->get_var( "SELECT post_id "
 										. "FROM {$wpdb->prefix}favorites "
 										. "WHERE post_id = '{$post->ID}' "
