@@ -136,3 +136,8 @@ function is_favorite( $post = null, $user = null ) {
 	$favorite = JPTT_Favorite::get_instance();
 	return $favorite->is_favorite( $post, $user );
 }
+
+function get_favorite_posts($user = null) {
+	$favorite = JPTT_Favorite::get_instance();
+	return $favorite->get_favorite_posts( $user );
+}

@@ -234,7 +234,7 @@ class JPTT_Favorite {
 
 		if ( is_int( $user ) ) {
 			$_userdata = get_userdata( $user );
-		} elseif ( is_string( $_userdata ) ) {
+		} elseif ( is_string( $user ) ) {
 			$_userdata = get_user_by( 'login', $user );
 		} elseif ( $user instanceof WP_User ) {
 			$_userdata = $user;
@@ -263,6 +263,28 @@ class JPTT_Favorite {
 						. "WHERE post_id = '{$post_id}' " );
 
 		return $total;
+	}
+
+	public function get_favorite_posts( $user ) {
+
+		if ( is_int( $user ) ) {
+			$_userdata = get_userdata( $user );
+		} elseif ( is_string( $user ) ) {
+			$_userdata = get_user_by( 'login', $user );
+		} elseif ( $user instanceof WP_User ) {
+			$_userdata = $user;
+		} elseif ( is_user_logged_in() ) {
+			$_userdata = get_userdata( get_current_user_id() );
+		} else {
+			return array();
+		}
+
+		global $wpdb;
+
+		$query = "SELECT post_id "
+						. "FROM {$wpdb->prefix}favorites "
+						. "WHERE user_id = '{$_userdata->ID}' ";
+		return $wpdb->get_col( $query );
 	}
 
 }
