@@ -12,6 +12,13 @@ if ( !$featured_enabled || !is_admin() ) {
 
 /** Filter to add featured column to admin posts */
 add_filter( 'manage_posts_columns', function( $posts_columns, $post_type = null) {
+
+	$post_types_disabled = (array) apply_filters( 'jptt_featured_post_types_disabled' );
+
+	if ( in_array( $post_type, $post_type_disabled ) ) {
+		return $posts_columns;
+	}
+
 	$new = array(
 			'cb' => $posts_columns['cb'],
 			'featured' => '<span class="dashicons dashicons-star-filled" title="' . __( 'Featured', JPTT_TEXTDOMAIN ) . '"><span class="screen-reader-text">' . __( 'Featured', JPTT_TEXTDOMAIN ) . '</span></span>'
@@ -23,6 +30,12 @@ add_filter( 'manage_posts_columns', function( $posts_columns, $post_type = null)
 
 /** Filter to add featured column to admin pages */
 add_filter( 'manage_pages_columns', function( $posts_columns, $post_type = null) {
+	$post_types_disabled = (array) apply_filters( 'jptt_featured_post_types_disabled' );
+
+	if ( in_array( $post_type, $post_type_disabled ) ) {
+		return $posts_columns;
+	}
+
 	$new = array(
 			'cb' => $posts_columns['cb'],
 			'featured' => '<span class="dashicons dashicons-star-filled" title="' . __( 'Featured', JPTT_TEXTDOMAIN ) . '"><span class="screen-reader-text">' . __( 'Featured', JPTT_TEXTDOMAIN ) . '</span></span>'
@@ -77,5 +90,5 @@ add_action( 'wp_ajax_toggle_featured_post', function() {
 
 	update_post_meta( $post_id, '_featured', (int) !$featured );
 
-	wp_send_json_success( (bool) !$featured  );
+	wp_send_json_success( (bool) !$featured );
 } );
