@@ -80,7 +80,7 @@ add_action( 'manage_posts_custom_column', function($column_name, $post_id) {
 	}
 
 	$post_types_disabled = array();
-	$post_types_disabled = (array) apply_filters( 'jptt_featured_post_types_disabled', $post_types_disabled, $post_type );
+	$post_types_disabled = (array) apply_filters( 'jptt_featured_post_types_disabled', $post_types_disabled, null );
 
 	if ( !empty( $post_types_disabled ) && in_array( get_post_type( $post_id ), $post_types_disabled ) ) {
 		return;
@@ -101,7 +101,7 @@ add_action( 'manage_pages_custom_column', function($column_name, $post_id) {
 	}
 
 	$post_types_disabled = array();
-	$post_types_disabled = (array) apply_filters( 'jptt_featured_post_types_disabled', $post_types_disabled, $post_type );
+	$post_types_disabled = (array) apply_filters( 'jptt_featured_post_types_disabled', $post_types_disabled, null );
 
 	if ( !empty( $post_types_disabled ) && in_array( get_post_type( $post_id ), $post_types_disabled ) ) {
 		return;
