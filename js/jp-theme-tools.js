@@ -19,7 +19,7 @@ jQuery(function ($) {
 		var item = this;
 		$(item).addClass('hidden').removeClass('dashicons-star-empty dashicons-star-filled');
 		$.post(ajaxurl, {action: 'toggle_featured_post', post_id: postId}, function (response) {
-			if (response.data) {
+			if (response.featured) {
 				$(item).addClass('dashicons-star-filled').removeClass('hidden');
 			} else {
 				$(item).addClass('dashicons-star-empty').removeClass('hidden');

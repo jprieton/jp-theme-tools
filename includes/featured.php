@@ -21,7 +21,9 @@ if ( !function_exists( 'is_featured' ) ) {
 		if ( !$post ) {
 			return false;
 		}
-		return (bool) get_post_meta( $post->ID, '_featured', true );
+
+		$featured = get_post_meta( $post->ID, '_featured', true );
+		return ( 'yes' == $featured );
 	}
 
 }
@@ -36,7 +38,8 @@ if ( !$featured_enabled || !is_admin() ) {
 /** Filter to add featured column to admin posts */
 add_filter( 'manage_posts_columns', function( $posts_columns, $post_type = null) {
 
-	$post_types_disabled = (array) apply_filters( 'jptt_featured_post_types_disabled', null );
+	$post_types_disabled = array();
+	$post_types_disabled = (array) apply_filters( 'jptt_featured_post_types_disabled', $post_types_disabled, $post_type );
 
 	if ( in_array( $post_type, $post_types_disabled ) ) {
 		return $posts_columns;
@@ -53,9 +56,11 @@ add_filter( 'manage_posts_columns', function( $posts_columns, $post_type = null)
 
 /** Filter to add featured column to admin pages */
 add_filter( 'manage_pages_columns', function( $posts_columns, $post_type = null) {
-	$post_types_disabled = (array) apply_filters( 'jptt_featured_post_types_disabled', null );
 
-	if ( in_array( $post_type, $post_type_disabled ) ) {
+	$post_types_disabled = array();
+	$post_types_disabled = (array) apply_filters( 'jptt_featured_post_types_disabled', $post_types_disabled, $post_type );
+
+	if ( in_array( $post_type, $post_types_disabled ) ) {
 		return $posts_columns;
 	}
 
@@ -74,6 +79,13 @@ add_action( 'manage_posts_custom_column', function($column_name, $post_id) {
 		return;
 	}
 
+	$post_types_disabled = array();
+	$post_types_disabled = (array) apply_filters( 'jptt_featured_post_types_disabled', $post_types_disabled, $post_type );
+
+	if ( !empty( $post_types_disabled ) && in_array( get_post_type( $post_id ), $post_types_disabled ) ) {
+		return;
+	}
+
 	$featured = get_post_meta( $post_id, '_featured', true );
 	if ( in_array( $featured, array( 'yes', 1 ) ) ) {
 		echo '<a href="#" class="dashicons dashicons-star-filled jptt-toggle-featured" data-id="' . $post_id . '"></a>';
@@ -88,12 +100,27 @@ add_action( 'manage_pages_custom_column', function($column_name, $post_id) {
 		return;
 	}
 
+	$post_types_disabled = array();
+	$post_types_disabled = (array) apply_filters( 'jptt_featured_post_types_disabled', $post_types_disabled, $post_type );
+
+	if ( !empty( $post_types_disabled ) && in_array( get_post_type( $post_id ), $post_types_disabled ) ) {
+		return;
+	}
+
 	$featured = get_post_meta( $post_id, '_featured', true );
 	if ( in_array( $featured, array( 'yes', 1 ) ) ) {
 		echo '<a href="#" class="dashicons dashicons-star-filled toggle-featured" data-id="' . $post_id . '"></a>';
 	} else {
 		echo '<a href="#" class="dashicons dashicons-star-empty toggle-featured" data-id="' . $post_id . '"></a>';
 	}
+}, 10, 2 );
+
+/** Filter to remove featured column when woocommerce exists */
+add_filter( 'jptt_featured_post_types_disabled', function ($post_types_disabled, $post_type) {
+	if ( function_exists( 'WC' ) ) {
+		$post_types_disabled[] = 'product';
+	}
+	return $post_types_disabled;
 }, 10, 2 );
 
 add_action( 'wp_ajax_toggle_featured_post', function() {
@@ -109,9 +136,13 @@ add_action( 'wp_ajax_toggle_featured_post', function() {
 		wp_send_json_error( $error );
 	}
 
-	$featured = (int) get_post_meta( $post_id, '_featured', true );
+	$featured = get_post_meta( $post_id, '_featured', true );
 
-	update_post_meta( $post_id, '_featured', (int) !$featured );
-
-	wp_send_json_success( (bool) !$featured );
+	if ( 'yes' == $featured ) {
+		delete_post_meta( $post_id, '_featured' );
+		wp_send_json( array( 'success' => true, 'featured' => false ) );
+	} else {
+		update_post_meta( $post_id, '_featured', 'yes' );
+		wp_send_json( array( 'success' => true, 'featured' => true ) );
+	}
 } );
