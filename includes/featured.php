@@ -7,13 +7,13 @@ if ( !function_exists( 'is_featured' ) ) {
 
 	/**
 	 * Is featured post?
-	 * 
+	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @global wpdb $wpdb
-	 * 
+	 *
 	 * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global `$post`.
-	 * 
+	 *
 	 * @return boolean
 	 */
 	function is_featured( $post = null ) {
@@ -36,9 +36,9 @@ if ( !$featured_enabled || !is_admin() ) {
 /** Filter to add featured column to admin posts */
 add_filter( 'manage_posts_columns', function( $posts_columns, $post_type = null) {
 
-	$post_types_disabled = (array) apply_filters( 'jptt_featured_post_types_disabled' );
+	$post_types_disabled = (array) apply_filters( 'jptt_featured_post_types_disabled', null );
 
-	if ( in_array( $post_type, $post_type_disabled ) ) {
+	if ( in_array( $post_type, $post_types_disabled ) ) {
 		return $posts_columns;
 	}
 
@@ -53,7 +53,7 @@ add_filter( 'manage_posts_columns', function( $posts_columns, $post_type = null)
 
 /** Filter to add featured column to admin pages */
 add_filter( 'manage_pages_columns', function( $posts_columns, $post_type = null) {
-	$post_types_disabled = (array) apply_filters( 'jptt_featured_post_types_disabled' );
+	$post_types_disabled = (array) apply_filters( 'jptt_featured_post_types_disabled', null );
 
 	if ( in_array( $post_type, $post_type_disabled ) ) {
 		return $posts_columns;
@@ -74,8 +74,8 @@ add_action( 'manage_posts_custom_column', function($column_name, $post_id) {
 		return;
 	}
 
-	$featured = (bool) get_post_meta( $post_id, '_featured', true );
-	if ( $featured ) {
+	$featured = get_post_meta( $post_id, '_featured', true );
+	if ( in_array( $featured, array( 'yes', 1 ) ) ) {
 		echo '<a href="#" class="dashicons dashicons-star-filled jptt-toggle-featured" data-id="' . $post_id . '"></a>';
 	} else {
 		echo '<a href="#" class="dashicons dashicons-star-empty jptt-toggle-featured" data-id="' . $post_id . '"></a>';
@@ -88,8 +88,8 @@ add_action( 'manage_pages_custom_column', function($column_name, $post_id) {
 		return;
 	}
 
-	$featured = (bool) get_post_meta( $post_id, '_featured', true );
-	if ( $featured ) {
+	$featured = get_post_meta( $post_id, '_featured', true );
+	if ( in_array( $featured, array( 'yes', 1 ) ) ) {
 		echo '<a href="#" class="dashicons dashicons-star-filled toggle-featured" data-id="' . $post_id . '"></a>';
 	} else {
 		echo '<a href="#" class="dashicons dashicons-star-empty toggle-featured" data-id="' . $post_id . '"></a>';
