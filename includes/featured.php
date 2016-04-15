@@ -53,9 +53,9 @@ add_action( 'manage_posts_custom_column', function($column_name, $post_id) {
 
 	$featured = (bool) get_post_meta( $post_id, '_featured', true );
 	if ( $featured ) {
-		echo '<a href="#" class="dashicons dashicons-star-filled toggle-featured" data-id="' . $post_id . '"></a>';
+		echo '<a href="#" class="dashicons dashicons-star-filled jptt-toggle-featured" data-id="' . $post_id . '"></a>';
 	} else {
-		echo '<a href="#" class="dashicons dashicons-star-empty toggle-featured" data-id="' . $post_id . '"></a>';
+		echo '<a href="#" class="dashicons dashicons-star-empty jptt-toggle-featured" data-id="' . $post_id . '"></a>';
 	}
 }, 10, 2 );
 
