@@ -131,7 +131,9 @@ add_action( 'wp_ajax_toggle_featured_post', function() {
 
 	$post_id = (int) (filter_input( INPUT_POST, 'post_id', FILTER_SANITIZE_NUMBER_INT ) ? : filter_input( INPUT_GET, 'post_id', FILTER_SANITIZE_NUMBER_INT ));
 
-	if ( empty( get_post( $post_id ) ) ) {
+	$post = get_post( $post_id );
+
+	if ( empty( $post ) ) {
 		$error = new WP_Error( 'action_disabled', __( 'Action disabled' ) );
 		wp_send_json_error( $error );
 	}
