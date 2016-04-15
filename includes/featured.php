@@ -3,6 +3,29 @@
 /** Block direct access */
 defined( 'ABSPATH' ) or die( 'No direct script access allowed' );
 
+if ( !function_exists( 'is_featured' ) ) {
+
+	/**
+	 * Is featured post?
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @global wpdb $wpdb
+	 * 
+	 * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global `$post`.
+	 * 
+	 * @return boolean
+	 */
+	function is_featured( $post = null ) {
+		$post = get_post( $post );
+		if ( !$post ) {
+			return false;
+		}
+		return (bool) get_post_meta( $post->ID, '_featured', true );
+	}
+
+}
+
 $featured_enabled = (bool) jptt_get_option( 'module_featured' );
 
 /** If module is disabled or isn't admin area omit filter & actions */
