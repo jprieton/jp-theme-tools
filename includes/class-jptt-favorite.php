@@ -271,6 +271,23 @@ class JPTT_Favorite {
 
 }
 
+/**
+ * Is favorite post?
+ * 
+ * @since 1.0.0
+ * 
+ * @global wpdb $wpdb
+ * 
+ * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global `$post`.
+ * @param int|string|WP_User $user Optional. User ID, user login or  WP_User object. Defaults to current user.
+ * 
+ * @return boolean
+ */
+function is_favorite( $post = null, $user = null ) {
+	$favorite = JPTT_Favorite::get_instance();
+	return $favorite->is_favorite( $post, $user );
+}
+
 add_action( 'wp_ajax_user_toogle_favorite', function() {
 	$post_id = (int) (filter_input( INPUT_POST, 'post_id', FILTER_SANITIZE_NUMBER_INT ) ? : filter_input( INPUT_GET, 'post_id', FILTER_SANITIZE_NUMBER_INT ));
 	$user_id = (int) get_current_user_id();
