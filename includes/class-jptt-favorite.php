@@ -187,6 +187,10 @@ class JPTT_Favorite {
 			$_userdata = $this->userdata;
 		}
 
+		if ( !$_userdata ) {
+			return false;
+		}
+
 		$is_favorite = (bool) $wpdb->get_var( "SELECT post_id "
 										. "FROM {$wpdb->prefix}favorites "
 										. "WHERE post_id = '{$post->ID}' "
@@ -265,7 +269,16 @@ class JPTT_Favorite {
 		return $total;
 	}
 
-	public function get_favorite_posts( $user ) {
+	/**
+	 * Get posts id by user
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @param int|string|WP_User $user Optional. User ID, user login or  WP_User object. Defaults to current user.
+	 *
+	 * @return array
+	 */
+	public function get_favorite_posts( $user = null ) {
 
 		if ( is_int( $user ) ) {
 			$_userdata = get_userdata( $user );
@@ -284,9 +297,38 @@ class JPTT_Favorite {
 		$query = "SELECT post_id "
 						. "FROM {$wpdb->prefix}favorites "
 						. "WHERE user_id = '{$_userdata->ID}' ";
-		return $wpdb->get_col( $query );
+		return $wpdb->get_results( $query );
 	}
 
+}
+
+/**
+ * Is favorite post?
+ * 
+ * @since 1.0.0
+ * 
+ * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global `$post`.
+ * @param int|string|WP_User $user Optional. User ID, user login or  WP_User object. Defaults to current user.
+ * 
+ * @return boolean
+ */
+function is_favorite( $post = null, $user = null ) {
+	$favorite = JPTT_Favorite::get_instance();
+	return $favorite->is_favorite( $post, $user );
+}
+
+/**
+ * Get posts id by user
+ * 
+ * @since 1.0.0
+ * 
+ * @param int|string|WP_User $user Optional. User ID, user login or  WP_User object. Defaults to current user.
+ *
+ * @return array
+ */
+function get_favorite_posts( $user = null ) {
+	$favorite = JPTT_Favorite::get_instance();
+	return $favorite->get_favorite_posts( $user );
 }
 
 add_action( 'wp_ajax_user_toogle_favorite', function() {
