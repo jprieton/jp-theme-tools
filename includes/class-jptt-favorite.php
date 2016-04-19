@@ -297,7 +297,7 @@ class JPTT_Favorite {
 		$query = "SELECT post_id "
 						. "FROM {$wpdb->prefix}favorites "
 						. "WHERE user_id = '{$_userdata->ID}' ";
-		return $wpdb->get_results( $query );
+		return $wpdb->get_col( $query );
 	}
 
 }
