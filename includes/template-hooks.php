@@ -1,5 +1,7 @@
 <?php
 
+defined( 'ABSPATH' ) or die( 'No direct script access allowed' );
+
 add_action( 'after_setup_theme', function() {
 
 	/**

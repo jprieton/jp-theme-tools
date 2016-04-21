@@ -44,12 +44,11 @@ function jptt_get_template_part( $slug, $name = null ) {
 }
 
 /**
- * Shows the pagination block
+ * Shows the pagination component
  *
- * @since 1.0.0
+ * @since 0.18.2
  *
- * @param string $type Optional. Either 'default' or 'pager'
- *
+ * @see https://github.com/jprieton/jp-theme-tools/wiki/Pagination
  * @see http://getbootstrap.com/components/#pagination
  */
 function jptt_pagination() {
