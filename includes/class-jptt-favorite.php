@@ -238,7 +238,7 @@ class JPTT_Favorite {
 
 		if ( is_int( $user ) ) {
 			$_userdata = get_userdata( $user );
-		} elseif ( is_string( $_userdata ) ) {
+		} elseif ( is_string( $user ) ) {
 			$_userdata = get_user_by( 'login', $user );
 		} elseif ( $user instanceof WP_User ) {
 			$_userdata = $user;
