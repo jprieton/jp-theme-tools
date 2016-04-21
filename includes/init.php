@@ -16,6 +16,7 @@ require_once realpath( JPTT_BASEPATH . '/includes/class-jptt-user.php' );
 require_once realpath( JPTT_BASEPATH . '/includes/featured.php' );
 require_once realpath( JPTT_BASEPATH . '/includes/core.php' );
 require_once realpath( JPTT_BASEPATH . '/includes/template.php' );
+require_once realpath( JPTT_BASEPATH . '/includes/template-hooks.php' );
 
 /** Admin menu */
 add_action( 'admin_menu', function () {

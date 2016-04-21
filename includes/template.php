@@ -31,7 +31,9 @@ function jptt_get_template_part( $slug, $name = null ) {
 		$template = JPTT_TEMPLATE_PATH . "/{$slug}.php";
 	}
 
-	$template = realpath( $template );
+	if ( $template ) {
+		$template = realpath( $template );
+	}
 
 	// Allow 3rd party plugins to filter template file from their plugin.
 	$template = apply_filters( 'jptt_get_template_part', $template, $slug, $name );
@@ -50,6 +52,6 @@ function jptt_get_template_part( $slug, $name = null ) {
  *
  * @see http://getbootstrap.com/components/#pagination
  */
-function jptt_paginate() {
-	jptt_get_template_part( 'global', 'paginate' );
+function jptt_pagination() {
+	jptt_get_template_part( 'global/pagination' );
 }

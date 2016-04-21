@@ -7,7 +7,7 @@ if ( $wp_query->max_num_pages <= 1 ) {
 	return;
 }
 
-$class = (string) apply_filters('bs_pagination', 'bs-pagination');
+$class = (string) apply_filters('jptt_pagination_class', 'bs-pagination');
 ?>
 <nav itemscope itemtype="http://schema.org/SiteNavigationElement" class="<?php echo $class ?>">
 		<?php
