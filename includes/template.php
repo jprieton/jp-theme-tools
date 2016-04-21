@@ -50,7 +50,6 @@ function jptt_get_template_part( $slug, $name = null ) {
  *
  * @see http://getbootstrap.com/components/#pagination
  */
-function jptt_paginate( $type = 'default' ) {
-	$type = ('default' == $type) ? 'default' : 'pager';
-	jptt_get_template_part( 'global', $type );
+function jptt_paginate() {
+	jptt_get_template_part( 'global', 'paginate' );
 }
