@@ -57,7 +57,7 @@ class JPTT_User {
 		}
 
 		$userdata = compact( 'user_login', 'user_email', 'user_pass' );
-		$userdata = apply_filters( 'filter_pre_jptt_user_register', $userdata );
+		$userdata = apply_filters( 'jptt_user_register', $userdata );
 
 		if ( is_wp_error( $userdata ) ) {
 			return $userdata;
@@ -137,12 +137,12 @@ add_action( 'wp_ajax_nopriv_jptt_user_login', function() {
 	$user_pass = filter_input( INPUT_POST, 'user_password', FILTER_SANITIZE_STRING );
 	$remember = filter_input( INPUT_POST, 'user_password', FILTER_SANITIZE_STRING );
 
-	do_action( 'pre_user_user_login', $user_email, $user_pass );
+	do_action( 'pre_jptt_user_login', $user_email, $user_pass );
 
 	$user = JPTT_User::get_instance();
 	$userdata = $user->user_login( $user_email, $user_pass, (bool) $remember );
 
-	do_action( 'post_user_user_login', $userdata );
+	do_action( 'post_jptt_user_login', $userdata );
 
 	if ( is_wp_error( $userdata ) ) {
 		wp_send_json_error( $userdata );

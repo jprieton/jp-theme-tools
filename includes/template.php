@@ -31,7 +31,9 @@ function jptt_get_template_part( $slug, $name = null ) {
 		$template = JPTT_TEMPLATE_PATH . "/{$slug}.php";
 	}
 
-	$template = realpath( $template );
+	if ( $template ) {
+		$template = realpath( $template );
+	}
 
 	// Allow 3rd party plugins to filter template file from their plugin.
 	$template = apply_filters( 'jptt_get_template_part', $template, $slug, $name );
@@ -39,4 +41,16 @@ function jptt_get_template_part( $slug, $name = null ) {
 	if ( $template ) {
 		load_template( $template, false );
 	}
+}
+
+/**
+ * Shows the pagination component
+ *
+ * @since 0.18.2
+ *
+ * @see https://github.com/jprieton/jp-theme-tools/wiki/Pagination
+ * @see http://getbootstrap.com/components/#pagination
+ */
+function jptt_pagination() {
+	jptt_get_template_part( 'global/pagination' );
 }

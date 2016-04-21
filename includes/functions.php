@@ -119,20 +119,3 @@ function get_the_time_ago( $post = null, $full = false ) {
 
 	return $string;
 }
-
-/**
- * Is favorite post?
- * 
- * @since 1.0.0
- * 
- * @global wpdb $wpdb
- * 
- * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global `$post`.
- * @param int|string|WP_User $user Optional. User ID, user login or  WP_User object. Defaults to current user.
- * 
- * @return boolean
- */
-function is_favorite( $post = null, $user = null ) {
-	$favorite = JPTT_Favorite::get_instance();
-	return $favorite->is_favorite( $post, $user );
-}

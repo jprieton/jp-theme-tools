@@ -9,7 +9,7 @@
 		?>
 
 		<div>
-			<h2 class="nav-tab-wrapper">
+			<h2 class="nav-tab-wrapper jptt-nav-tab-wrapper">
 				<a href="#" class="nav-tab nav-tab-active" data-target="#settings-modules">Modules</a>
 				<a href="#" class="nav-tab" data-target="#settings-develop">Development</a>
 				<a href="#" class="nav-tab" data-target="#settings-security">Security</a>
@@ -27,6 +27,13 @@
 							<b><?php _e( 'Favorite posts', 'jptt' ) ?></b>
 						</label>
 						<p class="description">Enables users to mark/unmark posts as favorites.</p>
+						<br />
+						<label for="module_featured">
+							<input type="hidden" name="jptt_options[module_featured]" value="0">
+							<input type="checkbox" value="1" id="module_featured" name="jptt_options[module_featured]" <?php checked( (bool) jptt_get_option( 'module_featured' ) ) ?>>
+							<b><?php _e( 'Featured posts', JPTT_TEXTDOMAIN ) ?></b>
+						</label>
+						<p class="description">Enables users to mark/unmark posts as featured.</p>
 						<br />
 						<label for="module_subscribers">
 							<input type="hidden" name="jptt_options[module_subscribers]" value="0">
@@ -50,11 +57,22 @@
 						<p class="description">Enables users to register from custom form.</p>
 					</td>
 				</tr>
+				<tr valign="top">
+					<th scope="row"><h2 class="no-margin-top">WooCommerce</h2></th>
+					<td>
+						<label for="module_favorites">
+							<input type="hidden" name="jptt_options[woocommerce_pagination]" value="0">
+							<input type="checkbox" value="1" id="module_favorites" name="jptt_options[woocommerce_pagination]" <?php checked( (bool) jptt_get_option( 'woocommerce_pagination' ) ) ?>>
+							<b><?php _e( 'Overrides default pagination', 'jptt' ) ?></b>
+						</label>
+						<p class="description">Overrides the WooCommerce default pagination with the Bootstrap component.</p>
+					</td>
+				</tr>
 			</table>
 			<?php submit_button(); ?>
 		</div>
 
-		<div class="data-tab" id="settings-develop">
+		<div class="data-tab" id="settings-develop" style="display: none;">
 			<table class="form-table">
 				<tr valign="top">
 					<th scope="row">Theming</th>
@@ -71,8 +89,7 @@
 			<?php submit_button(); ?>
 		</div>
 
-		<div class="data-tab" id="settings-security">
-
+		<div class="data-tab" id="settings-security" style="display: none;">
 			<table class="form-table">
 				<tr valign="top">
 					<th scope="row">Header</th>
@@ -148,18 +165,3 @@
 		</div>
 	</form>
 </div>
-
-<script>
-  jQuery(function () {
-      jQuery('.nav-tab-wrapper a').click(function (e) {
-          e.preventDefault();
-          jQuery('.data-tab').hide();
-          jQuery('.nav-tab-wrapper a').removeClass('nav-tab-active');
-          var tabContent = jQuery(this).data('target');
-          jQuery(tabContent).stop().show();
-          jQuery(this).addClass('nav-tab-active');
-      });
-
-      jQuery('a.nav-tab-active').trigger('click');
-  });
-</script>

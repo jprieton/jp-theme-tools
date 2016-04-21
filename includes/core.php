@@ -87,5 +87,3 @@ if ( (bool) jptt_get_option( 'theming_helper' ) ) {
 		include_once realpath( JPTT_BASEPATH . '/templates/responsive-helper.php' );
 	}, 99 );
 }
-
-

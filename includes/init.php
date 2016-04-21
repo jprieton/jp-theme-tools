@@ -13,8 +13,10 @@ require_once realpath( JPTT_BASEPATH . '/includes/functions.php' );
 require_once realpath( JPTT_BASEPATH . '/includes/class-jptt-favorite.php' );
 require_once realpath( JPTT_BASEPATH . '/includes/class-jptt-subscriber.php' );
 require_once realpath( JPTT_BASEPATH . '/includes/class-jptt-user.php' );
+require_once realpath( JPTT_BASEPATH . '/includes/featured.php' );
 require_once realpath( JPTT_BASEPATH . '/includes/core.php' );
 require_once realpath( JPTT_BASEPATH . '/includes/template.php' );
+require_once realpath( JPTT_BASEPATH . '/includes/template-hooks.php' );
 
 /** Admin menu */
 add_action( 'admin_menu', function () {
@@ -62,3 +64,8 @@ require_once realpath( JPTT_BASEPATH . '/widgets/bs-sidebar-search.php' );
 require_once realpath( JPTT_BASEPATH . '/widgets/bs-navbar-menu.php' );
 require_once realpath( JPTT_BASEPATH . '/widgets/bs-navbar-search.php' );
 require_once realpath( JPTT_BASEPATH . '/widgets/bs-navbar-subscribe.php' );
+
+/** Enqueue plugin scripts */
+add_action( 'admin_enqueue_scripts', function() {
+	wp_enqueue_script( 'jp-theme-tools', JPTT_PLUGIN_URI . 'js/jp-theme-tools.js', array('jquery'), '1.0.0', true );
+} );
