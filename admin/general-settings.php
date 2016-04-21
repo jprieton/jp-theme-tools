@@ -57,6 +57,17 @@
 						<p class="description">Enables users to register from custom form.</p>
 					</td>
 				</tr>
+				<tr valign="top">
+					<th scope="row"><h2 class="no-margin-top">WooCommerce</h2></th>
+					<td>
+						<label for="module_favorites">
+							<input type="hidden" name="jptt_options[woocommerce_pagination]" value="0">
+							<input type="checkbox" value="1" id="module_favorites" name="jptt_options[woocommerce_pagination]" <?php checked( (bool) jptt_get_option( 'woocommerce_pagination' ) ) ?>>
+							<b><?php _e( 'Overrides default pagination', 'jptt' ) ?></b>
+						</label>
+						<p class="description">Overrides the WooCommerce default pagination with the Bootstrap component.</p>
+					</td>
+				</tr>
 			</table>
 			<?php submit_button(); ?>
 		</div>

@@ -40,3 +40,17 @@ function jptt_get_template_part( $slug, $name = null ) {
 		load_template( $template, false );
 	}
 }
+
+/**
+ * Shows the pagination block
+ *
+ * @since 1.0.0
+ *
+ * @param string $type Optional. Either 'default' or 'pager'
+ *
+ * @see http://getbootstrap.com/components/#pagination
+ */
+function jptt_paginate( $type = 'default' ) {
+	$type = ('default' == $type) ? 'default' : 'pager';
+	jptt_get_template_part( 'global', $type );
+}

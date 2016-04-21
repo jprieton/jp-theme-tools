@@ -88,4 +88,8 @@ if ( (bool) jptt_get_option( 'theming_helper' ) ) {
 	}, 99 );
 }
 
-
+if ( (bool) jptt_get_option( 'woocommerce_pagination' ) ) {
+	/** Overrides the WooCommerce default pagination with the Bootstrap component. */
+	remove_action( 'woocommerce_after_shop_loop', 'woocommerce_pagination' );
+	add_action( 'woocommerce_after_shop_loop', 'jptt_paginate' );
+}
