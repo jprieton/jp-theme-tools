@@ -54,11 +54,6 @@ if ( is_admin() && !class_exists( 'Parsedown' ) ) {
 /** Helpers */
 require realpath( JPTT_BASEPATH . '/helpers/bootstrap.php' );
 
-/** Loads the plugin's translated strings */
-add_action( 'plugins_loaded', function() {
-	load_plugin_textdomain( 'jptt', false, JPTT_BASEPATH . DIRECTORY_SEPARATOR . 'languages' );
-} );
-
 /** Widgets */
 require_once realpath( JPTT_BASEPATH . '/widgets/bs-sidebar-search.php' );
 require_once realpath( JPTT_BASEPATH . '/widgets/bs-navbar-menu.php' );

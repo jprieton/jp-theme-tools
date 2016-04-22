@@ -35,7 +35,11 @@ if ( !$featured_enabled || !is_admin() ) {
 	return;
 }
 
-/** Filter to add featured column to admin posts */
+/**
+ * Add featured column to admin posts
+ *
+ * @since 1.0.0
+ */
 add_filter( 'manage_posts_columns', function( $posts_columns, $post_type = null) {
 
 	$post_types_disabled = array();
@@ -54,7 +58,11 @@ add_filter( 'manage_posts_columns', function( $posts_columns, $post_type = null)
 	return $posts_columns;
 }, 10, 2 );
 
-/** Filter to add featured column to admin pages */
+/**
+ * Add featured column to admin pages
+ *
+ * @since 1.0.0
+ */
 add_filter( 'manage_pages_columns', function( $posts_columns, $post_type = null) {
 
 	$post_types_disabled = array();
@@ -73,7 +81,11 @@ add_filter( 'manage_pages_columns', function( $posts_columns, $post_type = null)
 	return $posts_columns;
 }, 10, 2 );
 
-/** Action to show featured value to admin posts */
+/**
+ * Show featured value to admin posts
+ *
+ * @since 1.0.0
+ */
 add_action( 'manage_posts_custom_column', function($column_name, $post_id) {
 	if ( 'featured' != $column_name ) {
 		return;
@@ -94,7 +106,11 @@ add_action( 'manage_posts_custom_column', function($column_name, $post_id) {
 	}
 }, 10, 2 );
 
-/** Action to show featured value to admin pages */
+/**
+ * Show featured value to admin pages
+ *
+ * @since 1.0.0
+ */
 add_action( 'manage_pages_custom_column', function($column_name, $post_id) {
 	if ( 'featured' != $column_name ) {
 		return;
@@ -115,7 +131,11 @@ add_action( 'manage_pages_custom_column', function($column_name, $post_id) {
 	}
 }, 10, 2 );
 
-/** Filter to remove featured column when woocommerce exists */
+/**
+ * Remove featured column when woocommerce exists
+ *
+ * @since 1.0.0
+ */
 add_filter( 'jptt_featured_post_types_disabled', function ($post_types_disabled, $post_type) {
 	if ( function_exists( 'WC' ) ) {
 		$post_types_disabled[] = 'product';
@@ -123,6 +143,11 @@ add_filter( 'jptt_featured_post_types_disabled', function ($post_types_disabled,
 	return $post_types_disabled;
 }, 10, 2 );
 
+/**
+ * Action to toggle featured post/page in admin
+ *
+ * @since 1.0.0
+ */
 add_action( 'wp_ajax_toggle_featured_post', function() {
 	if ( !is_admin() ) {
 		$error = new WP_Error( 'action_disabled', __( 'Action disabled' ) );

@@ -1,5 +1,8 @@
 <?php
 
+/** Block direct access */
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
+
 /**
  * Plugin Name: JP WordPress Theme Tools
  * Plugin URI: https://github.com/jprieton/jp-theme-tools/
@@ -12,40 +15,48 @@
  * GitHub Plugin URI: jprieton/jp-theme-tools
  * GitHub Branch: master
  * License: GPL2 or later
- * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  */
+defined( 'JPTT_TEXT_DOMAIN' ) || define( 'JPTT_TEXT_DOMAIN', 'jptt' );
+defined( 'JPTT_PLUGIN_URI' ) || define( 'JPTT_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
+defined( 'JPTT_PLUGIN_PATH' ) || define( 'JPTT_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
-/** Block direct access */
-defined( 'ABSPATH' ) or die( 'No direct script access allowed' );
+add_action( 'plugins_loaded', function () {
 
-/** Constants */
-define( 'JPTT_BASEPATH', realpath( __DIR__ ) );
-define( 'JPTT_TEMPLATE_PATH', realpath( __DIR__ .'/templates/' ) );
+	/**
+	 * Load plugin textdomain.
+	 *
+	 * @since 1.0.0
+	 */
+	load_plugin_textdomain( JPTT_TEXT_DOMAIN, false, plugin_basename( dirname( __FILE__ ) ) . '/i18n' );
+} );
 
-/** Init */
-require_once realpath( JPTT_BASEPATH . '/includes/init.php' );
+
+
 
 
 
 /**
  * -----------------------------------------------------
- * Cleanup/Rewrite 01/04/2016
+ * Cleanup/Rewrite 22/04/2016
  * -----------------------------------------------------
  */
+/** Constants */
+define( 'JPTT_BASEPATH', realpath( __DIR__ ) );
+define( 'JPTT_TEMPLATE_PATH', realpath( __DIR__ . '/templates/' ) );
+
+/** Init */
+require_once realpath( JPTT_BASEPATH . '/includes/init.php' );
 
 /** On activate plugin * /
-register_activation_hook( __FILE__, function() {
-	Post_Stats::create_table();
-} );
-*/
-define( 'JPTT_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
-
+  register_activation_hook( __FILE__, function() {
+  Post_Stats::create_table();
+  } );
+ */
 require( dirname( __FILE__ ) . '/_includes/functions-scripts.php' );
 
 // https://developer.wordpress.org/plugins/the-basics/best-practices/
 // require( dirname( __FILE__ ) . '/_includes/admin/admin-menu.php' );
-
-define( 'JPTT_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
 
 define( 'JPTT_THEME_PATH', get_stylesheet_directory() );
 define( 'JPTT_THEME_URI', get_stylesheet_directory_uri() );
