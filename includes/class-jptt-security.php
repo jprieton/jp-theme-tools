@@ -12,7 +12,6 @@ class JPTT_Security {
 
 	/** Refers to a single instance of this class. */
 	private static $instance = null;
-	private static $table_exists = null;
 
 	/**
 	 * Creates or returns an instance of this class.

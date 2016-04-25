@@ -62,5 +62,5 @@ require_once realpath( JPTT_BASEPATH . '/widgets/bs-navbar-subscribe.php' );
 
 /** Enqueue plugin scripts */
 add_action( 'admin_enqueue_scripts', function() {
-	wp_enqueue_script( 'jp-theme-tools', JPTT_PLUGIN_URI . 'js/jp-theme-tools.js', array('jquery'), '1.0.0', true );
+	wp_enqueue_script( 'jp-theme-tools', JPTT_BASEURI . 'js/jp-theme-tools.js', array('jquery'), '1.0.0', true );
 } );
