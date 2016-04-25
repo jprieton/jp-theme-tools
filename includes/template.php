@@ -51,6 +51,20 @@ function jptt_get_template_part( $slug, $name = null ) {
  * @see https://github.com/jprieton/jp-theme-tools/wiki/Pagination
  * @see http://getbootstrap.com/components/#pagination
  */
-function jptt_pagination() {
-	jptt_get_template_part( 'global/pagination' );
+function jptt_pagination( $type = 'default' ) {
+	$type = in_array( $type, array( 'default', 'pager' ) ) ? $type : 'default';
+	jptt_get_template_part( "global/pagination-{$type}" );
+}
+
+/**
+ * Aliases for bootstrap_pagination()
+ * Shows the pagination component
+ *
+ * @since 0.18.2
+ *
+ * @see https://github.com/jprieton/jp-theme-tools/wiki/Pagination
+ * @see http://getbootstrap.com/components/#pagination
+ */
+function bootstrap_pagination( $type = 'default' ) {
+	jptt_pagination( $type );
 }
