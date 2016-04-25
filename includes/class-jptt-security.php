@@ -36,10 +36,13 @@ class JPTT_Security {
 
 	/**
 	 * Get htaccess file content to block direct execution script
+	 *
+	 * @since 1.0.0
+	 *
 	 * @return string
 	 */
 	private function get_htaccess() {
-		return  "# ----------------------------------------------------------------------\n" .
+		return "# ----------------------------------------------------------------------\n" .
 						"# DISABLE DIRECTORY BROWSING\n" .
 						"# ----------------------------------------------------------------------\n" .
 						"Options All -Indexes\n" .
@@ -59,6 +62,9 @@ class JPTT_Security {
 
 	/**
 	 * Add .htaccess file in folder
+	 *
+	 * @since 1.0.0
+	 *
 	 * @param string $folder
 	 * @return boolean
 	 */
@@ -82,6 +88,9 @@ class JPTT_Security {
 
 	/**
 	 * Remove .htaccess file from folder
+	 *
+	 * @since 1.0.0
+	 *
 	 * @param string $folder
 	 * @return boolean
 	 */
