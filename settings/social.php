@@ -11,7 +11,7 @@
 			do_settings_sections( 'jptt-social-group' );
 			?>
 		<div>
-			<h2 class="nav-tab-wrapper" style="padding-bottom: 0">
+			<h2 class="nav-tab-wrapper jptt-nav-tab-wrapper" style="padding-bottom: 0">
 				<a href="#" class="nav-tab nav-tab-active" data-target="#tab-general">General</a>
 				<a href="#" class="nav-tab" data-target="#tab-facebook">Facebook</a>
 				<a href="#" class="nav-tab" data-target="#tab-instagram">Instagram</a>
@@ -111,7 +111,3 @@
 		<?php submit_button(); ?>
 	</form>
 </div>
-<?php
-include_once JPTT_BASEPATH . 'snippets/admin-tabs-js.php';
-
-
