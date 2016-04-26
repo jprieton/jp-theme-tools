@@ -18,7 +18,7 @@ if (is_admin() && FALSE) {
 			$content.= "define('{$item}', {$value});\n";
 		}
 
-		$filename = JPTT_PLUGIN_PATH . 'libraries/timthumb/timthumb-config.php';
+		$filename = JPTT_BASEPATH . 'libraries/timthumb/timthumb-config.php';
 
 		if (file_exists($filename)) {
 			unlink($filename);

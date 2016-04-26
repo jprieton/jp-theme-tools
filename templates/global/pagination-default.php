@@ -7,14 +7,18 @@ if ( $wp_query->max_num_pages <= 1 ) {
 	return;
 }
 
-$nav_class = (string) apply_filters('jptt_pagination_nav_class', 'bs-pagination');
-$ul_class = (string) apply_filters('jptt_pagination_ul_class', '');
+$nav_class = (string) apply_filters( 'jptt_pagination_default_nav_class', 'text-center' );
+$ul_class = (string) apply_filters( 'jptt_pagination_default_ul_class', '' );
 ?>
 <nav itemscope itemtype="http://schema.org/SiteNavigationElement" class="<?php echo $nav_class ?>">
 		<?php
-		$args = array(
+		$default = array(
+				'class' => '',
+				'prev_text' => '<span aria-hidden="true">&laquo;</span>',
+				'next_text' => '<span aria-hidden="true">&raquo;</span>',
 				'type' => 'list',
 		);
+		$args = (array) apply_filters( 'jptt_pagination_args', $default );
 		$paginate = paginate_links( $args );
 		$search = array(
 				"<ul class='page-numbers'>",

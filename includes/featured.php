@@ -10,8 +10,6 @@ if ( !function_exists( 'is_featured' ) ) {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @global wpdb $wpdb
-	 *
 	 * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global `$post`.
 	 *
 	 * @return boolean
@@ -23,19 +21,24 @@ if ( !function_exists( 'is_featured' ) ) {
 		}
 
 		$featured = get_post_meta( $post->ID, '_featured', true );
-		return ( 'yes' == $featured );
+		// 'yes' for WooCommerce support, '1' for legacy support
+		return ( 'yes' == $featured || '1' == $featured);
 	}
 
 }
 
 $featured_enabled = (bool) jptt_get_option( 'module_featured' );
 
-/** If module is disabled or isn't admin area omit filter & actions */
+/** If module is disabled or isn't admin area disable filter & actions */
 if ( !$featured_enabled || !is_admin() ) {
 	return;
 }
 
-/** Filter to add featured column to admin posts */
+/**
+ * Add featured column to admin posts
+ *
+ * @since 1.0.0
+ */
 add_filter( 'manage_posts_columns', function( $posts_columns, $post_type = null) {
 
 	$post_types_disabled = array();
@@ -54,7 +57,11 @@ add_filter( 'manage_posts_columns', function( $posts_columns, $post_type = null)
 	return $posts_columns;
 }, 10, 2 );
 
-/** Filter to add featured column to admin pages */
+/**
+ * Add featured column to admin pages
+ *
+ * @since 1.0.0
+ */
 add_filter( 'manage_pages_columns', function( $posts_columns, $post_type = null) {
 
 	$post_types_disabled = array();
@@ -73,7 +80,11 @@ add_filter( 'manage_pages_columns', function( $posts_columns, $post_type = null)
 	return $posts_columns;
 }, 10, 2 );
 
-/** Action to show featured value to admin posts */
+/**
+ * Show featured value to admin posts
+ *
+ * @since 1.0.0
+ */
 add_action( 'manage_posts_custom_column', function($column_name, $post_id) {
 	if ( 'featured' != $column_name ) {
 		return;
@@ -94,7 +105,11 @@ add_action( 'manage_posts_custom_column', function($column_name, $post_id) {
 	}
 }, 10, 2 );
 
-/** Action to show featured value to admin pages */
+/**
+ * Show featured value to admin pages
+ *
+ * @since 1.0.0
+ */
 add_action( 'manage_pages_custom_column', function($column_name, $post_id) {
 	if ( 'featured' != $column_name ) {
 		return;
@@ -115,7 +130,11 @@ add_action( 'manage_pages_custom_column', function($column_name, $post_id) {
 	}
 }, 10, 2 );
 
-/** Filter to remove featured column when woocommerce exists */
+/**
+ * Remove custom featured column in products when WooCommerce exists
+ *
+ * @since 1.0.0
+ */
 add_filter( 'jptt_featured_post_types_disabled', function ($post_types_disabled, $post_type) {
 	if ( function_exists( 'WC' ) ) {
 		$post_types_disabled[] = 'product';
@@ -123,6 +142,11 @@ add_filter( 'jptt_featured_post_types_disabled', function ($post_types_disabled,
 	return $post_types_disabled;
 }, 10, 2 );
 
+/**
+ * Action to toggle featured post/page in admin
+ *
+ * @since 1.0.0
+ */
 add_action( 'wp_ajax_toggle_featured_post', function() {
 	if ( !is_admin() ) {
 		$error = new WP_Error( 'action_disabled', __( 'Action disabled' ) );
@@ -130,6 +154,11 @@ add_action( 'wp_ajax_toggle_featured_post', function() {
 	}
 
 	$post_id = (int) (filter_input( INPUT_POST, 'post_id', FILTER_SANITIZE_NUMBER_INT ) ? : filter_input( INPUT_GET, 'post_id', FILTER_SANITIZE_NUMBER_INT ));
+
+	if ( empty( $post ) ) {
+		$error = new WP_Error( 'action_disabled', __( 'Action disabled' ) );
+		wp_send_json_error( $error );
+	}
 
 	$post = get_post( $post_id );
 
@@ -140,7 +169,8 @@ add_action( 'wp_ajax_toggle_featured_post', function() {
 
 	$featured = get_post_meta( $post_id, '_featured', true );
 
-	if ( 'yes' == $featured ) {
+	// 'yes' for WooCommerce support, '1' for legacy support
+	if ( 'yes' == $featured || '1' == $featured ) {
 		delete_post_meta( $post_id, '_featured' );
 		wp_send_json( array( 'success' => true, 'featured' => false ) );
 	} else {

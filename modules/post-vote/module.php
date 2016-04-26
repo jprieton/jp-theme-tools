@@ -3,7 +3,7 @@
 defined('ABSPATH') or die('No direct script access allowed');
 
 require_once __DIR__ . '/class-post-vote.php';
-require_once JPTT_PLUGIN_PATH . 'core/class-input.php';
+require_once JPTT_BASEPATH . 'core/class-input.php';
 
 add_action('wp_ajax_post_vote', function() {
 

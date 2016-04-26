@@ -112,6 +112,6 @@
 	</form>
 </div>
 <?php
-include_once JPTT_PLUGIN_PATH . 'snippets/admin-tabs-js.php';
+include_once JPTT_BASEPATH . 'snippets/admin-tabs-js.php';
 
 
