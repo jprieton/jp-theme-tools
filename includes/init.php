@@ -51,9 +51,6 @@ if ( is_admin() && !class_exists( 'Parsedown' ) ) {
 	require_once JPTT_BASEPATH . '/libraries/parsedown.php';
 }
 
-/** Helpers */
-require realpath( JPTT_BASEPATH . '/helpers/bootstrap.php' );
-
 /** Widgets */
 require_once realpath( JPTT_BASEPATH . '/widgets/bs-sidebar-search.php' );
 require_once realpath( JPTT_BASEPATH . '/widgets/bs-navbar-menu.php' );
