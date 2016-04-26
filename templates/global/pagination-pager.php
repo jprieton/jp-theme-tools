@@ -1,10 +1,7 @@
 <?php
 defined( 'ABSPATH' ) or die( 'No direct script access allowed' );
 
-//var_dump( !(is_archive() || is_home() || is_singular()) && is_page() );
-// var_dump( $wp_query );
-
-if ( !(is_archive() || is_home() || is_singular() ) || is_page()) {
+if ( !(is_archive() || is_home() || is_singular() ) || is_page() ) {
 	return;
 }
 
