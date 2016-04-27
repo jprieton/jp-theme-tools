@@ -149,21 +149,21 @@ add_filter( 'jptt_featured_post_types_disabled', function ($post_types_disabled,
  */
 add_action( 'wp_ajax_toggle_featured_post', function() {
 	if ( !is_admin() ) {
-		$error = new WP_Error( 'action_disabled', __( 'Action disabled' ) );
+		$error = new WP_Error( 'action_disabled', __( 'Action disabled1' ) );
 		wp_send_json_error( $error );
 	}
 
 	$post_id = (int) (filter_input( INPUT_POST, 'post_id', FILTER_SANITIZE_NUMBER_INT ) ? : filter_input( INPUT_GET, 'post_id', FILTER_SANITIZE_NUMBER_INT ));
 
-	if ( empty( $post ) ) {
-		$error = new WP_Error( 'action_disabled', __( 'Action disabled' ) );
+	if ( empty( $post_id ) ) {
+		$error = new WP_Error( 'action_disabled', __( 'Action disabled2' ) );
 		wp_send_json_error( $error );
 	}
 
 	$post = get_post( $post_id );
 
 	if ( empty( $post ) ) {
-		$error = new WP_Error( 'action_disabled', __( 'Action disabled' ) );
+		$error = new WP_Error( 'action_disabled', __( 'Action disabled3' ) );
 		wp_send_json_error( $error );
 	}
 
