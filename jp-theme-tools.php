@@ -17,9 +17,9 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
  * License: GPL3 or later
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  */
-defined( 'JPTT_TEXT_DOMAIN' ) || define( 'JPTT_TEXT_DOMAIN', 'jptt' );
-defined( 'JPTT_BASEPATH' ) || define( 'JPTT_BASEPATH', plugin_dir_path( __FILE__ ) );
-defined( 'JPTT_BASEURI' ) || define( 'JPTT_BASEURI', plugin_dir_url( __FILE__ ) );
+defined( 'JPTT_TEXTDOMAIN' ) || define( 'JPTT_TEXTDOMAIN', 'jptt' );
+defined( 'JPTT_PLUGIN_PATH' ) || define( 'JPTT_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+defined( 'JPTT_PLUGIN_URI' ) || define( 'JPTT_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
 
 add_action( 'plugins_loaded', function () {
 
@@ -28,7 +28,7 @@ add_action( 'plugins_loaded', function () {
 	 *
 	 * @since 1.0.0
 	 */
-	load_plugin_textdomain( JPTT_TEXT_DOMAIN, false, plugin_basename( dirname( __FILE__ ) ) . '/i18n' );
+	load_plugin_textdomain( JPTT_TEXTDOMAIN, false, plugin_basename( dirname( __FILE__ ) ) . '/i18n' );
 } );
 
 
@@ -38,7 +38,7 @@ add_action( 'plugins_loaded', function () {
  * -----------------------------------------------------
  */
 /** Init */
-require_once JPTT_BASEPATH . '/includes/init.php';
+require_once JPTT_PLUGIN_PATH . '/includes/init.php';
 
 
 /** On activate plugin * /
@@ -67,34 +67,34 @@ include_once __DIR__ . '/_includes/input.php';
 include_once __DIR__ . '/_includes/user.php';
 include_once __DIR__ . '/_includes/error.php';
 
-include_once JPTT_BASEPATH . '_includes/taxonomy.php';
+include_once JPTT_PLUGIN_PATH . '_includes/taxonomy.php';
 
 //Helpers
-include_once JPTT_BASEPATH . 'helpers/debug.php';
-include_once JPTT_BASEPATH . 'helpers/url.php';
-include_once JPTT_BASEPATH . 'helpers/form.php';
-include_once JPTT_BASEPATH . 'core/Common.php';
-// include_once JPTT_BASEPATH . 'helpers/user.php';
+include_once JPTT_PLUGIN_PATH . 'helpers/debug.php';
+include_once JPTT_PLUGIN_PATH . 'helpers/url.php';
+include_once JPTT_PLUGIN_PATH . 'helpers/form.php';
+include_once JPTT_PLUGIN_PATH . 'core/Common.php';
+// include_once JPTT_PLUGIN_PATH . 'helpers/user.php';
 //Frontend
-//include_once JPTT_BASEPATH . 'frontend/attachments.php';
-//include_once JPTT_BASEPATH . 'frontend/galleries.php';
-//include_once JPTT_BASEPATH . 'frontend/posts.php';
-//include_once JPTT_BASEPATH . 'frontend/users.php';
+//include_once JPTT_PLUGIN_PATH . 'frontend/attachments.php';
+//include_once JPTT_PLUGIN_PATH . 'frontend/galleries.php';
+//include_once JPTT_PLUGIN_PATH . 'frontend/posts.php';
+//include_once JPTT_PLUGIN_PATH . 'frontend/users.php';
 // Action hooks
-include_once JPTT_BASEPATH . '_includes/link-template.php';
-include_once JPTT_BASEPATH . '_includes/class-html.php';
-include_once JPTT_BASEPATH . '_includes/post-thumbnail-template.php';
-include_once JPTT_BASEPATH . '_includes/class-head-actions.php';
-include_once JPTT_BASEPATH . 'includes/class-jptt_instagram.php';
+include_once JPTT_PLUGIN_PATH . '_includes/link-template.php';
+include_once JPTT_PLUGIN_PATH . '_includes/class-html.php';
+include_once JPTT_PLUGIN_PATH . '_includes/post-thumbnail-template.php';
+include_once JPTT_PLUGIN_PATH . '_includes/class-head-actions.php';
+include_once JPTT_PLUGIN_PATH . 'includes/class-jptt_instagram.php';
 
-//include_once JPTT_BASEPATH . 'includes/class-user-actions.php';
-include_once JPTT_BASEPATH . '_includes/contact.php';
-include_once JPTT_BASEPATH . 'actions/profile-image.php';
+//include_once JPTT_PLUGIN_PATH . 'includes/class-user-actions.php';
+include_once JPTT_PLUGIN_PATH . '_includes/contact.php';
+include_once JPTT_PLUGIN_PATH . 'actions/profile-image.php';
 
 global $defer_scripts, $async_scripts;
-require_once JPTT_BASEPATH . '/functions/common-functions.php';
-require_once JPTT_BASEPATH . '/filters/common-filters.php';
-require_once JPTT_BASEPATH . '/_includes/actions.php';
+require_once JPTT_PLUGIN_PATH . '/functions/common-functions.php';
+require_once JPTT_PLUGIN_PATH . '/filters/common-filters.php';
+require_once JPTT_PLUGIN_PATH . '/_includes/actions.php';
 
 require_once __DIR__ . '/core/class-error.php';
 require_once __DIR__ . '/core/class-input.php';
@@ -104,8 +104,8 @@ require_once __DIR__ . '/core/class-request.php';
 // Autoload modules
 $jptt_modules = (array) get_option( 'jptt_modules', array() );
 foreach ( $jptt_modules as $key => $value ) {
-	if ( file_exists( JPTT_BASEPATH . "modules/{$key}/module.php" ) ) {
-		include_once JPTT_BASEPATH . "modules/{$key}/module.php";
+	if ( file_exists( JPTT_PLUGIN_PATH . "modules/{$key}/module.php" ) ) {
+		include_once JPTT_PLUGIN_PATH . "modules/{$key}/module.php";
 	}
 }
 
@@ -177,7 +177,7 @@ if ( is_admin() ) {
 	add_action( 'admin_enqueue_scripts', 'jptt_admin_style' );
 
 	function jptt_admin_style() {
-		wp_register_style( 'jptt_admin_style', JPTT_BASEURI . 'assets/css/jp-theme-tools-admin.css', false, '1.0.0' );
+		wp_register_style( 'jptt_admin_style', JPTT_PLUGIN_URI . 'assets/css/jp-theme-tools-admin.css', false, '1.0.0' );
 		wp_enqueue_style( 'jptt_admin_style' );
 	}
 

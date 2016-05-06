@@ -2,8 +2,8 @@
 
 defined('ABSPATH') or die('No direct script access allowed');
 
-require_once JPTT_BASEPATH . 'core/class-input.php';
-require_once JPTT_BASEPATH . 'core/class-error.php';
+require_once JPTT_PLUGIN_PATH . 'core/class-input.php';
+require_once JPTT_PLUGIN_PATH . 'core/class-error.php';
 require_once __DIR__ . '/class-user-subscribe.php';
 
 add_action('wp_ajax_nopriv_add_subscriber', function() {

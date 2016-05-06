@@ -14,7 +14,7 @@ add_filter( 'pre_update_option_jptt_options', function($value, $old_value, $opti
 		$subscriber->create_table();
 	}
 
-	require_once realpath( JPTT_BASEPATH . '/includes/class-jptt-security.php' );
+	require_once realpath( JPTT_PLUGIN_PATH . '/includes/class-jptt-security.php' );
 	$security = JPTT_Security::get_instance();
 
 	$direct_execution_plugin = empty( $value['disable_direct_execution_plugins'] ) ? false : (bool) $value['disable_direct_execution_plugins'];
@@ -84,6 +84,6 @@ if ( (bool) jptt_get_option( 'remove_rsd_link' ) || (bool) jptt_get_option( 'xml
 if ( (bool) jptt_get_option( 'theming_helper' ) ) {
 	/** Shows a box with info about current Bootstrap breakpoint, resolution and modernizr features. */
 	add_action( 'wp_footer', function() {
-		include_once realpath( JPTT_BASEPATH . '/templates/responsive-helper.php' );
+		include_once realpath( JPTT_PLUGIN_PATH . '/templates/responsive-helper.php' );
 	}, 99 );
 }

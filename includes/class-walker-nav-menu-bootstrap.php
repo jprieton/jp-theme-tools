@@ -10,7 +10,7 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-class Walker_Nav_Menu_Bootstrap extends Walker_Nav_Menu {
+class Bootstrap_Nav_Menu extends Walker_Nav_Menu {
 
 	/**
 	 * @see Walker::start_lvl()

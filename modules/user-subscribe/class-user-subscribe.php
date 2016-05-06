@@ -3,7 +3,7 @@
 namespace jptt\modules;
 
 defined('ABSPATH') or die('No direct script access allowed');
-require_once JPTT_BASEPATH . 'core/class-error.php';
+require_once JPTT_PLUGIN_PATH . 'core/class-error.php';
 
 /**
  * @since 0.9.0

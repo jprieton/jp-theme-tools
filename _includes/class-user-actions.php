@@ -2,7 +2,7 @@
 
 defined('ABSPATH') or die("No script kiddies please!");
 
-require_once JPTT_BASEPATH . 'core/class-error.php';
+require_once JPTT_PLUGIN_PATH . 'core/class-error.php';
 
 class User_Actions {
 

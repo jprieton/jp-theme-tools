@@ -17,8 +17,8 @@ function jptt_get_template_part( $slug, $name = null ) {
 	}
 
 	// Get default slug-name.php
-	if ( !$template && $name && file_exists( JPTT_BASEPATH . "/templates/{$slug}-{$name}.php" ) ) {
-		$template = JPTT_BASEPATH . "/templates/{$slug}-{$name}.php";
+	if ( !$template && $name && file_exists( JPTT_PLUGIN_PATH . "/templates/{$slug}-{$name}.php" ) ) {
+		$template = JPTT_PLUGIN_PATH . "/templates/{$slug}-{$name}.php";
 	}
 
 	// If template file doesn't exist, look in yourtheme/jptt/slug.php
@@ -27,8 +27,8 @@ function jptt_get_template_part( $slug, $name = null ) {
 	}
 
 	// If template file doesn't existGet default slug.php
-	if ( !$template && file_exists( JPTT_BASEPATH . "/templates/{$slug}.php" ) ) {
-		$template = JPTT_BASEPATH . "/templates/{$slug}.php";
+	if ( !$template && file_exists( JPTT_PLUGIN_PATH . "/templates/{$slug}.php" ) ) {
+		$template = JPTT_PLUGIN_PATH . "/templates/{$slug}.php";
 	}
 
 	if ( $template ) {

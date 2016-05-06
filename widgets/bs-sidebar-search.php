@@ -26,7 +26,7 @@ class BS_Sidebar_Search_Widget extends WP_Widget {
 	public function widget( $args, $instance ) {
 		$template = locate_template( 'jp-theme-tools/widgets/sidebar-search.php' );
 		if ( empty( $template ) ) {
-			$template = JPTT_BASEPATH . '/templates/widgets/sidebar-search.php';
+			$template = JPTT_PLUGIN_PATH . '/templates/widgets/sidebar-search.php';
 		}
 		include apply_filters( 'bs_sidebar_search_template', $template );
 	}

@@ -21,8 +21,8 @@ add_filter('__mod_rewrite_rules', function($rule) {
 
 		$not_found_rule = $timthumb_rule = '';
 
-		$home_root = parse_url(JPTT_BASEURI . 'libraries/timthumb/timthumb.php', PHP_URL_PATH);
-		$default_image = parse_url(JPTT_BASEURI . 'assets/images/no-image.png', PHP_URL_PATH);
+		$home_root = parse_url(JPTT_PLUGIN_URI . 'libraries/timthumb/timthumb.php', PHP_URL_PATH);
+		$default_image = parse_url(JPTT_PLUGIN_URI . 'assets/images/no-image.png', PHP_URL_PATH);
 
 		$not_found_rule .= "<IfModule mod_rewrite.c>\n";
 		$not_found_rule .= "RewriteEngine On\n";

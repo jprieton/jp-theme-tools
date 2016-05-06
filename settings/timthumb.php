@@ -198,7 +198,7 @@
 			<tr valign="top">
 				<th scope="row">NOT_FOUND_IMAGE</th>
 				<td>
-					<input type="text" class="large-text" value="<?php echo get_option('timthumb_not_found_image', JPTT_BASEURI . 'assets/images/no-image.png') ?>" id="timthumb_not_found_image" name="timthumb_not_found_image" placeholder="">
+					<input type="text" class="large-text" value="<?php echo get_option('timthumb_not_found_image', JPTT_PLUGIN_URI . 'assets/images/no-image.png') ?>" id="timthumb_not_found_image" name="timthumb_not_found_image" placeholder="">
 					<p class="description">to serve if any 404 occurs </p>
 				</td>
 			</tr>
@@ -206,7 +206,7 @@
 				<th scope="row">ERROR_IMAGE</th>
 				<td>
 						<?php $checked = ((bool) get_option('timthumb_error_image')) ? 'checked' : '' ?>
-					<input type="text" class="large-text" value="<?php echo get_option('timthumb_error_image', JPTT_BASEURI . 'assets/images/no-image.png') ?>" id="timthumb_error_image" name="timthumb_error_image" <?php echo $checked ?>>
+					<input type="text" class="large-text" value="<?php echo get_option('timthumb_error_image', JPTT_PLUGIN_URI . 'assets/images/no-image.png') ?>" id="timthumb_error_image" name="timthumb_error_image" <?php echo $checked ?>>
 					<p class="description">to serve if an error occurs instead of showing error message </p>
 				</td>
 			</tr>

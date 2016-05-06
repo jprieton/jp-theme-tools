@@ -27,7 +27,7 @@ class BS_Navbar_Menu_Widget extends WP_Widget {
 		$term = get_term( $instance['menu'] );
 		$menu_class = !empty( $instance['menu_class'] ) ? $instance['menu_class'] : '';
 
-		require_once realpath( JPTT_BASEPATH . '/includes/class-walker-nav-menu-bootstrap.php' );
+		require_once realpath( JPTT_PLUGIN_PATH . '/includes/class-walker-nav-menu-bootstrap.php' );
 		wp_nav_menu( array(
 				'menu' => $term->term_id,
 				'container' => '',

@@ -8,7 +8,7 @@ function jptt_get_template( $template_file ) {
 	} else {
 		// If neither the child nor parent theme have overridden the template,
 		// we load the template from the 'templates' sub-directory of the directory this file is in
-		load_template( JPTT_BASEPATH . '/templates/' . $template_file );
+		load_template( JPTT_PLUGIN_PATH . '/templates/' . $template_file );
 	}
 }
 

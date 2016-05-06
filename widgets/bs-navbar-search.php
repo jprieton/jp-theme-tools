@@ -26,7 +26,7 @@ class BS_Navbar_Search_Widget extends WP_Widget {
 	public function widget( $args, $instance ) {
 		$template = locate_template( 'jp-theme-tools/widgets/navbar-search.php' );
 		if ( empty( $template ) ) {
-			$template = JPTT_BASEPATH . '/templates/widgets/navbar-search.php';
+			$template = JPTT_PLUGIN_PATH . '/templates/widgets/navbar-search.php';
 		}
 		include apply_filters( 'bs_navbar_search_template', $template );
 	}

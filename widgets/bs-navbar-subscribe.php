@@ -26,7 +26,7 @@ class BS_Navbar_Subscribe_Widget extends WP_Widget {
 	public function widget( $args, $instance ) {
 		$template = locate_template( 'jp-theme-tools/widgets/navbar-subscribe.php' );
 		if ( empty( $template ) ) {
-			$template = JPTT_BASEPATH . '/templates/widgets/navbar-subscribe.php';
+			$template = JPTT_PLUGIN_PATH . '/templates/widgets/navbar-subscribe.php';
 		}
 		include apply_filters( 'bs_navbar_subscribe_template', $template );
 	}
