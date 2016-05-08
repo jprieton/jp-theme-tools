@@ -17,6 +17,7 @@ require_once realpath( JPTT_BASEPATH . '/includes/featured.php' );
 require_once realpath( JPTT_BASEPATH . '/includes/core.php' );
 require_once realpath( JPTT_BASEPATH . '/includes/template.php' );
 require_once realpath( JPTT_BASEPATH . '/includes/template-hooks.php' );
+require_once realpath( JPTT_BASEPATH . '/includes/twbs-components.php' );
 
 /** Admin menu */
 add_action( 'admin_menu', function () {
