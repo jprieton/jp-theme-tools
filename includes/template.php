@@ -260,7 +260,7 @@ add_filter( 'post_thumbnail_html', function($html, $post_id, $post_thumbnail_id,
 
 	if ( empty( $not_found_image ) ) {
 		$locale = substr( get_locale(), 0, 2 );
-		if ( empty( $locale ) || !file_exists( JPTT_PLUGIN_URI . 'images/not-available-' . $locale . '.png' ) ) {
+		if ( empty( $locale ) || !file_exists( JPTT_PLUGIN_PATH . 'images/not-available-' . $locale . '.png' ) ) {
 			$not_found_image = JPTT_PLUGIN_URI . 'images/not-available-en.png';
 		} else {
 			$not_found_image = JPTT_PLUGIN_URI . 'images/not-available-' . $locale . '.png';
