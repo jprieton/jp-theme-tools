@@ -196,7 +196,7 @@ function bootstrap_breadcrumb() {
  * Shows the Bootstrap modal
  *
  * @since 0.19.2
- * 
+ *
  * @staticvar int $id
  * @param array $args
  */
@@ -245,3 +245,37 @@ function bootstrap_modal( $args ) {
 	</div><!-- /.modal -->
 	<?php
 }
+
+/**
+ * Shows a default image when the post don't have featured image
+ *
+ * @since 0.20.0
+ */
+add_filter( 'post_thumbnail_html', function($html, $post_id, $post_thumbnail_id, $size, $attr) {
+	if ( !empty( $html ) ) {
+		return $html;
+	}
+
+	static $not_found_image;
+
+	if ( empty( $not_found_image ) ) {
+		$locale = substr( get_locale(), 0, 2 );
+		if ( empty( $locale ) || !file_exists( JPTT_PLUGIN_URI . 'images/not-available-' . $locale . '.png' ) ) {
+			$not_found_image = JPTT_PLUGIN_URI . 'images/not-available-en.png';
+		} else {
+			$not_found_image = JPTT_PLUGIN_URI . 'images/not-available-' . $locale . '.png';
+		}
+
+		$not_found_image = jptt_get_option( 'not-found-image', $not_found_image );
+	}
+
+	$img_attr = array(
+			'alt = "' . __( 'Image not available', TEXT_DOMAIN ) . '"',
+			'src = "' . $not_found_image . '"'
+	);
+	foreach ( (array) $attr as $key => $value ) {
+		$img_attr[] = $key . ' = "' . ((is_array( $value )) ? implode( ' ', $value ) : $value) . ' ' . "attachment-$size size-$size" . '"';
+	}
+
+	return '<img ' . implode( ' ', $img_attr ) . '>  ';
+}, 10, 5 );
