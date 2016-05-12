@@ -5,7 +5,9 @@ defined( 'ABSPATH' ) or die( 'No direct script access allowed' );
 
 /** Constants */
 define( 'JPTT_LIBRARIES', realpath( JPTT_PLUGIN_PATH . '/libraries' ) );
-define( 'JPTT_TEXTDOMAIN', 'jptt' );
+
+/** Admin customizer */
+require_once realpath( JPTT_PLUGIN_PATH . '/admin/admin.php' );
 
 /** Required files */
 require_once realpath( JPTT_PLUGIN_PATH . '/includes/class-jptt.php' );
@@ -17,6 +19,7 @@ require_once realpath( JPTT_PLUGIN_PATH . '/includes/featured.php' );
 require_once realpath( JPTT_PLUGIN_PATH . '/includes/core.php' );
 require_once realpath( JPTT_PLUGIN_PATH . '/includes/template.php' );
 require_once realpath( JPTT_PLUGIN_PATH . '/includes/template-hooks.php' );
+require_once realpath( JPTT_PLUGIN_PATH . '/includes/twbs-components.php' );
 
 /** Admin menu */
 add_action( 'admin_menu', function () {
