@@ -31,7 +31,6 @@ add_action( 'plugins_loaded', function () {
 	load_plugin_textdomain( JPTT_TEXTDOMAIN, false, plugin_basename( dirname( __FILE__ ) ) . '/i18n' );
 } );
 
-
 /**
  * -----------------------------------------------------
  * Cleanup/Rewrite 22/04/2016
